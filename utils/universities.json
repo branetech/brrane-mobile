@@ -1,0 +1,1990 @@
+{
+  "universities": [
+    {
+      "name": "University of Abuja, Gwagwalada",
+      "city": "Gwagwalada",
+      "code": "Uniabuja",
+      "logo": "https://www.uniabuja.edu.ng/uploads/settings/16815763039597.png"
+    },
+    {
+      "name": "Abubakar Tafawa Balewa University, Bauchi",
+      "city": "Bauchi",
+      "code": "ATBU",
+      "logo": "https://atbu.edu.ng/wp-content/uploads/2021/05/ATBU-new-logo@2x.png"
+    },
+    {
+      "name": "Ahmadu Bello University, Zaria",
+      "city": "Zaria",
+      "code": "ABU",
+      "logo": "https://abu.edu.ng/wp-content/uploads/2023/08/logo-1.png"
+    },
+    {
+      "name": "Bayero University, Kano",
+      "city": "Kano",
+      "code": "BUK",
+      "logo": "https://buk.edu.ng/sites/default/files/inline-images/buk-logo.png"
+    },
+    {
+      "name": "Obafemi Awolowo University, Ile-Ife",
+      "city": "Ile-Ife",
+      "code": "OAU",
+      "logo": "https://oauife.edu.ng/wp-content/uploads/2022/11/oaulogon.jpg"
+    },
+    {
+      "name": "Usumanu Danfodiyo University Sokoto",
+      "city": "Sokoto",
+      "code": "UDOS",
+      "logo": "https://www.udusok.edu.ng/wp-content/uploads/2018/08/udus-logo.png"
+    },
+    {
+      "name": "Federal University of Technology, Akure",
+      "city": "Akure",
+      "code": "FUTA",
+      "logo": "https://www.futa.edu.ng/asset/img/futalogo.png"
+    },
+    {
+      "name": "Federal University of Agriculture, Abeokuta",
+      "city": "Abeokuta",
+      "code": "FUNAAB",
+      "logo": "https://funaab.edu.ng/wp-content/uploads/2019/04/unaab-logo2-1.jpg"
+    },
+    {
+      "name": "Modibbo Adama University of Technology, Yola",
+      "city": "Yola",
+      "code": "MAUT",
+      "logo": "https://mau.edu.ng/static/media/mau.066f5b63b9510e7f2520.png"
+    },
+    {
+      "name": "Michael Okpara University of Agricultural Umudike",
+      "city": "Umudike",
+      "code": "MOUA Umudike",
+      "logo": "https://mouau.edu.ng/wp-content/uploads/2020/05/mouau_logo.jpg"
+    },
+    {
+      "name": "University of Agriculture, Makurdi",
+      "city": "Makurdi",
+      "code": "UAM",
+      "logo": "https://uam.edu.ng/wp-content/themes/universo/images/logo.png"
+    },
+    {
+      "name": "Federal University, Gusau",
+      "city": "Gusau",
+      "code": "FUGUS",
+      "logo": "https://www.fugusau.edu.ng/wp-content/uploads/2024/07/cropped-UniLogo4.png"
+    },
+    {
+      "name": "Nigerian Defence Academy Kaduna",
+      "city": "Kaduna",
+      "code": "NDA",
+      "logo": "https://nda.edu.ng/wp-content/uploads/2020/06/Logo_mobile_dark.png"
+    },
+    {
+      "name": "University of Calabar",
+      "city": "Calabar",
+      "code": "Unical",
+      "logo": "https://www.unical.edu.ng/images/logo-wide.png"
+    },
+    {
+      "name": "University of Ibadan",
+      "city": "Ibadan",
+      "code": "UI",
+      "logo": "http://www.ui.edu.ng/sites/default/files/WhatsApp%20Image%202023-08-11%20at%201.55.09%20PM.jpeg"
+    },
+    {
+      "name": "University of Ilorin",
+      "city": "Ilorin",
+      "code": "unilorin",
+      "logo": "https://www.unilorin.edu.ng/wp-content/uploads/2024/10/16.png"
+    },
+    {
+      "name": "University of Jos",
+      "city": "Jos",
+      "code": "Unijos",
+      "logo": "https://www.unijos.edu.ng/sites/default/files/unijos_header_3.png"
+    },
+    {
+      "name": "University of Lagos",
+      "city": "Lagos",
+      "code": "Unilag",
+      "logo": "https://unilag.edu.ng/wp-content/uploads/Group-1.png"
+    },
+    {
+      "name": "University of Maiduguri",
+      "city": "Maiduguri",
+      "code": "Unimaid",
+      "logo": "https://www.unimaid.edu.ng/images/logo.png"
+    },
+    {
+      "name": "University of Nigeria, Nsukka",
+      "city": "Nsukka",
+      "code": "UNN",
+      "logo": "https://www.unn.edu.ng/wp-content/uploads/2016/06/logo.png"
+    },
+    {
+      "name": "University of Port-Harcourt",
+      "city": "Port-Harcourt",
+      "code": "Uniport",
+      "logo": "https://networks.au-ibar.org/show/university-of-port-harcourt-local-government-abuja-campus/image/2008090514-1046-3096-400x300/AU+REC+logos+-+2022-03-30T134843.247.png"
+    },
+    {
+      "name": "University of Uyo",
+      "city": "Uyo",
+      "code": "Uniuyo",
+      "logo": "https://uniuyo.edu.ng/wp-content/themes/academia/dist/images/logo/logo-blue.png"
+    },
+    {
+      "name": "University of Benin",
+      "city": "Benin",
+      "code": "Uniben",
+      "logo": "https://www.uniben.edu/images/uniben-logo1.png"
+    },
+    {
+      "name": "Nnamdi Azikiwe University, Awka",
+      "city": "Awka",
+      "code": "Unizik",
+      "logo": "https://i0.wp.com/unizik.edu.ng/wp-content/uploads/2021/03/UNIZIK_Main_Logo_.png?fit=300%2C80&ssl=1"
+    },
+    {
+      "name": "Nigeria Police Academy Wudil",
+      "city": "Wudil",
+      "code": "NPA Wudil",
+      "logo": "https://www.polac.edu.ng/sites/polac/files/POLAC_LOGO_6_0_0_0_0_0_0_0.png"
+    },
+    {
+      "name": "National Open University of Nigeria, Lagos",
+      "city": "Lagos",
+      "code": "NOUN",
+      "logo": "http://nou.edu.ng//wp-content/uploads/2021/12/Logo-shield-1.png"
+    },
+    {
+      "name": "Federal University, Birnin Kebbi",
+      "city": "Birnin Kebbi",
+      "code": "FUBK",
+      "logo": "https://fubk.edu.ng/wp-content/uploads/2023/12/The-University-Logo.png"
+    },
+    {
+      "name": "Federal University, Wukari",
+      "city": "Wukari",
+      "code": "FUWUKARI",
+      "logo": "https://www.fuwukari.edu.ng/storage/logo/logo.png"
+    },
+    {
+      "name": "Federal University, Oye-Ekiti",
+      "city": "Oye-Ekiti",
+      "code": "FUOYE",
+      "logo": "https://fuoye.edu.ng/wp-content/uploads/elementor/thumbs/logo-text2-plb1987y2qfdkyt2a8c0z1gi7ilcmavcccnl4h2d4w.png"
+    },
+    {
+      "name": "Federal University, Otuoke",
+      "city": "Otuoke",
+      "code": "FUOTUOKE",
+      "logo": "https://fuotuoke.edu.ng/wp-content/uploads/2023/09/website-logo-big.png"
+    },
+    {
+      "name": "Federal University, Ndifu-Alike",
+      "city": "Ndifu-Alike",
+      "code": "FU Ndifu-Alike",
+      "logo": "https://funai.edu.ng/wp-content/uploads/2020/03/cropped-funai_Logo-1.png"
+    },
+    {
+      "name": "Federal University, Lokoja",
+      "city": "Lokoja",
+      "code": "FU Lokoja",
+      "logo": "https://www.fulokoja.edu.ng/assets/images/logo.png"
+    },
+    {
+      "name": "Federal University, Lafia",
+      "city": "Lafia",
+      "code": "FU Lafia",
+      "logo": "https://fulafia.edu.ng/wp-content/uploads/2023/04/Fulafia_Logo_white.png"
+    },
+    {
+      "name": "Federal University, Kashere",
+      "city": "Kashere",
+      "code": "FU Kashere",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdXrm91fj5oj-SsTAnKcHiwpeBamQdQMZMBw&s"
+    },
+    {
+      "name": "Federal University, Dutsin-Ma",
+      "city": "Dutsin-Ma",
+      "code": "FU Dutsin-Ma",
+      "logo": "https://fudutsinma.edu.ng/wp-content/uploads/2022/10/cropped-logo-2.png"
+    },
+    {
+      "name": "Federal University, Dutse",
+      "city": "Dutse",
+      "code": "FU Dutse",
+      "logo": "https://fud.edu.ng/wp-content/uploads/2019/07/cropped-fudutse-logo.png"
+    },
+    {
+      "name": "Federal University of Technology, Owerri",
+      "city": "Owerri",
+      "code": "FUT Owerri",
+      "logo": "https://futo.edu.ng/wp-content/uploads/2019/04/futo-logo.jpg"
+    },
+    {
+      "name": "Federal University of Technology, Minna",
+      "city": "Minna",
+      "code": "FUT Minna",
+      "logo": "https://futminna.edu.ng/wp-content/uploads/2022/01/futminna-logo-2.png"
+    },
+    {
+      "name": "Federal University of Petroleum Resources, Effurun",
+      "city": "Effurun",
+      "code": "FUPRE",
+      "logo": "https://fupre.edu.ng/images/fupre-logo.png"
+    },
+    {
+      "name": "Federal University Gashua, Yobe",
+      "city": "Gashua",
+      "code": "FUG Yobe",
+      "logo": "https://fugashua.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Abia State University, Uturu",
+      "city": "Uturu",
+      "code": "ABSU Uturu",
+      "logo": "https://abiastateuniversity.edu.ng/Content/images/logo.png"
+    },
+    {
+      "name": "Adamawa State University Mubi",
+      "city": "Mubi",
+      "code": "ADSU Mubi",
+      "logo": "https://adsu.edu.ng/images/ADSU.png"
+    },
+    {
+      "name": "Adekunle Ajasin University, Akungba",
+      "city": "Akungba",
+      "code": "AAU Akungba",
+      "logo": "https://aaua.edu.ng/wp-content/uploads/2020/01/aaua-logo.png"
+    },
+    {
+      "name": "Akwa Ibom State University of Technology, Uyo",
+      "city": "Uyo",
+      "code": "ASUT Uyo",
+      "logo": "https://aksu.edu.ng/wp-content/uploads/2021/09/AKSU-Logo.png"
+    },
+    {
+      "name": "Ambrose Alli University, Ekpoma",
+      "city": "Ekpoma",
+      "code": "AAU Ekpoma",
+      "logo": "https://aauekpoma.edu.ng/wp-content/uploads/2021/05/logo.jpg"
+    },
+    {
+      "name": "Chukwuemeka Odumegwu Ojukwu University, Uli",
+      "city": "Uli",
+      "code": "COU",
+      "logo": "https://coou.edu.ng/wp-content/uploads/2021/02/COOU_Logo.png"
+    },
+    {
+      "name": "Bauchi State University, Gadau",
+      "city": "Gadau",
+      "code": "BSU",
+      "logo": "https://basug.edu.ng/images/basug-logo.png"
+    },
+    {
+      "name": "Benue State University, Makurdi",
+      "city": "Makurdi",
+      "code": "BSU",
+      "logo": "https://bsum.edu.ng/img/bsu_logo.jpg"
+    },
+    {
+      "name": "Bukar Abba Ibrahim University, Damaturu",
+      "city": "Damaturu",
+      "code": "BAIU",
+      "logo": "https://yobeuniversity.edu.ng/logo.png"
+    },
+    {
+      "name": "Cross River State University of Science & Technology, Calabar",
+      "city": "Calabar",
+      "code": "CSUST",
+      "logo": "https://crutech.edu.ng/img/CRUTECH-Logo.png"
+    },
+    {
+      "name": "Delta State University Abraka",
+      "city": "Abraka",
+      "code": "DELSU",
+      "logo": "https://delsu.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Ebonyi State University, Abakaliki",
+      "city": "Abakaliki",
+      "code": "ESU",
+      "logo": "https://ebsu.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Ekiti State University",
+      "city": "Ekiti",
+      "code": "EKSU",
+      "logo": "https://eksu.edu.ng/images/eksu-logo.png"
+    },
+    {
+      "name": "Enugu State University of Science and Technology, Enugu",
+      "city": "Enugu",
+      "code": "ESUT Enugu",
+      "logo": "https://esut.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Gombe State University, Gombe",
+      "city": "Gombe",
+      "code": "GOMSU",
+      "logo": "https://gsu.edu.ng/images/gsu-logo.png"
+    },
+    {
+      "name": "Ibrahim Badamasi Babangida University, Lapai",
+      "city": "Lapai",
+      "code": "IBBU",
+      "logo": "https://ibbu.edu.ng/logo.png"
+    },
+    {
+      "name": "Ignatius Ajuru University of Education, Rumuolumeni",
+      "city": "Rumuolumeni",
+      "code": "IAUE",
+      "logo": "https://iaue.edu.ng/images/IAUE_logo.png"
+    },
+    {
+      "name": "Imo State University, Owerri",
+      "city": "Owerri",
+      "code": "IMSU",
+      "logo": "https://imsu.edu.ng/images/imsu-logo.png"
+    },
+    {
+      "name": "Sule Lamido University, Kafin Hausa, Jigawa",
+      "city": "Jigawa",
+      "code": "SLU",
+      "logo": "https://slu.edu.ng/images/slulogo.png"
+    },
+    {
+      "name": "Kaduna State University, Kaduna",
+      "city": "Kaduna",
+      "code": "KASU",
+      "logo": "https://kasu.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Kano University of Science & Technology, Wudil",
+      "city": "Wudil",
+      "code": "KUST",
+      "logo": "https://kustwudil.edu.ng/assets/images/kust_logo.png"
+    },
+    {
+      "name": "Kebbi State University, Kebbi",
+      "city": "Kebbi",
+      "code": "KSUSTA",
+      "logo": "https://ksusta.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Kogi State University Anyigba",
+      "city": "Anyigba",
+      "code": "KSU",
+      "logo": "https://ksu.edu.ng/assets/images/ksu-logo.png"
+    },
+    {
+      "name": "Kwara State University, Ilorin",
+      "city": "Ilorin",
+      "code": "KWASU",
+      "logo": "https://kwasu.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Ladoke Akintola University of Technology, Ogbomoso",
+      "city": "Ogbomoso",
+      "code": "LAUTECH",
+      "logo": "https://lautech.edu.ng/logo.png"
+    },
+    {
+      "name": "Ondo State University of Science and Technology Okitipupa",
+      "city": "Okitipupa",
+      "code": "OSUSTECH",
+      "logo": "https://osustech.edu.ng/images/logo.png"
+    },
+    {
+      "name": "River State University of Science and Technology",
+      "city": "Rivers",
+      "code": "UST",
+      "logo": "https://ust.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Olabisi Onabanjo University, Ago Iwoye",
+      "city": "Ago Iwoye",
+      "code": "OOU Ago Iwoye",
+      "logo": "https://oouagoiwoye.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Lagos State University, Ojo",
+      "city": "Ojo",
+      "code": "LASU",
+      "logo": "https://lasu.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Niger Delta University Yenagoa",
+      "city": "Yenagoa",
+      "code": "NDU Yenegoa",
+      "logo": "https://ndu.edu.ng/images/ndu_logo.png"
+    },
+    {
+      "name": "Nasarawa State University Keffi",
+      "city": "Keffi",
+      "code": "NSUK",
+      "logo": "https://nsuk.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Plateau State University Bokkos",
+      "city": "Bokkos",
+      "code": "PLASU",
+      "logo": "https://plasu.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Tai Solarin University of Education Ijebu Ode",
+      "city": "Ijebu Ode",
+      "code": "TASUED",
+      "logo": "https://tasued.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Osun State University Osogbo",
+      "city": "Osogbo",
+      "code": "Uniosun",
+      "logo": "https://uniosun.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Northwest University Kano",
+      "city": "KANO",
+      "code": "NWU",
+      "logo": "https://nwu.edu.ng/images/nwu-logo.png"
+    },
+    {
+      "name": "Oyo State Technical University Ibadan",
+      "city": "Ibadan",
+      "code": "OSTU Ibadan",
+      "logo": "https://tech-u.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Ondo State University of Medical Sciences",
+      "city": "Ondo",
+      "code": "OSUME",
+      "logo": "https://unimed.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Edo University Iyamo",
+      "city": "Iyamo",
+      "code": "EDU Iyamo",
+      "logo": "https://edouniversity.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Eastern Palm University Ogboko, Imo State",
+      "city": "Imo",
+      "code": "EPUA",
+       "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRf1oPlK1-2SXnGdjzGcZn3URXv-uqK4Odzfg&s"
+    },
+    {
+      "name": "Achievers University, Owo",
+      "city": "Owo",
+      "code": "Achievers",
+       "logo": "https://www.achievers.edu.ng/wp-content/uploads/2019/06/new_logo-2.png"
+    },
+    {
+      "name": "Adeleke University, Ede",
+      "city": "Ede",
+      "code": "Adeleke",
+       "logo": "https://adelekeuniversity.edu.ng/wp-content/uploads/2022/12/logo-1-300x69.png"
+    },
+    {
+      "name": "Afe Babalola University, Ado-Ekiti",
+      "city": "Ado-Ekiti",
+      "code": "ABUAD",
+       "logo": "https://www.abuad.edu.ng/wp-content/uploads/2024/02/logo-copy.png"
+    },
+    {
+      "name": "African University of Science & Technology, Abuja",
+      "city": "Abuja",
+      "code": "AUST",
+       "logo": "https://aust.edu.ng/sites/default/files/AUST%20LOGO_1.png"
+    },
+    {
+      "name": "Ajayi Crowther University, Ibadan",
+      "city": "Ibadan",
+      "code": "ACU",
+       "logo": "https://www.acu.edu.ng/wp-content/uploads/2019/07/acu-logo3-1.png"
+    },
+    {
+      "name": "Al-Hikmah University, Ilorin",
+      "city": "Ilorin",
+      "code": "Alhikmah",
+       "logo": "https://alhikmahuniversity.edu.ng/wp-content/uploads/2022/07/au-logo.jpg"
+    },
+    {
+      "name": "Al-Qalam University, Katsina",
+      "city": "Katsina",
+      "code": "AUK",
+       "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUVXpfZOLFegNvgdLJOaGMpNjfjRIZp7GRkA&s"
+    },
+    {
+      "name": "American University of Nigeria, Yola",
+      "city": "Yola",
+      "code": "AUN",
+      "logo": "https://www.aun.edu.ng/images/aun-logo-top.png"
+    },
+    {
+      "name": "Augustine University",
+      "city": "Lagos",
+      "code": "Augustine",
+      "logo": "https://augustineuniversity.edu.ng/images/NAME.png"
+    },
+    {
+      "name": "Babcock University,Ilishan-Remo",
+      "city": "Ilishan-Remo",
+      "code": "BABCOCK",
+      "logo": "https://babcock.edu.ng/curator/media/54048b80-7701-4637-85b9-b663ca5054c9.png?h=50&w=150&s=b88c6dbd56b22364526383f037f4d683"
+    },
+    {
+      "name": "Baze University",
+      "city": "Abuja",
+      "code": "BAZE",
+      "logo": "https://bazeuniversity.edu.ng/static/media/logo.385bef27.png"
+    },
+    {
+      "name": "Bells University of Technology, Otta",
+      "city": "Otta",
+      "code": "Bells",
+      "logo": "https://www.bellsuniversity.edu.ng/wp-content/uploads/cropped-Bells-Logo.2png.png"
+    },
+    {
+      "name": "Benson Idahosa University, Benin city",
+      "city": "Benin city",
+      "code": "BIU",
+      "logo": "https://upload.wikimedia.org/wikipedia/en/8/8f/Bensonidahosa.jpg"
+    },
+    {
+      "name": "Bingham University, New Karu",
+      "city": "New Karu",
+      "code": "Bingham",
+      "logo": "https://binghamuni.edu.ng/v2/images/logo.png"
+    },
+    {
+      "name": "Bowen University, Iwo",
+      "city": "Iwo",
+      "code": "BOWEN",
+      "logo": "https://bowen.edu.ng/wp-content/uploads/2023/04/cropped-cropped-bowen-3.png"
+    },
+    {
+      "name": "Caleb University, Lagos",
+      "city": "Lagos",
+      "code": "Caleb Uni",
+      "logo": "https://www.calebuniversity.edu.ng/caleb_uploads/2024/05/caleb-logonnnnnng.png.webp"
+    },
+    {
+      "name": "Caritas University, Enugu",
+      "city": "Enugu",
+      "code": "Caritas",
+      "logo": "https://www.caritasuni.edu.ng/assets/images/logo-header-1-116x128.png"
+    },
+    {
+      "name": "CETEP city University, Lagos",
+      "city": "Lagos",
+      "code": "CETEP Uni",
+      "logo": "https://universitycompass.com/assets/images/logo.jpg"
+    },
+    {
+      "name": "Chrisland University",
+      "city": "Abeokuta",
+      "code": "Chrisland University",
+       "logo": "https://chrislanduniversity.edu.ng/static/img/logo/culogo.png"
+    },
+    {
+      "name": "Covenant University Ota",
+      "city": "Ota",
+      "code": "CU",
+       "logo": "https://covenantuniversity.edu.ng/images/logos/covenant-university-logo-desktop.png"
+    },
+    {
+      "name": "Crawford University Igbesa",
+      "city": "Igbesa",
+      "code": "Crawford",
+       "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUMTNulSp3q0vtBWMPMhbZNr2YBO90PynH6Q&s"
+    },
+    {
+      "name": "Crescent University",
+      "city": "Abeokuta",
+      "code": "Crescent",
+       "logo": "https://cuab.edu.ng/wp-content/uploads/2023/08/cuab-footer-logo.png"
+    },
+    {
+      "name": "Edwin Clark University, Kaigbodo",
+      "city": "Kaigbodo",
+      "code": "ECU",
+       "logo": "http://edwinclarkuniversity.edu.ng/wp-content/uploads/2023/09/cropped-ecu-logo-copy.jpg"
+    },
+    {
+      "name": "Elizade University, Ilara-Mokin",
+      "city": "Ilara-Mokin",
+      "code": "Elizade",
+       "logo": "https://www.elizadeuniversity.edu.ng/img/eulogo.jpg"
+    },
+    {
+      "name": "Evangel University, Akaeze",
+      "city": "Akaeze",
+      "code": "Evangel",
+       "logo": "https://official.evangeluniversity.edu.ng/wp-content/uploads/2023/11/Untitled-2-1.png"
+    },
+    {
+      "name": "Fountain Unveristy, Oshogbo",
+      "city": "Oshogbo",
+      "code": "FU",
+       "logo": "https://fuo.edu.ng/wp-content/uploads/2024/03/Web-Logo-New2-e1711114531376.png"
+    },
+    {
+      "name": "Godfrey Okoye University, Ugwuomu-Nike",
+      "city": "Ugwuomu-Nike",
+      "code": "GOU",
+       "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfQzg_taaFV2oJ__dgfS8H9_2Nljm7hrwCuA&s"
+    },
+    {
+      "name": "Gregory University, Uturu",
+      "city": "Uturu",
+      "code": "GU",
+       "logo": "https://gregoryuniversityuturu.edu.ng/website/wp-content/uploads/2023/08/GUU-logo-768x207.jpg"
+    },
+    {
+      "name": "Hallmark University",
+      "city": "Ijebu-Itele",
+      "code": "Hallmark",
+       "logo": "https://hallmarkuniversity.edu.ng/wp-content/uploads/2022/03/logo3-1.png"
+    },
+    {
+      "name": "Hezekiah University, Umudi",
+      "city": "Umudi",
+      "code": "Hezekiah",
+       "logo": "https://hezekiah.edu.ng/wp-content/uploads/2019/04/HEZlogo2.png"
+    },
+    {
+      "name": "Igbinedion University Okada",
+      "city": "Okada",
+      "code": "Igbinedion Uni",
+       "logo": "https://iuokada.edu.ng/wp-content/uploads/2023/05/Header_img2.png"
+    },
+    {
+      "name": "Joseph Ayo Babalola University, Ikeji-Arakeji",
+      "city": "Ikeji-Arakeji",
+      "code": "JABU Ikeji-Arakeji",
+       "logo": "https://jabu.edu.ng/wp-content/uploads/2019/07/JABU-Logo-n-Header.png"
+    },
+    {
+      "name": "Kings University",
+      "city": "Odeomu",
+      "code": "Kings University",
+       "logo": "https://kingsuniversity.edu.ng/kusite/wp-content/uploads/KU-logo_V1-1.png"
+    },
+    {
+      "name": "Kwararafa University, Wukari",
+      "city": "Wukari",
+      "code": "KU Wukari",
+       "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq7mxAgb5gks1OLX_Vj3PstnMZinCrYaOnEg&s"
+    },
+    {
+      "name": "Landmark University, Omu-Aran.",
+      "city": "Omu-Aran",
+      "code": "Landmark Uni",
+       "logo": "https://lmu.edu.ng/images/logo.fw.png"
+    },
+    {
+      "name": "Lead city University, Ibadan",
+      "city": "Ibadan",
+      "code": "LCU Ibadan",
+       "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRm8q1wP7DRm4Bu3-2TAqRVnDE309rpvaK0rQ&s"
+    },
+    {
+      "name": "Madonna University, Okija",
+      "city": "Okija",
+      "code": "Madonna",
+       "logo": "https://www.madonnauniversity.edu.ng/wp-content/uploads/2019/08/MadonnaUniversityNigeria.png"
+    },
+    {
+      "name": "Mcpherson University, Seriki Sotayo, Ajebo",
+      "city": "Seriki Sotayo, Ajebo",
+      "code": "MU Seriki Sotayo, Ajebo",
+       "logo": "https://mcu.edu.ng/wp-content/uploads/2023/12/The_McPherson_University_logo540-e1704153425833.png"
+    },
+    {
+      "name": "Micheal & Cecilia University",
+      "city": "Otor Ughelli North",
+      "code": "MCU",
+       "logo": "https://mciu.edu.ng/assets/MCIU-logo-CmxtYET5.png"
+    },
+    {
+      "name": "Mountain Top University",
+      "city": "Prayer city",
+      "code": "MICU",
+       "logo": "https://mtu.edu.ng/mtu-logo.svg"
+    },
+    {
+      "name": "Nigerian-Turkish Nile University, Abuja",
+      "city": "Abuja",
+      "code": "NTNU Abuja",
+       "logo": "https://www.nileuniversity.edu.ng/wp-content/uploads/2024/05/Logo-Nile-University-of-Nigeria.svg"
+    },
+    {
+      "name": "Novena University, Ogume",
+      "city": "Ogume",
+      "code": "Novena Uni",
+       "logo": "https://novenauniversity.edu.ng/wp-content/uploads/2017/04/novena-logo-white.png"
+    },
+    {
+      "name": "Obong University, Obong Ntak",
+      "city": "Obong Ntak",
+      "code": "OU Obong Ntak",
+       "logo": "https://static.wixstatic.com/media/9f18a3_2caf453c38c74d1a99896fa34932c641~mv2.png/v1/fill/w_132,h_142,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/university%20logo%20-%20transparent.png"
+    },
+    {
+      "name": "Oduduwa University, Ipetumodu - Osun State",
+      "city": "Ipetumodu",
+      "code": "ODU Ipetumodu",
+       "logo": "https://www.oduduwauniversity.edu.ng/web/wp-content/uploads/2021/03/smal-e1628421996329.png"
+    },
+    {
+      "name": "Pan-Atlantic University, Lagos",
+      "city": "Lagos",
+      "code": "PAU Lagos",
+       "logo": "https://pau.edu.ng/wp-content/themes/eikra/assets/img/logo-light.png"
+    },
+    {
+      "name": "Paul University, Awka",
+      "city": "Awka",
+      "code": "Paul Uni",
+       "logo": "https://www.pauluniversity.edu.ng/wp-content/uploads/2018/12/paullogo_18.png"
+    },
+    {
+      "name": "Redeemer's University, Mowe",
+      "city": "Mowe",
+      "code": "Redeemers Uni",
+       "logo": "https://run.edu.ng/wp-content/uploads/2024/09/cropped-colored-logo-300x83.png"
+    },
+    {
+      "name": "Renaissance University, Enugu",
+      "city": "Enugu",
+      "code": "RU Enugu",
+       "logo": "https://universitycompass.com/universities/assets/images/Renaissance-University.png"
+    },
+    {
+      "name": "Rhema University, Obeama-Asa",
+      "city": "Obeama-Asa",
+      "code": "Rhema Uni Obeama-Asa",
+       "logo": "https://www.rhemauniversity.edu.ng/assets/images/corp-footer-img.gif"
+    },
+    {
+      "name": "Ritman University",
+      "city": "Ikot Ekpene",
+      "code": "Ritman Uni",
+       "logo": "https://static.wixstatic.com/media/c4c29c_febcf9eff2b842afa8044fda6d5182ca~mv2.jpg/v1/fill/w_126,h_126,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/images-10.jpg"
+    },
+    {
+      "name": "Salem University, Lokoja",
+      "city": "Lokoja",
+      "code": "Salem Uni",
+       "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6vSU6LnmeqojUnwcxiRiExloSTx3EY8YvTw&s"
+    },
+    {
+      "name": "Samuel Adegboyega University, Ogwa",
+      "city": "Ogwa",
+      "code": "SAU Ogwa",
+       "logo": "https://gvu.edu.ng/src/shell/images/logo/gvu-logo-1.png"
+    },
+    {
+      "name": "Southwestern University, Oku Owa",
+      "city": "Oku Owa",
+      "code": "SU Oku Owa",
+       "logo": "https://southwesternuniversity.edu.ng/wp-content/uploads/2018/07/sun-logo.png"
+    },
+    {
+      "name": "Tansian University, Umunya",
+      "city": "Umunya",
+      "code": "TU Umunya",
+       "logo": "https://www.tansianuniversity.edu.ng/images/logo.png"
+    },
+    {
+      "name": "University of Mkar, Mkar",
+      "city": "Mkar",
+      "code": "UM Mkar",
+       "logo": "https://umm.edu.ng/wp-content/uploads/2022/11/cropped-umm-logo-new-150x150.jpeg"
+    },
+    {
+      "name": "Veritas University",
+      "city": "Bwari",
+      "code": "Veritas",
+       "logo": "https://www.veritas.edu.ng/public/image/logo.png"
+    },
+    {
+      "name": "Wellspring University, Evbuobanosa",
+      "city": "Evbuobanosa",
+      "code": "WU Evbuobanosa",
+       "logo": "https://wellspringuniversity.edu.ng/wp-content/uploads/2024/09/welsu-white-logo.png"
+    },
+    {
+      "name": "Western Delta University, Oghara",
+      "city": "Oghara",
+      "code": "WDU Oghara",
+       "logo": "https://wdu.edu.ng/files/aad870a8-58e7-11ee-be32-a45d3619a196/brand/logo.png"
+    },
+    {
+      "name": "Christopher University Mowe",
+      "city": "Mowe",
+      "code": "CU Mowe",
+       "logo": "https://christopheruniversity.edu.ng/wp-content/uploads/2023/08/Christopher-Uni-Logo.png"
+    },
+    {
+      "name": "Adeyemi College of Education, Ondo",
+      "city": "Ondo",
+      "code": "ACE Ondo",
+        "logo": "https://www.aceondo.edu.ng/wp-content/uploads/2020/10/Webp.net-resizeimage-5.png"
+    },
+    {
+      "name": "Alvan Ikoku College of Education, Owerri",
+      "city": "Owerri",
+      "code": "AICE Owerri",
+        "logo": "https://www.alvanikoku.edu.ng/wp-content/uploads/2021/10/imageedit_1_8129305147.png"
+    },
+    {
+      "name": "Federal College of Educ. Abeokuta",
+      "city": "Abeokuta",
+      "code": "FCE Abeokuta",
+        "logo": "https://fce-cedep.com/wp-content/uploads/2022/12/cedep.png"
+    },
+    {
+      "name": "Federal College of Education",
+      "city": "Eha-Amufu",
+      "code": "FCE, Eha-Amufu",
+        "logo": "https://fceehamufu.edu.ng/wp-content/uploads/2022/09/cropped-FCEE-New-LOGO-1.png"
+    },
+    {
+      "name": "Federal College of Education, Kano",
+      "city": "Kano",
+      "code": "FCE Kano",
+        "logo": "https://fcekano.edu.ng/wp-content/uploads/2022/07/logox2-1.png"
+    },
+    {
+      "name": "Federal College of Education",
+      "city": "Katsina",
+      "code": "FCE Katsina",
+        "logo": "https://fcekatsina.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Federal college of Education, Kontagora",
+      "city": "Kontagora",
+      "code": "FCE Kontagora",
+        "logo": "https://fcekg.edu.ng/images/menu-logo.png"
+    },
+    {
+      "name": "Federal College of Education, Obudu",
+      "city": "Obudu",
+      "code": "FCE Obudu",
+        "logo": "https://www.fceobudu.edu.ng/sites/default/files/logo_obudu.png"
+    },
+    {
+      "name": "Federal College of Education, Okene",
+      "city": "Okene",
+      "code": "FCE Okene",
+        "logo": "https://fceokene.edu.ng/wp-content/uploads/2019/12/logo-small.png"
+    },
+    {
+      "name": "Federal College of Education, Pankshin",
+      "city": "Pankshin",
+      "code": "FCE Pankshin",
+        "logo": "https://www.fcepkn.edu.ng/templates/fcepv2/images/logo.png"
+    },
+    {
+      "name": " Federal College of Education, Yola",
+      "city": "Yola",
+      "code": "FCE Yola",
+        "logo": "https://www.fceyola.edu.ng/wp-content/uploads/2021/03/logx2-1.png"
+    },
+    {
+      "name": "Federal College of Education, Zaria",
+      "city": "Zaria",
+      "code": "FCE Zaria",
+        "logo": "https://fcezaria.edu.ng/portal/images/logo1.png"
+    },
+    {
+      "name": "Federal College of Education (Technical), Akoka",
+      "city": "Akoka",
+      "code": "FCE Akoka",
+        "logo": "https://fcetakoka.edu.ng/wp-content/uploads/2021/04/sch_logo.png"
+    },
+    {
+      "name": "Federal College of Education (Technical), Asaba",
+      "city": "Asaba",
+      "code": "FCE Asaba",
+        "logo": "https://fcetasaba-edu.ng/wp-content/uploads/2020/09/cropped-asaba.png"
+    },
+    {
+      "name": "Federal College of Education (Technical), Bichi",
+      "city": "Bichi",
+      "code": "FCE Bichi",
+        "logo": "http://localhost/website/wp-content/uploads/2021/03/logo1.png"
+    },
+    {
+      "name": "Federal College of Education (Technical), Gombe",
+      "city": "Gombe",
+      "code": "FCE Gombe",
+        "logo": "https://fcetgombe.edu.ng/wp-content/uploads/2020/10/cropped-logo-300x300.png"
+    },
+    {
+      "name": "Federal College of Education (Technical) (Female Only), Gusau",
+      "city": "Gusau",
+      "code": "FCE Gusau",
+        "logo": "https://fcetgusau.edu.ng/home/wp-content/uploads/2021/06/fcetgg.jpg"
+    },
+    {
+      "name": "Fed College of Education (Technical), Omoku",
+      "city": "Omoku",
+      "code": "FCE Omoku",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNzs64JYCk6A0c9HmByImsP3qKEUj0idCC1g&s"
+    },
+    {
+      "name": "Federal College of Education (Technical), Potiskum",
+      "city": "Potiskum",
+      "code": "FCE Potiskum",
+        "logo": "https://lh4.googleusercontent.com/proxy/i_Cai1TYEVooXXokgyGBovvrBl5e_ckZn5Z5Mu_7cbQ1sRcB2gB4QLztt_R5laenPthSMN90hTAscj7eSHsLWDF_Jt0"
+    },
+    {
+      "name": "Federal College of Education (Technical) Umunze",
+      "city": "Umunze",
+      "code": "FCE Umunze",
+        "logo": "https://fcetumunze.edu.ng/wp-content/themes/umunze/assets/images/bida_logo.png"
+    },
+    {
+      "name": "Federal College of Education (Special) Oyo",
+      "city": "Oyo",
+      "code": "FCE Oyo",
+        "logo": "https://www.nce.fcesoyo.edu.ng/assets2/assets/images/logo.png"
+    },
+    {
+      "name": "College of Education, Agbor",
+      "city": "Agbor",
+      "code": "CE Agbor",
+        "logo": "https://www.coeagbor.edu.ng/img/coe.png"
+    },
+    {
+      "name": "Akwa-Ibom State College of Education, Afaha-Nsit",
+      "city": "Afaha-Nsit",
+      "code": "ASCE Afaha-Nsit",
+        "logo": "https://akscoe.edu.ng/wp-content/uploads/2023/05/download.jpg"
+    },
+    {
+      "name": "College of Education, Akwanga",
+      "city": "Akwanga",
+      "code": "CE Akwanga",
+        "logo": "https://coeakwanga.edu.ng/templates/fcepv2/images/logo.png"
+    },
+    {
+      "name": "College of Education, Ankpa",
+      "city": "Ankpa",
+      "code": "CE Ankpa",
+        "logo": "http://kscoeankpa.edu.ng/wp-content/uploads/2021/06/cropped-ankpa-college.png"
+    },
+    {
+      "name": "Adamu Augie College of Education, Argungu",
+      "city": "Argungu",
+      "code": "AACE Argungu",
+        "logo": "https://www.aacoeargungu.edu.ng/images/coe.jpg"
+    },
+    {
+      "name": "Abia State College of Education (Technical), Arochukwu",
+      "city": "Arochukwu",
+      "code": "ABSCE Arochukwu",
+        "logo": "https://coursedig.com/cd_backend/uploaded_files/institution_logos/1.jpeg"
+    },
+    {
+      "name": "College of Education, Azare",
+      "city": "Azare",
+      "code": "CE Azare",
+        "logo": "https://ascoea.edu.ng/wp-content/uploads/2023/11/ascoea-admission-list-20222023-nce-degree-1st-batch-justsch.com_-300x88.png"
+    },
+    {
+      "name": "Umar-Ibn EI-Kanemi College of Education, Dutsinma",
+      "city": "Dutsinma",
+      "code": "UECE Dutsinma",
+        "logo": "https://www.naijabusiness.com.ng/wp-content/uploads/2020/03/Umar-Ibn-Ibrahim-El-Kanemi-College-Of-Education-Science-And-Technology-Bama-Borno-State.jpg"
+    },
+    {
+      "name": "Bayelsa State College of Education, Okpoama-Brass",
+      "city": "Okpoama-Brass",
+      "code": "BSCE Okpoama-Brass",
+        "logo": "https://ijbcoe.edu.ng/images/LogoBanner.png"
+    },
+    {
+      "name": "Isa Kaita College of Education, Dutsinma",
+      "city": "Dutsinma",
+      "code": "IKCE Dutsinma",
+      "logo": "https://ikcoedm.edu.ng/wp-content/uploads/2020/08/Isa-Kaita-College-of-Education-1.jpg"
+    },
+    {
+      "name": "Emmanuel Alyande College of Education, Oyo",
+      "city": "Oyo",
+      "code": "EACE Oyo",
+      "logo": "https://eacoed.edu.ng/wp-content/uploads/2020/04/logo.png"
+    },
+    {
+      "name": "Enugu State College of Education (Tech.) Enugu",
+      "city": "Enugu",
+      "code": "ESCE Abakaliki Rd",
+      "logo": "https://escet.edu.ng/wp-content/uploads/2024/03/Logo.png"
+    },
+    {
+      "name": "College of Education, Ekiadolor",
+      "city": "Ekiadolor",
+      "code": "CE Ekiadolor",
+      "logo": "https://www.fcetekiadolor.edu.ng/assets/img/logo-7.png"
+    },
+    {
+      "name": "Umar Suleiman College of Education, Gashua",
+      "city": "Gashua",
+      "code": "USCE Gashua",
+      "logo": "https://www.uscoega.edu.ng/pictures/uscoega.gif"
+    },
+    {
+      "name": "College of Education, Gindiri",
+      "city": "Gindiri",
+      "code": "CE Gindiri",
+      "logo": "https://coeg.edu.ng/0/wp-content/uploads/2021/04/logo-2.png"
+    },
+    {
+      "name": "Jigawa State College of Education, Gumel",
+      "city": "Gumel",
+      "code": "JSCE Gumel",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0ywBh-xOENyTmSU2BQxaLZjR_QvHTPgYcew&s"
+    },
+    {
+      "name": "Michael Otedola College of Primary Education, Moforiji",
+      "city": "Moforiji",
+      "code": "MOCPE Moforiji",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJcNqj7ApCBwlRiar13YOSDhcPzzvA-e2OVg&s"
+    },
+    {
+      "name": "Delta State College of Physical Education, Mosogar",
+      "city": "Mosogar",
+      "code": "DSCPE Mosogar",
+      "logo": "https://descoem.edu.ng/wp-content/uploads/2023/04/descoem-logo-medium.png"
+    },
+    {
+      "name": "College of Education, Port Harcourt",
+      "city": "Port Harcourt",
+      "code": "CE Port Harcourt",
+      "logo": "https://iaue.edu.ng/wp-content/uploads/2024/03/cropped-Ignatus-log.png"
+    },
+    {
+      "name": "College of Education, Hong",
+      "city": "Hong",
+      "code": "CE Hong",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhyShxqj2X-4_S1kG19Q5duL4NTdL6bvAhQw&s"
+    },
+    {
+      "name": "Adeniran Ogunsanya College of Education, Otto/Ijanikin",
+      "city": "Otto/Ijanikin",
+      "code": "AOCE Otto/Ijanikin",
+      "logo": "https://aocoed.edu.ng/images/ko.png"
+    },
+    {
+      "name": "Tai Solarin University of Education Ijebu Ode",
+      "city": "Ijebu-Ode",
+      "code": "Tasued",
+      "logo": "https://tasued.edu.ng/web/wp-content/uploads/2023/03/logo3.png"
+    },
+    {
+      "name": "Ebonyi State College of Education, Ikwo",
+      "city": "Ikwo",
+      "code": "ESCE Ikwo",
+      "logo": "https://ebscoe.edu.ng/logo.png"
+    },
+    {
+      "name": "College of Education, Ikere",
+      "city": "Ikere",
+      "code": "CE Ikere",
+      "logo": "https://coe.bouesti.edu.ng/images/newlogo5.jpg"
+    },
+    {
+      "name": "Osun State College of Education, Ila-Orangun",
+      "city": "Ila-Orangun",
+      "code": "OSCE Ila-Orangun",
+        "logo": "https://ossceila.edu.ng/wp-content/uploads/2024/02/OSSCE-ILA-NEW-LOGO-1.jpg"
+    },
+    {
+      "name": "College of Education, Ilesha",
+      "city": "Ilesha",
+      "code": "CE Ilesha",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR91En77K3Tc_4kPmpWswx8j_OQ72PLhdzdMg&s"
+    },
+    {
+      "name": "College of Education, Ilorin",
+      "city": "Ilorin",
+      "code": "CE Ilorin",
+        "logo": "https://www.kwcoeilorin.edu.ng/templates/kwcoednew/images/logo.png"
+    },
+    {
+      "name": "Peacock College of Education, Jalingo",
+      "city": "Jalingo",
+      "code": "CE Jalingo",
+        "logo": "https://peacockcoejalingo.edu.ng/assets/images/site_name.jpg"
+    },
+    {
+      "name": "College of Education, Gidan-Waya",
+      "city": "Gidan-Waya",
+      "code": "CE Gidan-Waya",
+        "logo": "https://www.kscoe.edu.ng/wp-content/uploads/2023/11/Kaduna_State_College_of_Education__Kafanchan-removebg-preview-1.png"
+    },
+    {
+      "name": "sa'adatu Remi College of Education, Kumbotso Zaria Rd",
+      "city": "Kumbotso Zaria Rd",
+      "code": "KSCE Kumbotso Zaria Rd",
+        "logo": "https://srcoe.edu.ng/images/logo-wide.png"
+    },
+    {
+      "name": "College of Education, Katsina-Ala",
+      "city": "Katsina-Ala",
+      "code": "CE Katsina-Ala",
+        "logo": "https://coekatsinaala.edu.ng/wp-content/uploads/2024/01/cropped-katsina-ala-logo-copy-1.png"
+    },
+    {
+      "name": "The Adamu Augie College of Education, Argungu",
+      "city": "Argungu",
+      "code": "KSCE Argungu",
+        "logo": "https://www.aacoeargungu.edu.ng/images/coe.jpg"
+    },
+    {
+      "name": "College of Education, (Tech), Lafiagi",
+      "city": "Lafiagi",
+      "code": "CE Lafiagi",
+        "logo": "https://kwacoetl.edu.ng/images/coetlogo.png"
+    },
+    {
+      "name": "Kashim-Ibrahim College of Educ., Maiduguri",
+      "city": "Maiduguri",
+      "code": "KIC Maiduguri",
+        "logo": "https://nucis.ng/wp-content/uploads/2022/12/Square-logo-300x300.png"
+    },
+    {
+      "name": "Niger State College of Education, Minna",
+      "city": "Minna",
+      "code": "CE Minna",
+        "logo": "https://coeminna.edu.ng/storage/2020/07/Asset-2.png"
+    },
+    {
+      "name": "Mohammed Goni of Legal and Islamic Studies, Maiduguri",
+      "city": "Maiduguri",
+      "code": "MGLIS Maiduguri",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCmlE4EX9BrXKwmyIfRMMBh8rIkASS_6oVNg&s"
+    },
+    {
+      "name": "Nwafor Orizu College of Education, Nsugbe",
+      "city": "Nsugbe",
+      "code": "NOCE Nsugbe",
+        "logo": "https://www.nocen.edu.ng/img/logo.png"
+    },
+    {
+      "name": " Zamfara State College of Education, Maru",
+      "city": "Maru",
+      "code": "CE Maru",
+        "logo": "https://zcoemaru.edu.ng/wp-content/uploads/2022/11/Maru-Logo-768x394.png"
+    },
+    {
+      "name": "College of Education, Oju",
+      "city": "Oju",
+      "code": "CE Oju",
+        "logo": "https://coeoju.edu.ng/wp-content/uploads/2020/12/cropped-coelogo-1-768x254.png"
+    },
+    {
+      "name": "Kwara State College of Education, Oro",
+      "city": "Oro",
+      "code": "CE Oro",
+        "logo": "https://www.kwcoeoro.edu.ng/Imgs/LogoHeader.png"
+    },
+    {
+      "name": "Oyo State College of Education, Oyo",
+      "city": "Oyo",
+      "code": "OSCE Oyo",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy1C6Ywdzbu08RZWRKcK6Q4FdDymR4FDnXPQ&s"
+    },
+    {
+      "name": "Shehu Shagari College of Education, Sokoto",
+      "city": "Sokoto",
+      "code": "SSCE Sokoto",
+        "logo": "https://www.sscoe.edu.ng/images/logo.png"
+    },
+    {
+      "name": "College of Education, Waka-Biu",
+      "city": "Waka-Biu",
+      "code": "CE Waka-Biu",
+        "logo": "https://www.coewakabiu.edu.ng/images/logowaka.jfif"
+    },
+    {
+      "name": "College of Education, Warri",
+      "city": "Warri",
+      "code": "CE Warri",
+        "logo": "https://coewarri.edu.ng/wp-content/uploads/2021/04/banner-2.png"
+    },
+    {
+      "name": "FCT College of Education",
+      "city": "Zuba",
+      "code": "FCTCE Zuba",
+        "logo": "http://www.fctcoezuba.edu.ng/student/assets/media/logos/logo.png"
+    },
+    {
+      "name": "All states College of Education, Ero Community Junction Akure",
+      "city": "Akure",
+      "code": "ASCE Akure",
+        "logo": "https://directory.gsfnational.org/frontend/img/logo.png"
+    },
+    {
+      "name": "Angel Crown College of Education, Gidan-Daya",
+      "city": "Gidan-Daya",
+      "code": "ACCE Gidan-Daya",
+        "logo": "https://www.edusko.com/landing-page/edusko_weblogo.png"
+    },
+    {
+      "name": "Ansar-Ud-Deen College of Education, Oshodi",
+      "city": "Oshodi",
+      "code": "ACE Oshodi",
+        "logo": "https://universitycompass.com/colleges/assets/images/Ansar-Ud-Deen-College-of-Education-Isolo.jpg"
+    },
+    {
+      "name": "Elder Oyama Memorial College of Education, Obubra",
+      "city": "Obubra",
+      "code": "EOMCE Obubra",
+        "logo": "https://nucis.ng/wp-content/uploads/2022/12/Square-logo-300x300.png"
+    },
+    {
+      "name": "Assanusiyah College of Education, Odeomu",
+      "city": "Odeomu",
+      "code": "ACE Odeomu",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG-ymaIP5Kz9uIw6rst_XYfZrR3bEvjY94rg&s"
+    },
+    {
+      "name": "Apa College of Education, Aido Godo-Okpoga",
+      "city": "Aido Godo-Okpoga",
+      "code": "ACE Aido Godo-Okpoga",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcResMYrQHHrXmbuVheODwIvtXqB81Sgc6Kmtg&s"
+    },
+    {
+      "name": "African Thinkers Community of inquiry College of Education, Enugu",
+      "city": "Enugu",
+      "code": "ATCCE Enugu",
+        "logo": "https://www.schchat.com/storage/school/profilepic/afjpg_1620748197.jpg"
+    },
+    {
+      "name": "Awori District College of Education, Bankole Estate Ijako-Ota",
+      "city": "Bankole Estate Ijako-Ota",
+      "code": "ADCE Bankole Estate Ijako-Ota",
+        "logo": "https://nucis.ng/wp-content/uploads/2022/12/Square-logo-300x300.png"
+    },
+    {
+      "name": "Best Legacy College of Education, Ogbomoso",
+      "city": "Ogbomoso",
+      "code": "BLCE Ogbomoso",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHQNPcpeqif24BISdHqZE9gwwxvu5nUx8cgQ&s"
+    },
+    {
+      "name": "Bauchi Institute for Arabic and Islamic Studies, Bauchi",
+      "city": "Bauchi",
+      "code": "BIAIS Bauchi",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJ9SEtQEYVnFJgdvPuOX0lbfcXW4PtYv5knw&s"
+    },
+    {
+      "name": "Calvin Foundation College of Education, Naka",
+      "city": "Naka",
+      "code": "CFCE Naka",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6z-mME1PSCvf_n730bAKt00ixZQLnIw0Gxg&s"
+    },
+    {
+      "name": "The College of Education, Nsukka",
+      "city": "Nsukka",
+      "code": "CE Nsukka",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTz6b3TcHtK3-MhKuY6D1ojajp0T65A4VGCDA&s"
+    },
+    {
+      "name": "College of Education, Irra Rd. Ilemona",
+      "city": "Ilemona",
+      "code": "CE Ilemona",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG5h_dQRl0i0DT8oGonRCX_qOxEHr0-raMMQ&s"
+    },
+    {
+      "name": "Cornerstone College of Education, Ikeja",
+      "city": "Ikeja",
+      "code": "CCE Ikeja",
+        "logo": "https://schchat.com/storage/school/profilepic/cornerjpg_1621419700.jpg"
+    },
+    {
+      "name": "city College of Education, Maraba Gurku",
+      "city": "Maraba Gurku",
+      "code": "CCE Maraba Gurku",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTtPHwLGJ1JkpbabGLtEjJwnx8kCU9JhZeHVQ&s"
+    },
+    {
+      "name": "Delar College of Education, Egbeda",
+      "city": "Egbeda",
+      "code": "DCE Egbeda",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcGX4EFMkdf89Y2389_rEUgvwWq5Zj-OJs8A&s"
+    },
+    {
+      "name": "Harvard Wilson College of Education, Aba",
+      "city": "Aba",
+      "code": "HWCE Aba",
+        "logo": "https://edusko-dev-bucket.s3.eu-north-1.amazonaws.com/1637464394077jrD80B9dpdW__7TAOK_aR_L6VMVgkedS.png"
+    },
+    {
+      "name": "Hill College of Education, Gwanji, Akwanga",
+      "city": "Akwanga",
+      "code": "HCEGA Akwanga",
+        "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBv2RzbzESgrXh2dzC2_BdRQA3nU_uF2rTcg&s"
+    },
+    {
+      "name": "Institute of Ecumenical Education, Enugu",
+      "city": "Enugu",
+      "code": "IEE Enugu",
+        "logo": "https://www.ieceenugu.edu.ng/wp-content/uploads/2014/10/Institute-of-Ecumenical-Education-Enugu.png"
+    },
+    {
+      "name": "Jama’Atu Nasir Islam College of Education, Kaduna",
+      "city": "Kaduna",
+      "code": "JNICE Kaduna",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAkH85Dlcx8wvhWeNMrvXFw86R2zvSScFP-A&s"
+    },
+    {
+      "name": "Jibwis College of Arabic and Islamic Education, Gombe",
+      "city": "Gombe",
+      "code": "JCAIE Gombe",
+       "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIJEPHvlrs3zBaNoxIxGn1Pw6_o57QJUsxJw&s"
+    },
+    {
+      "name": "College of Education, Foreign Links Campus Moro, Ife, North",
+      "city": "Ife, North",
+      "code": "CEFL Ife, North",
+       "logo": "https://foreignlinkscampus.edu.ng/wp-content/uploads/2023/03/Screen-Shot-2023-02-03-at-4.56.31-AM.png"
+    },
+    {
+      "name": "College of Education, Moro-Ife",
+      "city": "Moro-Ife",
+      "code": "CE Moro-Ife",
+       "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUkaJWI4PMpaZnwlTK3RVJl1n63r93if5cqA&s"
+    },
+    {
+      "name": "Muhyideen College of Education, Ilorin",
+      "city": "Ilorin",
+      "code": "MCE Ilorin",
+       "logo": "https://muyhideencoed.com/assets/img/logo.png"
+    },
+    {
+      "name": "Mufutau’ Lanihun College of Education, Oremeji",
+      "city": "Oremeji",
+      "code": "MLCE Oremeji",
+       "logo": "https://scontent.flos5-2.fna.fbcdn.net/v/t39.30808-1/301154740_440082978159802_5417798761685964846_n.jpg?stp=dst-jpg_s480x480&_nc_cat=102&ccb=1-7&_nc_sid=f4b9fd&_nc_ohc=TCK0c_gZvKsQ7kNvgF6Nj1f&_nc_zt=24&_nc_ht=scontent.flos5-2.fna&_nc_gid=A_mm_IBwWJfZC_D9h2lhL5G&oh=00_AYDeDuwVb32ZKXLv6-9jUicfxyos3C45KeZUKU6jmxjACA&oe=67297BA8"
+    },
+    {
+      "name": "Nana Aishat Memorial College of Education, Ilorin",
+      "city": "Ilorin",
+      "code": "NAMCE Ilorin",
+       "logo": "https://namcoed.sch.ng/images/logo-text.png"
+    },
+    {
+      "name": "Institute of Arabic and Islamic Studies, Olodo Ibadan",
+      "city": "Olodo Ibadan",
+      "code": "IAIS Olodo Ibadan",
+       "logo": "https://www.facultyofartsui.org/front/images/uilogo.jpg"
+    },
+    {
+      "name": "ONIT College of Education, Abagana",
+      "city": "Abagana",
+      "code": "ONITCE Abagana",
+       "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1yIGFAZL14iil_i-Njq-QhxDltjzhdB4nrw&s"
+    },
+    {
+      "name": "Our Saviour Inst. Of Sci. & Tech. College of Education, Enugu",
+      "city": "Enugu",
+      "code": "OSISTCE Enugu",
+       "logo": "https://www.schchat.com/storage/school/profilepic/Our-Saviour-Institute-of-Science-Agriculture-and-Technology-OSISATECHjpg_1620745133.jpg"
+    },
+    {
+      "name": "The African Church College of Education, Adewale Adegun Avenue",
+      "city": "Adewale Adegun Avenue",
+      "code": "TACCE Adewale Adegun Avenue",
+       "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmW9G6HJLEFS_hHPEWUnQ0EAIQSA7fQkwNWA&s"
+    },
+    {
+      "name": "St. Augustine College of Education (Project Time), Yaba",
+      "city": "Yaba",
+      "code": "SACE Yaba",
+       "logo": "https://staugustinecollege.edu.ng/wp-content/uploads/2024/05/cropped-logo.png"
+    },
+    {
+      "name": "Topmost College of Education, Ipaja",
+      "city": "Ipaja",
+      "code": "TCEI Ipaja",
+       "logo": "https://topmostedu.org.ng/wp-content/uploads/2023/05/logo111.png"
+    },
+    {
+      "name": "Yewa Central College of Education, Adehun Abeokuta",
+      "city": "Adehun Abeokuta",
+      "code": "YCCE Adehun Abeokuta",
+       "logo": "hhttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNXozZ2kZBTnbvbjRvFE_UpLsDoWM4bX1wBg&s"
+    },
+    {
+      "name": "Yusuf Bala Usman College of Legal and General Studies, Daura",
+      "city": "Daura",
+      "code": "YBUCLGS Daura",
+       "logo": "https://www.ybuc.edu.ng/assets/icons/bala-logo.png"
+    },
+    {
+      "name": "Kinsey College Of Education, Ilorin South",
+      "city": "Ilorin South",
+      "code": "KCE Ilorin South",
+       "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiZIejtQAH-EiDkpW2eZNDmihRilBnNGpPzA&s"
+    },
+    {
+      "name": "Akanu Ibiam Federal Polytechnic, Unwana-Afikpo",
+      "city": "Unwana-Afikpo",
+      "code": "AIFP Unwana-Afikpo",
+       "logo": "https://polyunwana.edu.ng/wp-content/uploads/2020/05/cropped-header-logo-1.png"
+    },
+    {
+      "name": "Auchi Polytechnic, Auchi",
+      "city": "Auchi",
+      "code": "APA Auchi",
+       "logo": "https://www.auchipoly-online.com/images/hdlogo.gif"
+    },
+    {
+      "name": "Federal Polytechnic, Ekiti",
+      "city": "Ekiti",
+      "code": "FP Ekiti",
+       "logo": "https://fedpolyado.edu.ng/wp-content/uploads/2023/10/logo.png"
+    },
+    {
+      "name": "Federal Polytechnic, Bauchi",
+      "city": "Bauchi",
+      "code": "FP Bauchi",
+       "logo": "https://fptb.edu.ng/wp-content/uploads/2022/02/logo.jpg"
+    },
+    {
+      "name": "Federal Polytechnic, Bida",
+      "city": "Bida",
+      "code": "FP Bida",
+       "logo": "https://fedpolybida.edu.ng/wp-content/uploads/2023/07/BIDA-POLY-BANNER-2.png"
+    },
+    {
+      "name": "Federal Polytechnic, Damaturu",
+      "city": "Damaturu",
+      "code": "FP Damaturu",
+       "logo": "https://www.fedpodam.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Federal Polytechnic, Ede",
+      "city": "Ede",
+      "code": "FP Ede",
+       "logo": "https://www.federalpolyede.edu.ng/images/logoOriginal.png"
+    },
+    {
+      "name": "Federal Polytechnic, Idah",
+      "city": "Idah",
+      "code": "FP Idah",
+       "logo": "https://forms.fepoda.edu.ng/apply/assets/img/avatars/fepoda.fw.png"
+    },
+    {
+      "name": "Federal Polytechnic, Ilaro",
+      "city": "Ilaro",
+      "code": "FP Ilaro",
+       "logo": "https://federalpolyilaro.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Federal Polytechnic, Ile-Oluji",
+      "city": "Ile-Oluji",
+      "code": "FP Ile-Oluji",
+       "logo": "https://fedpolel.edu.ng/wp-content/uploads/2021/05/logo-1.png"
+    },
+    {
+      "name": "Federal Polytechnic, Kaura Namoda",
+      "city": "Kaura Namoda",
+      "code": "FP Kaura Namoda",
+       "logo": "http://portal.fedponam.edu.ng/Poly%20Banner3.png"
+    },
+    {
+      "name": "Federal Polytechnic, Mubi",
+      "city": "Mubi",
+      "code": "FP Mubi",
+       "logo": "https://fpmubieportal.edu.ng/wp-content/uploads/2020/10/web-logo-2-1.png"
+    },
+    {
+      "name": "Federal Polytechnic, Namoda",
+      "city": "Namoda",
+      "code": "FP Namoda",
+       "logo": "http://portal.fedponam.edu.ng/Poly%20Banner3.png"
+    },
+    {
+      "name": "Federal Polytechnic, Nassarawa",
+      "city": "Nassarawa",
+      "code": "FP Nassarawa",
+      "logo": "https://fpn.edu.ng/wp-content/uploads/2024/05/logo.jpg"
+    },
+    {
+      "name": "Federal Polytechnic, Nekede",
+      "city": "Nekede",
+      "code": "FP Nekede",
+      "logo": "https://fpno.edu.ng/new/wp-content/uploads/2024/07/nekedelogo.png"
+    },
+    {
+      "name": "Federal Polytechnic, Offa",
+      "city": "Offa",
+      "code": "FP Offa",
+      "logo": "https://www.fedpoffaonline.edu.ng/images/demo/default/logo/logo2.png"
+    },
+    {
+      "name": "Federal Polytechnic, Oko",
+      "city": "Oko",
+      "code": "FP Oko",
+      "logo": "https://federalpolyoko.edu.ng/wp-content/uploads/2023/10/cropped-logo-1-removebg-preview.png"
+    },
+    {
+      "name": "Hussaini Adamu Federal Polytechnic, Kazaure",
+      "city": "Kazaure",
+      "code": "HAFP Kazaure",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0MafvABXrEu03yGdQGMSO7yt1qj7WXCXUFQ&s"
+    },
+    {
+      "name": "Kaduna Polytechnic, Kaduna",
+      "city": "Kaduna",
+      "code": "KP Kaduna",
+      "logo": "https://www.kadunapoly.edu.ng/img/kpt.jpg"
+    },
+    {
+      "name": "Waziri Umaru Federal Polytechnic, Birnin Kebbi",
+      "city": "Birnin Kebbi",
+      "code": "WUFP Birnin Kebbi",
+      "logo": "https://wufpbk.edu.ng/index/wp-content/uploads/2020/09/logo1-2.png"
+    },
+    {
+      "name": "Yaba College of Technology, Yaba",
+      "city": "Yaba",
+      "code": "Yabatech",
+      "logo": "https://yabatech.edu.ng/img/logss.png"
+    },
+    {
+      "name": "Federal Polytechnic, Bali",
+      "city": "Bali",
+      "code": "FP Bali",
+      "logo": "https://fedpolybali.edu.ng/wp-content/themes/bali/assets/images/bida_logo.png"
+    },
+    {
+      "name": "Federal Polytechnic, Ekowe",
+      "city": "Ekowe",
+      "code": "FP Ekowe",
+      "logo": "https://www.federalpolyekowe.edu.ng/wp-content/uploads/2021/02/LOGO2.png"
+    },
+    {
+      "name": "Federal School of Dental Technology and Therapy, Enugu",
+      "city": "Enugu",
+      "code": "FSDTT Enugu",
+      "logo": "https://fedcodtten.edu.ng/wp-content/uploads/2020/05/logo-removebg-preview.png"
+    },
+    {
+      "name": "Nigeria Army School of Military Engineering, Makurdi",
+      "city": "Makurdi",
+      "code": "NASME Makurdi",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvbj1MRL4O8eTueonV2BPsSVsQncm9dzyU3Q&s"
+    },
+    {
+      "name": "Federal College of Animal Health and Production Technology, Moor Plantation",
+      "city": "Moor Plantation",
+      "code": "FCAHPT Moor Plantation",
+      "logo": "https://fcahptib.edu.ng/wp-content/uploads/2024/06/FCAHPT-LOGO.webp"
+    },
+    {
+      "name": "Air Force Institute of Technology Nigerian Air Force, Kaduna",
+      "city": "Kaduna",
+      "code": "AFITAF Kaduna",
+      "logo": "https://afit.edu.ng/home/wp-content/uploads/2023/05/AFITsLOGO.png"
+    },
+    {
+      "name": "Abdu Gusau Polytechnic, Talata-Mafara",
+      "city": "Talata-Mafara",
+      "code": "AGPT Talata-Mafara",
+      "logo": "https://sis.agpmafara.edu.ng/images/titil.png"
+    },
+    {
+      "name": "Abia State Polytechnic, Aba",
+      "city": "Aba",
+      "code": "ASP Aba",
+      "logo": "https://abiastatepolytechnic.edu.ng/wp-content/themes/abiapoly1/assets/img/logoapoly.png"
+    },
+    {
+      "name": "Abubakar Tatari Ali Polytechnic, Bauchi",
+      "city": "Bauchi",
+      "code": "ATAP Bauchi",
+      "logo": "https://atapoly.edu.ng/assets/images/atapoly-logo.png"
+    },
+    {
+      "name": "Adamawa State Polytechnic, Yola",
+      "city": "Yola",
+      "code": "ASP Yola",
+      "logo": "https://adamawapoly.edu.ng/wp-content/uploads/2021/10/cropped-logo.png"
+    },
+    {
+      "name": "Akwa-Ibom State College of Art and Science, Numkum",
+      "city": "Numkum",
+      "code": "ASCAS Numkum",
+      "logo": "https://naijadirectory.org/wp-content/uploads/job-manager-uploads/lt_gallery_images/2024/05/images-2024-05-24T123145.190-1.jpeg"
+    },
+    {
+      "name": "Akwa-Ibom State Polytechnic, Ikot-Osurua",
+      "city": "Ikot-Osurua",
+      "code": "ASP Ikot-Osurua",
+      "logo": "https://akwaibompoly.edu.ng/wp-content/uploads/2023/11/Akwaibom-state-Logo.png"
+    },
+    {
+      "name": "Benue State Polytechnic, Ugbokolo",
+      "city": "Ugbokolo",
+      "code": "BSP Ugbokolo",
+      "logo": "https://benpolyonline.edu.ng/host/wp-content/uploads/2024/05/cropped-msLogo.png"
+    },
+    {
+      "name": "College of Administrative and Business Studies, Potiskum",
+      "city": "Potiskum",
+      "code": "CABS Potiskum",
+      "logo": "https://camtechpotiskum.net/wp-content/uploads/2021/09/camtech-logo.png"
+    },
+    {
+      "name": "Delta State Polytechnic, tefe Ogharra",
+      "city": "tefe Ogharra",
+      "code": "DSP tefe Ogharra",
+      "logo": "https://ogharapoly.edu.ng/wp-content/uploads/2023/03/logonew.png"
+    },
+    {
+      "name": "Delta State Polytechnic, Ozoro",
+      "city": "Ozoro",
+      "code": "DSP Ozoro",
+      "logo": "https://www.dspz.edu.ng/IMG/DSPlogox3.fw.png"
+    },
+    {
+      "name": "Delta State Polytechnic, Ugwashi-Uku",
+      "city": "Ugwashi-Uku",
+      "code": "DSP Ugwashi-Uku",
+      "logo": "https://mydspg.edu.ng/wp-content/uploads/2021/08/trans-banner.png"
+    },
+    {
+      "name": "Edo State Institute of Management and Technology, Usen",
+      "city": "Benin",
+      "code": "EDIMT Benin",
+      "logo": "https://www.edopoly.edu.ng/wp-content/uploads/2022/03/EDO-POLY-LOGO2.png"
+    },
+    {
+      "name": "Enugu Polytechnic",
+      "city": "Ani-Iri",
+      "code": "EP Ani-Iri",
+      "logo": "https://espoly.edu.ng/wp-content/uploads/2020/06/Picture1.png"
+    },
+    {
+      "name": "Gateway ICT Institute, Itori",
+      "city": "Ewekoro",
+      "code": "GICTI Ewekoro",
+      "logo": "https://dsadegbenropoly.edu.ng/wp-content/uploads/2020/03/imageedit_1_4773329608-2.png"
+    },
+    {
+      "name": "Gateway ICT Polytechnic, Igbesa",
+      "city": "Igbesa",
+      "code": "GICTP Igbesa",
+      "logo": "https://dsadegbenropoly.edu.ng/wp-content/uploads/2020/03/imageedit_1_4773329608-2.png"
+    },
+    {
+      "name": "Gateway ICT Polytechnic, Saapade",
+      "city": "Saapade",
+      "code": "GICTP Saapade",
+      "logo": "https://dsadegbenropoly.edu.ng/wp-content/uploads/2020/03/imageedit_1_4773329608-2.png"
+    },
+    {
+      "name": "Hassan Usman Katsina Polytechnic, Katsina",
+      "city": "Katsina",
+      "code": "HUP Katsina",
+      "logo": "https://i1.wp.com/hukpoly.edu.ng/wp-content/uploads/2020/03/logo_trimmed.png?w=171&ssl=1"
+    },
+    {
+      "name": "Imo State Polytechnic, Umuagwo",
+      "city": "Owerri",
+      "code": "ISP Owerri",
+      "logo": "https://www.imopoly.edu.ng/img/nlogo.png"
+    },
+    {
+      "name": "Institute of Management & Technology, Enugu",
+      "city": "Enugu",
+      "code": "IMT Enugu",
+      "logo": "https://imt.edu.ng/wp-content/uploads/2018/09/website-logo-1.png"
+    },
+    {
+      "name": "Jigawa State Polytechnic, Dutse",
+      "city": "Dutse",
+      "code": "JSP Dutse",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6cgtsvGYzRR9XpK125FvqrrrRq8vXMHGqRQ&s"
+    },
+    {
+      "name": "Kano State Polytechnic, Kano",
+      "city": "Kano",
+      "code": "KSP Kano",
+      "logo": "https://kanopoly.edu.ng/wp-content/uploads/2024/09/Kano-State-Polytechnic-logo.png"
+    },
+    {
+      "name": "Kogi State Polytechnic, Lokoja",
+      "city": "Lokoja",
+      "code": "KSP Lokoja",
+      "logo": "https://www.kogistatepolytechnic.edu.ng/wp-content/uploads/2021/08/cropped-admin-ajax1.png"
+    },
+    {
+      "name": "Kwara State Polytechnic, Ilorin",
+      "city": "Ilorin",
+      "code": "KSP Ilorin",
+      "logo": "https://portal.kwarastatepolytechnic.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Lagos State Polytechnic, Ikorodu",
+      "city": "Ikorodu",
+      "code": "LSP Ikorodu",
+      "logo": "https://me.mylaspotech.edu.ng/Contents/images/logo.pnghttps://example.com/logos/lsp_ikorodu.png"
+    },
+    {
+      "name": "Moshood Abiola Polytechnic, Abeokuta",
+      "city": "Abeokuta",
+      "code": "MAP Abeokuta",
+      "logo": "https://mapoly.edu.ng/wordpress/wp-content/uploads/2021/08/cropped-mapoly_logo2.png"
+    },
+    {
+      "name": "Nasarawa State Polytechnic, Lafia",
+      "city": "Lafia",
+      "code": "NSP Lafia",
+      "logo": "https://imap.edu.ng/wp-content/uploads/2021/01/imap_header_logo_ok.png"
+    },
+    {
+      "name": "Niger State Polytechnic, Zungeru",
+      "city": "Zungeru",
+      "code": "NSP Zungeru",
+      "logo": "https://nigerpoly.edu.ng/images/logoi.png"
+    },
+    {
+      "name": "Nuhu Bamalli Polytechnic, Zaria",
+      "city": "Zaria",
+      "code": "NUBA Zaria",
+      "logo": "https://nubapoly.edu.ng/index_files/logo_new-1.png"
+    },
+    {
+      "name": "Osun State College of Technology, Esa-Oke",
+      "city": "Esa-Oke",
+      "code": "OSCT Esa-Oke",
+      "logo": "https://oscotechesaoke.edu.ng/oscosite/images/iconex.png"
+    },
+    {
+      "name": "Osun State Polytechnic, Iree",
+      "city": "Iree",
+      "code": "OSP Iree",
+      "logo": "https://ospoly.edu.ng/school_website/img/ospoly_index.png"
+    },
+    {
+      "name": "Plateau State Polytechnic, Barkin Ladi",
+      "city": "Barkin Ladi",
+      "code": "PSP Barkin Ladi",
+      "logo": "https://plapolyportal.com.ng/img/logo.jpg"
+    },
+    {
+      "name": "Ramat Polytechnic, Maiduguri",
+      "city": "Maiduguri",
+      "code": "RP Maiduguri",
+      "logo": "https://ramatpoly.edu.ng/wp-content/uploads/2021/02/apple-icon-144x144-1.png"
+    },
+    {
+      "name": "Rivers State Polytechnic, Bori",
+      "city": "Bori",
+      "code": "RSP Bori",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0IHS4TjPFJnZwbjp2PIMtrpAnfBQbYJ-zaA&s"
+    },
+    {
+      "name": "Rivers State College of Arts and Science, Rumola",
+      "city": "Rumola",
+      "code": "RSCAS Rumola",
+      "logo": "https://api.free-apply.com/img/logo/dfd91fa1-f67e-4711-8fc1-4d84cefca627?w=150&h=150&fit=crop&s=6bc67323b8b01557395d7b0dd603d337"
+    },
+    {
+      "name": "Rufus Giwa Polytechnic, Owo",
+      "city": "Owo",
+      "code": "RGP Owo",
+      "logo": "https://rugipo.edu.ng/wp-content/uploads/2021/08/logo.png"
+    },
+    {
+      "name": "Sokoto State Polytechnic, Sokoto",
+      "city": "Sokoto",
+      "code": "SSP Sokoto",
+      "logo": "https://www.uaspolysok.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Taraba State Polytechnic, Jalingo",
+      "city": "Jalingo",
+      "code": "TSP Jalingo",
+      "logo": "https://tarabapoly.edu.ng/portal/images/poly.jpg"
+    },
+    {
+      "name": "The Polytechnic, Ibadan",
+      "city": "Ibadan",
+      "code": "TP Ibadan",
+      "logo": "https://admissions.polytechnicibadan.com/img/polyib.png"
+    },
+    {
+      "name": "Yobe State Polytechnic, Geidam",
+      "city": "Geidam",
+      "code": "YSPG Geidam",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrzK7z5t4s6e24h8_UkoSmPbvTIzlhU3iSqw&s"
+    },
+    {
+      "name": "Allover Central Polytechnic, Sango-Ota",
+      "city": "Sango-Ota",
+      "code": "ACP Sango-Ota",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbDH0AycIsHznlv3POtuqtcTUeOz8juoskDg&s"
+    },
+    {
+      "name": "Covenant Polytechnic, Aba",
+      "city": "Aba",
+      "code": "CP Aba",
+      "logo": "https://covenantpolytechnic.com/img/logo.png"
+    },
+    {
+      "name": "Crown Polytechnic, Odo Ado-Ekiti",
+      "city": "Odo Ado-Ekiti",
+      "code": "CP Odo Ado-Ekiti",
+      "logo": "https://www.crownpolytechnic.edu.ng/uploads/school_content/logo/front_logo-5f36ff762616f7.27654468.png"
+    },
+    {
+      "name": "Dorben Polytechnic, Bwari",
+      "city": "Bwari",
+      "code": "DP Bwari",
+      "logo": "https://poly.dorben.edu.ng/wp-content/uploads/2020/05/Dorben-Polythecnic-Logo2.png"
+    },
+    {
+      "name": "Fidei Polytechnic, Gboko",
+      "city": "Gboko",
+      "code": "FP Gboko",
+      "logo": "https://fideipolytechnic.edu.ng/images/logo.jpg"
+    },
+    {
+      "name": "Grace Polytechnic, Surulere",
+      "city": "Surulere",
+      "code": "GP Surulere",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE7jJngsgM37OmXsiMhkIG9uFebOQp1ArEug&s"
+    },
+    {
+      "name": "Heritage Polytechnic, Eket",
+      "city": "Eket",
+      "code": "HP Eket",
+      "logo": "https://www.heritagepoly.edu.ng/img/logo.png"
+    },
+    {
+      "name": "Ibadan City Polytechnic, Dugbe",
+      "city": "Dugbe",
+      "code": "ICP Dugbe",
+      "logo": "https://www.icp.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Igbajo Polytechnic, Igbajo",
+      "city": "Igbajo",
+      "code": "IP Igbajo",
+      "logo": "https://igbajopolytechnic.edu.ng/images/logo.png?=1551355073"
+    },
+    {
+      "name": "Interlink Polytechnic, Ijebu-Jesa",
+      "city": "Ijebu-Jesa",
+      "code": "IP Ijebu-Jesa",
+      "logo": "https://www.interlinkpolytechnic.edu.ng/img/site-logo.png"
+    },
+    {
+      "name": "Kings Polytechnic, Ubiaja",
+      "city": "Ubiaja",
+      "code": "KP Ubiaja",
+      "logo": "https://kingspolytechnic.com/wp-content/uploads/2021/12/WhatsApp-Image-2021-12-23-at-12.45.38-PM.jpg"
+    },
+    {
+      "name": "Lagos City Polytechnic, Ikeja",
+      "city": "Ikeja",
+      "code": "LCP Ikeja",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6GJv_jZ3JWt_DxfIMbKN_gPDbw4k3ViE9ig&s"
+    },
+    {
+      "name": "Lighthouse Polytechnic, Evbuobanosa",
+      "city": "Evbuobanosa",
+      "code": "LP Evbuobanosa",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1GBkk4Yqcyg2KBd2xL1YM7sWrsBeBhUUWiw&s"
+    },
+    {
+      "name": "Nacabs Polytechnic, Akwanga",
+      "city": "Akwanga",
+      "code": "NP Akwanga",
+      "logo": "https://naijadirectory.org/wp-content/uploads/2024/06/NACABS-POLYTECHNIC-AKWANGA.png"
+    },
+    {
+      "name": "Nogak Polytechnic, Ikom",
+      "city": "Ikom",
+      "code": "NP Ikom",
+      "logo": "https://naijadirectory.org/wp-content/uploads/2024/06/NOGAK-POLYTECHNIC-IKOM-1.jpeg"
+    },
+    {
+      "name": "Our Saviour Institute of Science Agric and Technology (OSISATECH), Enugu",
+      "city": "Enugu",
+      "code": "OSISAT Enugu",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCLJqGkMrbvQj4uePbZMq3vRFkddYqzZxDRQ&s"
+    },
+    {
+      "name": "Prime Polytechnic, Ajaokuta",
+      "city": "Ajaokuta",
+      "code": "PP Ajaokuta",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYBplHJCJWcOFGXcXzqnHhnuX0Lj_me2WY4A&s"
+    },
+    {
+      "name": "Ronik Polytechnic, Ejigbo",
+      "city": "Ejigbo",
+      "code": "RP Ejigbo",
+      "logo": "https://www.ronikpolytechnic.edu.ng/wp-content/uploads/2019/09/ronik-logo2.png"
+    },
+    {
+      "name": "Shaka Polytechnic, Benin City",
+      "city": "Benin City",
+      "code": "SP Benin City",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQ4HLi93wOq4IrajDaPpx8jB01fHOJ2X-WWg&s"
+    },
+    {
+      "name": "Temple-Gate Polytechnic, Aba",
+      "city": "Aba",
+      "code": "TGP Aba",
+      "logo": "https://tgp.edu.ng/assets/img/new/logo.png"
+    },
+    {
+      "name": "The Polytechnic, Ile-Ife",
+      "city": "Ile-Ife",
+      "code": "TP Ile-Ife",
+      "logo": "https://cdn.scholaro.com/logos/379527-167072-11705476116.jpeg"
+    },
+    {
+      "name": "The Polytechnic, Imesi-Ile",
+      "city": "Imesi-Ile",
+      "code": "TP",
+      "logo": "https://thepolyimesi-ile.edu.ng/images/logo.png"
+    },
+    {
+      "name": "Tower Polytechnic, Ibadan",
+      "city": "Ibadan",
+      "code": "TP Ibadan",
+      "logo": "https://towerpolytechnic.edu.ng/wp-content/uploads/2024/03/tower-polytechnic-Logo.jpeg"
+    },
+    {
+      "name": "Wolex Polytechnic, Ikeja",
+      "city": "Ikeja",
+      "code": "WP Ikeja",
+      "logo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRjhQ76nANTfb0KDeAX1xU8taFnwHrVDszbbQ&s"
+    },
+    {
+      "name": "D.S. ADEGBENRO ICT Polytechnic, Abeokuta",
+      "city": "Abeokuta",
+      "code": "DSAP",
+      "logo": "https://dsadegbenropoly.edu.ng/wp-content/uploads/2020/03/imageedit_1_4773329608-2.png"
+    },
+    {
+      "name": "Nigerian Institute of Journalism (NIJ), Ogba Estate, Ikeja",
+      "city": "Ogba Estate, Ikeja",
+      "code": "NIJ",
+      "logo": "https://nij.edu.ng/wp-content/uploads/2021/02/header_2-300x69.png"
+    }
+  ]
+}
