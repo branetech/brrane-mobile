@@ -37,7 +37,7 @@ export const BraneButton = ({
   loadingColor
 }: BtnProps) => {
   const isDisabled = disabled || loading;
-  const buttonBackgroundColor = backgroundColor || '#3B5120';
+  const buttonBackgroundColor = backgroundColor || '#013D25';
   const spinnerColor = loadingColor || textColor || '#fff';
 
   return (
