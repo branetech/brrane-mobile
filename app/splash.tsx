@@ -1,0 +1,207 @@
+// app/onboarding.tsx
+import { View, Image, StyleSheet, Dimensions } from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'expo-router';
+import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
+import { useAppSelector } from '@/redux/store';
+import { ThemedText } from '@/components/themed-text';
+import { BraneButton } from '@/components/brane-button';
+
+const { height } = Dimensions.get('window');
+
+const SLIDES = [
+  {
+    image: require('@/assets/images/onboard/container.png'),
+    title: 'Get rewarded on every top-up',
+    body: "With every data and airtime recharge, you're not just topping up your phone you're building your investment portfolio.",
+  },
+  {
+    image: require('@/assets/images/onboard/container_1.png'),
+    title: 'Grow your wealth',
+    body: 'Just pay bills as usual—Brane handles the rest.',
+  },
+  {
+    image: require('@/assets/images/onboard/container_2.png'),
+    title: 'Your Path to Ownership',
+    body: 'Every purchase moves you closer to financial growth and ownership.',
+  },
+];
+
+export default function Onboarding() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const router = useRouter();
+  const { isAuthenticated, token } = useAppSelector((state) => state.auth);
+
+  const goToNextSlide = useCallback(() => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === SLIDES.length - 1 ? 0 : prevIndex + 1
+    );
+  }, []);
+
+  const handleCreateAccount = () => {
+    // router.replace('/(auth)/register');
+  };
+
+  const handleLogin = () => {
+    // router.replace('/(auth)/login');
+  };
+
+  useEffect(() => {
+    const timer = setTimeout(goToNextSlide, 5000);
+    return () => clearTimeout(timer);
+  }, [currentIndex, goToNextSlide]);
+
+  useEffect(() => {
+    if (isAuthenticated || token) {
+      router.replace('/(tabs)');
+    }
+  }, [isAuthenticated, token, router]);
+
+  return (
+    <View style={styles.container}>
+      {/* Image Container */}
+      <View style={styles.imageContainer}>
+        <Animated.View
+          key={currentIndex}
+          entering={FadeInRight.duration(300)}
+          exiting={FadeOutLeft.duration(300)}
+          style={styles.imageWrapper}
+        >
+          <Image
+            source={SLIDES[currentIndex].image}
+            style={styles.image}
+            resizeMode="contain"
+          />
+        </Animated.View>
+      </View>
+
+      {/* Content Container */}
+      <View style={styles.contentContainer}>
+        <View style={styles.textContainer}>
+          <ThemedText style={styles.title}>{SLIDES[currentIndex].title}</ThemedText>
+          <ThemedText style={styles.body}>{SLIDES[currentIndex].body}</ThemedText>
+        </View>
+
+        {/* Pagination */}
+        <View style={styles.pagination}>
+          {SLIDES.map((_, index) => (
+            <View
+              key={index}
+              style={[
+                styles.dot,
+                index === currentIndex ? styles.activeDot : styles.inactiveDot,
+              ]}
+            />
+          ))}
+        </View>
+
+        {/* Buttons */}
+        <View style={styles.buttonContainer}>
+          <BraneButton
+            onPress={handleCreateAccount}
+            text="Create Account"
+            style={styles.createAccountButton}
+            textColor={'#fff'}
+            fontSize={16}
+          />
+          <BraneButton
+            onPress={handleLogin}
+            text="Login"
+            style={styles.loginButton}
+            textColor={'#013D25'}
+            fontSize={16}
+          />
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    maxWidth: 480,
+    width: '100%',
+    alignSelf: 'center',
+    backgroundColor: '#FFFFFF',
+  },
+  imageContainer: {
+    height: height * 0.55,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 40,
+  },
+  imageWrapper: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: '90%',
+    // height: '100%',
+  },
+  contentContainer: {
+    flex: 1,
+    paddingHorizontal: '6%',
+    paddingVertical: '10%',
+    // justifyContent: 'space-between',
+  },
+  textContainer: {
+    alignItems: 'center',
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: '700',
+    textAlign: 'center',
+    marginBottom: 12,
+    color: '#000000',
+    lineHeight: 28,
+  },
+  body: {
+    fontSize: 14,
+    textAlign: 'center',
+    fontWeight: '400',
+    color: '#666666',
+    lineHeight: 20,
+    paddingHorizontal: 10,
+  },
+  pagination: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 8,
+    marginVertical: 10,
+  },
+  dot: {
+    borderRadius: 2,
+  },
+  activeDot: {
+    width: 24,
+    height: 4,
+    backgroundColor: '#013D25',
+  },
+  inactiveDot: {
+    width: 8,
+    height: 4,
+    backgroundColor: '#D0E4DB',
+  },
+  buttonContainer: {
+    gap: 12,
+  },
+  createAccountButton: {
+    backgroundColor: '#013D25',
+    height: 56,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loginButton: {
+    backgroundColor: '#D0E4DB',
+    height: 56,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

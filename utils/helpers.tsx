@@ -1,91 +1,96 @@
-// 'use client'
+// utils/helpers.ts
 import { onShowInsFunds, setLoader, setLoaderConfig } from "@/redux/slice/auth-slice";
-import store from "@/redux/store";
+import { dispatch } from "@/redux/store";
 import { ITransactionDetail } from "@/utils/index";
 import universities from "@/utils/universities.json";
-import { ArgsProps } from "antd/es/notification/interface";
 import { format } from "date-fns";
-import Image from "next/image";
-import React, { CSSProperties } from "react";
-import { toast } from "sonner";
+import React from "react";
+import { toast } from "sonner-native";
 import { getEarnedBracs } from "./brac";
+import { TextStyle, ViewStyle } from "react-native";
 
-
-export const getInitials = (name: string | undefined | null): string => ((name || "").match(/\b\w/g) || []).join('').toUpperCase();
+export const getInitials = (name: string | undefined | null): string => 
+  ((name || "").match(/\b\w/g) || []).join('').toUpperCase();
 
 export const getSchoolInitials = (name: string): string => {
-  const school = universities?.universities?.find((s) => s.name === name) || null
+  const school = universities?.universities?.find((s) => s.name === name) || null;
   return String(school?.code || getInitials(name)).toUpperCase();
 };
 
-Number.prototype.format = function (n: number, x: number) {
+// Extend Number prototype
+declare global {
+  interface Number {
+    format(n: number, x?: number): string;
+  }
+}
+
+Number.prototype.format = function (n: number, x: number = 3) {
   let re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
   return Number(this).toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&,');
 };
 
+export const priceFormatter = (value?: number, dec = 0): string => 
+  `₦${Number(value || 0).format(dec)}`;
 
-export const priceFormatter = (value?: number, dec = 0): string => `₦${Number(value || 0).format(dec)}`
+// Toast notifications for React Native
+export const showSuccess = (description: string, message: string = 'Success') => 
+  showMessage(message, description, 'success');
 
-// export const showSuccess = (description: string | React.ReactNode, options: any = {}, message: string = "Success",) => showMessage(message, description, "success", options);
-// export const showInfo = (description: string | React.ReactNode, options = {}, message: string = "Information",) => showMessage(message, description, "info", options);
-// export const showWarning = (description: string | React.ReactNode, options: ArgsProps | any = {}, message: string = "Warning") => showMessage(message, description, "warning", options);
-// export const showError = (description: string | React.ReactNode, options: ArgsProps | {} = {}, message: string = "Error") => showMessage(message, description, "error", options);
-//
-// type NotificationType = "success" | "info" | "warning" | "error";
-//
-// export const showMessage = (_: string, description: string | React.ReactNode, type: NotificationType, options: ArgsProps | {} = {}) => {
-//   notification[type]({
-//     message: '',
-//     description,
-//     icon: null,
-//     placement: 'top', ...options
-//   });
-// };
+export const showInfo = (description: string, message: string = 'Information') => 
+  showMessage(message, description, 'info');
 
+export const showWarning = (description: string, message: string = 'Warning') => 
+  showMessage(message, description, 'warning');
 
-
-export const showSuccess = (description: string | React.ReactNode, options: ArgsProps = { message: '' }, message: string = 'Success') => showMessage(message, description, 'success', options);
-export const showInfo = (description: string | React.ReactNode, options: ArgsProps = { message: '' }, message: string = 'Information') => showMessage(message, description, 'info', options);
-export const showWarning = (description: string | React.ReactNode, options: ArgsProps = { message: '' }, message: string = 'Warning') => showMessage(message, description, 'warning', options);
-export const showError = (description: string | React.ReactNode, options: ArgsProps = { message: '' }, message: string = 'Error') => showMessage(message, description, 'error', options);
+export const showError = (description: string, message: string = 'Error') => 
+  showMessage(message, description, 'error');
 
 type NotificationType = 'success' | 'info' | 'warning' | 'error';
 
-export const showMessage = (_: string, description: string | React.ReactNode, type: NotificationType, options: ArgsProps = { message: '' }) => {
-  //@ts-ignore
-  toast[type](description, { richColors: true, closable: true, action: ['decorators'], dismissible: true, ...options, })
+export const showMessage = (
+  _: string, 
+  description: string, 
+  type: NotificationType
+) => {
+  // @ts-ignore
+  toast[type](description, { 
+    duration: 3000,
+    // You can customize these based on sonner-native options
+  });
 };
 
 export interface ILoaderConfig {
-  message: string,
-  spinnerColor?: CSSProperties['color'],
-  style?: CSSProperties | undefined;
-  textStyle?: CSSProperties | undefined;
+  message: string;
+  spinnerColor?: string;
+  style?: ViewStyle;
+  textStyle?: TextStyle;
+  bg?: string;
 }
 
 export const showAppLoader = (config: ILoaderConfig = {
   message: "Please wait...",
   spinnerColor: "#013D25",
+  bg: "#FFFFFF",
   style: {},
   textStyle: {}
 }) => {
-  store.dispatch(setLoaderConfig(config));
+  dispatch(setLoaderConfig(config));
 };
 
 export const hideAppLoader = () => {
-  store.dispatch(setLoaderConfig({
+  dispatch(setLoaderConfig({
     message: "Please wait...",
     spinnerColor: "#013D25",
+    bg: "#FFFFFF",
     style: {},
     textStyle: {}
   }));
-  store.dispatch(setLoader(false));
+  dispatch(setLoader(false));
 };
 
 export const onShowInsufficientFunds = () => {
-  store.dispatch(onShowInsFunds());
-}
-
+  dispatch(onShowInsFunds());
+};
 
 export function formatPhoneNumber(phoneNumber: string): string {
   const cleanedNumber = phoneNumber.replace(/\D/g, '');
@@ -94,29 +99,43 @@ export function formatPhoneNumber(phoneNumber: string): string {
   return `+${cleanedNumber.replace('+', '').replaceAll(' ', '')}`;
 }
 
-export const getNetworkIcon = (ticker: string, size: number = 40) => {
+// For React Native, you'll need to use Image component differently
+export const getNetworkIcon = (ticker: string): string | null => {
   if (ticker?.toLowerCase().includes('mtn')) {
-    return <Image src='/network/mtn.svg' alt='MTN' width={size} height={size} />;
+    return require('@/assets/images/network/mtn.png');
   }
   if (ticker?.toLowerCase().includes('glo')) {
-    return <Image src='/network/glo.svg' alt='GLO' width={size} height={size} />;
+    return require('@/assets/images/network/glo.png');
   }
   if (ticker?.toLowerCase().includes('9mobile')) {
-    return <Image src='/network/9mobile.svg' alt='9mobile' width={size} height={size} />;
+    return require('@/assets/images/network/9mobile.png');
   }
   if (ticker?.toLowerCase().includes('airtel')) {
-    return <Image src='/network/airtel.svg' alt='Airtel' width={size} height={size} />;
+    return require('@/assets/images/network/airtel.png');
   }
-  return null;// <img src={ticker} alt='Airtel' width={size} height={size} />;;
+  return null;
 };
 
-export const pluralize = (count: number, noun: string, suffix = 's', pluralForm?: string) =>
-  `${new Intl.NumberFormat().format(count)} ${count === 1 || count === 0 ? noun : pluralForm || noun + suffix}`;
+// Usage in component:
+// const iconSource = getNetworkIcon(ticker);
+// {iconSource && <Image source={iconSource} style={{ width: 40, height: 40 }} />}
 
-export const pluralizeString = (count: number, noun: string, suffix = 's', pluralForm?: string) =>
-  `${count === 1 || count === 0 ? noun : pluralForm || noun + suffix}`;
+export const pluralize = (
+  count: number, 
+  noun: string, 
+  suffix = 's', 
+  pluralForm?: string
+) => `${new Intl.NumberFormat().format(count)} ${count === 1 || count === 0 ? noun : pluralForm || noun + suffix}`;
 
-export const formatNumber = (number: number | string | undefined) => Number(number || 0).format(0);
+export const pluralizeString = (
+  count: number, 
+  noun: string, 
+  suffix = 's', 
+  pluralForm?: string
+) => `${count === 1 || count === 0 ? noun : pluralForm || noun + suffix}`;
+
+export const formatNumber = (number: number | string | undefined) => 
+  Number(number || 0).format(0);
 
 export const convertCamelCaseToReadable = (str?: string): string => {
   if (!str) return "";
@@ -129,13 +148,19 @@ export const toPascalCase = (str?: string): string => {
   return str
     .toLowerCase()
     .replace(/_/g, ' ')
-    .replace(/(\w)(\w*)/g, (_, firstChar, rest) => firstChar.toUpperCase() + rest.toLowerCase())
+    .replace(/(\w)(\w*)/g, (_, firstChar, rest) => 
+      firstChar.toUpperCase() + rest.toLowerCase()
+    )
     .replace(/\s+/g, ' ');
 };
-export const collection = (collect: any) => Array.isArray(collect) ? collect : [];
 
+export const collection = (collect: any) => 
+  Array.isArray(collect) ? collect : [];
 
-export const formatDate = (dateString: any, formatStr = "MMMM dd, yyyy | hh:mm a") => {
+export const formatDate = (
+  dateString: any, 
+  formatStr = "MMMM dd, yyyy | hh:mm a"
+) => {
   try {
     const date = new Date(dateString);
     if (!isNaN(date.getTime())) {
@@ -148,22 +173,25 @@ export const formatDate = (dateString: any, formatStr = "MMMM dd, yyyy | hh:mm a
   }
 };
 
-
-
-
 export const parseTransaction = (transaction: ITransactionDetail) => {
   const wasSuccessful = String(transaction?.status).toLowerCase().includes('success');
 
-  const service = transaction?.serviceId ? `(${String(transaction?.serviceId).toUpperCase()})` : ''
-  const amount = Number(transaction?.amount || 0)
+  const service = transaction?.serviceId 
+    ? `(${String(transaction?.serviceId).toUpperCase()})` 
+    : '';
+  const amount = Number(transaction?.amount || 0);
+  
   const {
-    bracValue, rate, commissionVal, paymentGatewayFees, allocatable:rebate
-  }  = getEarnedBracs({
+    bracValue, 
+    rate, 
+    commissionVal, 
+    paymentGatewayFees, 
+    allocatable: rebate
+  } = getEarnedBracs({
     amount,
     serviceType: transaction?.transactionType?.toLowerCase() as any || 'brane',
     serviceId: transaction?.serviceId
-  })
-  
+  });
 
   if (transaction) {
     transaction.timestamp = new Date(String(transaction?.createdAt)).getTime();
@@ -180,38 +208,38 @@ export const parseTransaction = (transaction: ITransactionDetail) => {
     }
   }
   return transaction || {};
-}
-
+};
 
 export const formatTimestampToHumanReadable = (timestamp: number) => {
   const inputDate = new Date(timestamp);
   const currentDate = new Date();
 
-  // Calculate time differences
-  //@ts-ignore
-  const diffTime = currentDate - inputDate; // Difference in milliseconds
-  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); // Difference in days
-  const inputDayOfWeek = inputDate.getDay(); // Day of the week (0 for Sunday, 1 for Monday, etc.)
-  const currentDayOfWeek = currentDate.getDay(); // Current day of the week
+  // @ts-ignore
+  const diffTime = currentDate - inputDate;
+  const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+  const inputDayOfWeek = inputDate.getDay();
+  const currentDayOfWeek = currentDate.getDay();
 
-  // Helper to get day of the week in string format
-  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  const daysOfWeek = [
+    "Sunday", "Monday", "Tuesday", "Wednesday", 
+    "Thursday", "Friday", "Saturday"
+  ];
 
-  // Today's date (without time)
-  const today = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+  const today = new Date(
+    currentDate.getFullYear(), 
+    currentDate.getMonth(), 
+    currentDate.getDate()
+  );
 
-  // Date calculations
   const yesterday = new Date(today);
   yesterday.setDate(today.getDate() - 1);
 
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1);
 
-  // Last week's same day
   const lastWeek = new Date(today);
   lastWeek.setDate(today.getDate() - 7);
 
-  // Formatting rules
   if (inputDate.toDateString() === today.toDateString()) {
     return "Today";
   } else if (inputDate.toDateString() === yesterday.toDateString()) {
@@ -225,10 +253,9 @@ export const formatTimestampToHumanReadable = (timestamp: number) => {
   } else if (inputDate > today && inputDate < tomorrow) {
     return daysOfWeek[inputDayOfWeek];
   } else {
-    return inputDate.toLocaleDateString(); // Return as date string for other cases
+    return inputDate.toLocaleDateString();
   }
 };
-
 
 export function calculatePercentageChange(oldValue: number, newValue: number) {
   if (oldValue === 0) return 0;
@@ -241,7 +268,7 @@ export const parseTicker = (oldValue: number, newValue: number) => {
   const change = newValue - oldValue;
   if (change > 0) return 'up';
   if (change < 0) return 'down';
-  return ''
+  return '';
 };
 
 function getSuffix(day: number): string {
@@ -262,7 +289,6 @@ export const formatDateWithSuffix = (dateStr: string): string => {
       const day = dateObj.getDate();
       const month = dateObj.toLocaleString("default", { month: "long" });
       const suffix = getSuffix(day);
-
       return `${month} ${day}${suffix}`;
     } else {
       return "Invalid Date";
@@ -270,51 +296,58 @@ export const formatDateWithSuffix = (dateStr: string): string => {
   } catch (error) {
     return "Error";
   }
-}
+};
 
 export function formatNumberToDecimal(value: number): string {
   return value?.toFixed(2);
-};
+}
 
 export function formatPercentageToDecimal(value: number): string {
   return value?.toFixed(2) + '%';
-};
+}
 
 export function calculateBracsPercentage(part: number, total: number): number {
-  if (total === 0) {
-    return 0;
-  }
+  if (total === 0) return 0;
   const percentage = (part / total);
-  return parseFloat(percentage.toFixed(3)); // round to 2 decimal places
+  return parseFloat(percentage.toFixed(3));
 }
 
 export function calculatePercentage(percent: number, total: number): number {
   if (total === 0 || percent < 0) return 0;
   const percentage = (percent / 100) * total;
-  return parseFloat(percentage.toFixed(3)); // round to 2 decimal places
+  return parseFloat(percentage.toFixed(3));
 }
-
 
 export function getFirstWord(text: string): string {
   const noHyphens = text.replace(/-/g, " ");
   return noHyphens.split(" ")[0];
 }
 
+const toSnakeCase = (value: string) => 
+  value.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 
-const toSnakeCase = (value: string) => value.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
-
-export const toCamelCase = (s: string) => s.replace(/([-_][a-z])/gi, ($1) => $1.toUpperCase().replace('_', '').replace(' ', ''));
+export const toCamelCase = (s: string) => 
+  s.replace(/([-_][a-z])/gi, ($1) => 
+    $1.toUpperCase().replace('_', '').replace(' ', '')
+  );
 
 const isArray = (value: unknown) => Array.isArray(value);
 
-const isObject = (value: unknown) => value === Object(value) && !isArray(value) && typeof value !== 'function';
+const isObject = (value: unknown) => 
+  value === Object(value) && !isArray(value) && typeof value !== 'function';
+
+export type caseType = 'snakeCase' | 'camelCase';
 
 export const convertKeysCase = (o: unknown, type?: caseType): object => {
   if (isObject(o)) {
     let value = {};
     Object.keys(o as object).forEach((k) => {
       const val = o as { [key: string]: string | object | number | [] };
-      value = { ...value, [type === 'snakeCase' ? toSnakeCase(k) : toCamelCase(k)]: convertKeysCase(val[k], type), };
+      value = { 
+        ...value, 
+        [type === 'snakeCase' ? toSnakeCase(k) : toCamelCase(k)]: 
+          convertKeysCase(val[k], type) 
+      };
     });
     return value;
   } else if (isArray(o)) {
@@ -325,7 +358,11 @@ export const convertKeysCase = (o: unknown, type?: caseType): object => {
   return o as any;
 };
 
-export const objectToFormData = (obj: Record<string, any>, formData: FormData = new FormData(), parentKey?: string): FormData => {
+export const objectToFormData = (
+  obj: Record<string, any>, 
+  formData: FormData = new FormData(), 
+  parentKey?: string
+): FormData => {
   if (obj && typeof obj === 'object' && !(obj instanceof File)) {
     Object.keys(obj).forEach((key) => {
       const value = obj[key];
@@ -336,12 +373,8 @@ export const objectToFormData = (obj: Record<string, any>, formData: FormData = 
       } else if (value instanceof Date) {
         formData.append(fullKey, value.toISOString());
       } else if (Array.isArray(value)) {
-        // value.forEach((item, index) => {
-        // 	objectToFormData({ [`${key}`]: item }, formData, parentKey);
-        // });
         value.forEach((item, index) => {
           if (typeof item === 'object' && item !== null) {
-            // Recursively handle nested objects in arrays
             objectToFormData(item, formData, `${fullKey}[${index}]`);
           } else {
             formData.append(`${fullKey}[${index}]`, item?.toString() || '');
@@ -356,7 +389,6 @@ export const objectToFormData = (obj: Record<string, any>, formData: FormData = 
   }
   return formData;
 };
-export type caseType = 'snakeCase' | 'camelCase';
 
 export const tenureInDays = (tenure: string) => {
   const [value, unit] = tenure.split(" ");

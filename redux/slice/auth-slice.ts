@@ -1,3 +1,4 @@
+// redux/slice/auth-slice.ts
 import { IUSER } from "@/utils";
 import { ILoaderConfig } from "@/utils/helpers";
 import { createSlice } from "@reduxjs/toolkit";
@@ -22,9 +23,9 @@ function parseUserInfo(payload: IUSER): IUSER {
   user.hasIdentity = identity
   user.identity = findKey({
     "NIN": hasCompleted(nin),
-    "Internation Passport": hasCompleted(intl),
+    "International Passport": hasCompleted(intl),
     "Voters Card": hasCompleted(voters),
-    "Drivers Licence": hasCompleted(voters)
+    "Drivers Licence": hasCompleted(drivers) // Fixed: was 'voters'
   }, (value: boolean) => value)
 
   user.hasNextOfKin = !!payload?.nextOfKin?.firstName
@@ -42,42 +43,88 @@ function parseUserInfo(payload: IUSER): IUSER {
   user.hasBanking = user?.beneficiaries && !!user?.beneficiaries?.length;
 
   user.identityKyc = identity && user.hasPhoto && user.hasLocation;
-  user.kycDone = bvn && user.hasName && user.identiyKyc && user?.hasBanking;
-  user.name = `${payload?.firstName || ''} ${payload?.lastName || ''}`;
+  user.kycDone = bvn && user.hasName && user.identityKyc && user?.hasBanking; // Fixed typo: identiyKyc -> identityKyc
+  user.name = `${payload?.firstName || ''} ${payload?.lastName || ''}`.trim();
 
   return user as IUSER;
 }
 
+export interface Auth {
+  user: IUSER | null;
+  token: string | null;
+  isLoggedIn: boolean;
+  isAuthenticated: boolean; // Added for compatibility with route protection
+  insufficientFundsModal: boolean;
+  isLoading: boolean;
+  loaderConfig: ILoaderConfig;
+  config: any;
+  otp: string | null;
+  phone: string | null;
+  showTab: boolean;
+  refreshToken: string | null;
+  contactChecker: string | null;
+  checkouts: AssetCheckout[];
+  onContactChecked: null | ((contact?: string) => void);
+  wallet: any;
+}
+
+interface AssetCheckout {
+  // For Stocks
+  tickerSymbol: string;
+  assetClass: string;
+  brokerName: string;
+  quantity: number;
+  netPayable: number;
+  stockPrice?: number;
+  totalCharge?: number;
+
+  // For Investment Plans
+  days?: string;
+  amount?: number;
+  interestRate?: number;
+  planName?: string;
+  maturityDate?: string;
+  
+  // For Gold
+  logo: string;
+  companyName: string;
+}
+
+const initialState: Auth = {
+  user: null,
+  contactChecker: '',
+  token: null,
+  loaderConfig: {
+    message: 'Please wait...',
+    bg: '#FFFFFF',
+  },
+  isLoggedIn: false,
+  isAuthenticated: false,
+  showTab: false,
+  isLoading: false,
+  insufficientFundsModal: false,
+  wallet: null,
+  config: null,
+  refreshToken: null,
+  otp: null,
+  phone: null,
+  onContactChecked: null,
+  checkouts: [],
+};
+
 const { reducer, actions } = createSlice({
   name: "auth",
-  initialState: {
-    user: null,
-    contactChecker: '',
-    token: null,
-    loaderConfig: {
-      message: 'Please wait...',
-      bg: '#FFFFFF',
-    },
-    isLoggedIn: false,
-    showTab: false,
-    isLoading: false,
-    insufficientFundsModal: false,
-    wallet: null,
-    config: null,
-    refreshToken: null,
-    otp: null,
-    phone: null,
-    onContactChecked: null,
-    checkouts: [],
-  } as Auth,
+  initialState,
   reducers: {
     auth: (state, action) => {
       const { user, token } = action.payload;
-      state.user = user;
+      state.user = parseUserInfo(user);
+      state.token = token;
+      state.isLoggedIn = !!token;
+      state.isAuthenticated = !!token;
       state.refreshToken = action.payload.refreshToken;
       state.otp = action.payload.otp;
       state.phone = action.payload.phone;
-      setCookie('brane-token', token)
     },
     setUser: (state, action) => {
       state.user = parseUserInfo(action.payload);
@@ -85,15 +132,14 @@ const { reducer, actions } = createSlice({
     setToken: (state, action) => {
       state.token = action.payload;
       state.isLoggedIn = !!action.payload;
-      setCookie('brane-token', action.payload)
+      state.isAuthenticated = !!action.payload;
     },
     setRefreshToken: (state, action) => {
       state.refreshToken = action.payload;
     },
     logOut: (state) => {
-      state.user = null;
-      state.token = null;
-      setCookie('brane-token', '')
+      // Reset to initial state
+      return initialState;
     },
     setLoader: (state, action) => {
       state.isLoading = action.payload;
@@ -121,7 +167,7 @@ const { reducer, actions } = createSlice({
       if (!exists) {
         const stockPrice = (asset?.currentPrice || 0);
         const totalCharge = 0.09630661039 * stockPrice;
-        const order = {
+        const order: AssetCheckout = {
           quantity: 1,
           netPayable: stockPrice + totalCharge,
           tickerSymbol: asset?.tickerSymbol || '',
@@ -160,18 +206,22 @@ const { reducer, actions } = createSlice({
           } else if (key === 'contactChecker') {
             state[key] = payload[key]
             if (payload[key] === '') state['onContactChecked'] = null
+          } else if (key === 'token') {
+            state[key] = payload[key]
+            state.isLoggedIn = !!payload[key]
+            state.isAuthenticated = !!payload[key]
           } else {
             state[key] = payload[key]
           }
         })
       }
     },
-
     setConfig: (state, action) => {
       state.config = action.payload;
     },
   },
 });
+
 export default reducer;
 
 export const {
@@ -193,49 +243,3 @@ export const {
   onAddToCheckouts,
   onUpdateCheckouts
 } = actions;
-
-export interface Auth {
-  user: IUSER | null;
-  token: string | null;
-  isLoggedIn: boolean;
-  insufficientFundsModal: boolean;
-  isLoading: boolean | false;
-  loaderConfig: ILoaderConfig;
-  config: any;
-  otp: string | null;
-  phone: string | null;
-  showTab: boolean | false;
-  refreshToken: string | null;
-  contactChecker: string | null;
-  checkouts: AssetCheckout[];
-  onContactChecked: null | ((contact?: string) => void);
-}
-interface AssetCheckout {
-  // For Stocks
-  tickerSymbol: string;
-  assetClass: string;
-  brokerName: string;
-  quantity: number;
-  netPayable: number;
-  stockPrice?: number;
-  totalCharge?: number;
-
-  // For Investment Plans
-  days?: string;
-  amount?: number;
-  interestRate?: number;
-  planName?: string;
-  maturityDate?: string;
-  // For Gold
-  logo: string;
-  companyName: string;
-}
-
-function setCookie(name: string, value: string, exDays: number = 100) {
-  const d = new Date();
-  d.setTime(d.getTime() + exDays * 24 * 60 * 60 * 1000);
-  let expires = "expires=" + d.toUTCString();
-  if (typeof window !== "undefined") {
-    window.document.cookie = `${name}=${value};${expires};path=/`;
-  }
-}
