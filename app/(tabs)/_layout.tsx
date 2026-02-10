@@ -1,8 +1,8 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
 import { useColorScheme } from '@/hooks/use-color-scheme';
+import { Tabs } from 'expo-router';
+import { Gift, Home3, Profile, Receipt1 } from 'iconsax-react-nativejs';
+import React from 'react';
 import { Platform } from 'react-native';
-import { Gift, Home3, Profile, Receipt1 } from 'iconsax-react-nativejs'
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();

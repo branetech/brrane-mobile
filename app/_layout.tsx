@@ -1,13 +1,16 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
-import { useColorScheme } from '@/hooks/use-color-scheme';
-import store from '@/redux/store';
-import { Provider } from 'react-redux';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-
+import { useColorScheme } from "@/hooks/use-color-scheme";
+import store from "@/redux/store";
+import {
+  DarkTheme,
+  DefaultTheme,
+  ThemeProvider,
+} from "@react-navigation/native";
+import { Stack } from "expo-router";
+import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
+import { useEffect } from "react";
+import "react-native-reanimated";
+import { Provider } from "react-redux";
 
 // export const unstable_settings = {
 //   anchor: '(tabs)',
@@ -26,12 +29,16 @@ export default function RootLayout() {
 
   return (
     <Provider store={store}>
-      <ThemeProvider value={colorScheme === 'light' ? DarkTheme : DefaultTheme}>
+      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen
+            name="(unauthenticated)"
+            options={{ headerShown: false }}
+          />
         </Stack>
 
-        <StatusBar style={colorScheme === 'light' ? 'light' : 'dark'} />
+        <StatusBar style={colorScheme === "dark" ? "light" : "dark"} />
       </ThemeProvider>
     </Provider>
   );
