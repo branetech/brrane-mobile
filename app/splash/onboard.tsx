@@ -1,5 +1,5 @@
 // app/onboarding.tsx
-import { View, Image, StyleSheet, Dimensions } from 'react-native';
+import { Image, StyleSheet, Dimensions, View } from 'react-native';
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'expo-router';
 import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
@@ -110,6 +110,7 @@ export default function Onboarding() {
             style={styles.loginButton}
             textColor={'#013D25'}
             fontSize={16}
+            backgroundColor={'#D2F1E4'}
           />
         </View>
       </View>
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
     width: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 40,
+    paddingTop: 30,
   },
   imageWrapper: {
     width: '100%',
@@ -140,17 +141,21 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '90%',
-    // height: '100%',
   },
+
   contentContainer: {
     flex: 1,
     paddingHorizontal: '6%',
     paddingVertical: '10%',
-    // justifyContent: 'space-between',
+    backgroundColor: '#F4FBF8E5'
+
   },
+
   textContainer: {
     alignItems: 'center',
-  },
+    marginBottom: 20,
+    height: height * 0.1,
+    },
   title: {
     fontSize: 22,
     fontWeight: '700',
@@ -188,7 +193,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#D0E4DB',
   },
   buttonContainer: {
-    gap: 12,
+    gap: 15,
+    marginTop: 20,
   },
   createAccountButton: {
     backgroundColor: '#013D25',
@@ -198,7 +204,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loginButton: {
-    backgroundColor: '#D0E4DB',
+    // backgroundColor: '#D2F1E4',
     height: 56,
     borderRadius: 12,
     justifyContent: 'center',

@@ -12,7 +12,7 @@ export default function Index() {
 
   useEffect(() => {
     const checkInitialRoute = async () => {
-      if (isLoading) return; // ✅ Wait for token restoration from RootLayout
+      if (isLoading) return; 
 
       try {
         if (isAuthenticated) {
@@ -24,10 +24,8 @@ export default function Index() {
         const hasSeenFirstSplash = await expoSecureStorage.getItem("hasSeenFirstSplash");
         const hasCompletedOnboarding = await expoSecureStorage.getItem("hasCompletedOnboarding");
 
-        if (!hasSeenFirstSplash) {
-        //   router.replace("/splash/firstSplash");
-        } else if (!hasCompletedOnboarding) {
-        //   router.replace("/splash/onboarding");
+        if (!hasSeenFirstSplash && !hasCompletedOnboarding) {
+          router.replace("/splash/onboard");
         } else {
           router.replace("/splash");
         }
