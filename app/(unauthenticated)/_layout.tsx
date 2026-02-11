@@ -19,7 +19,7 @@ const Layout: React.FC<{ children: any }> = ({children}) => {
   return (
     <View flex>
       <Slot/>
-      <StatusBar animated backgroundColor={PRIMARY} translucent style='dark' networkActivityIndicatorVisible={false}/>
+      <StatusBar animated backgroundColor={PRIMARY} translucent style='light' networkActivityIndicatorVisible={false}/>
     </View>
   );
 }

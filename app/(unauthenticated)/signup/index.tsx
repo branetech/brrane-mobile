@@ -1,152 +1,235 @@
+import { BraneButton } from "@/components/brane-button";
+import { FormInput } from "@/components/formInput";
 import { PhoneInput } from "@/components/phone-input";
-import { FontAwesome } from "@expo/vector-icons";
-import { Text, Touch, View } from "@idimma/rn-widget";
+import { PassWrd } from "@/components/svg";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Image, Text, View } from "@idimma/rn-widget";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+const COLORS = {
+  primary: "#013D25",
+  text: "#0B0014",
+  muted: "#85808A",
+  border: "#E6E4E8",
+  error: "#CB010B",
+  screen: "#FFFFFF",
+  inputBg: "#F7F7F8",
+  googleBg: "#D2F1E4",
+};
+
 export default function SignupScreen() {
   const [phone, setPhone] = useState("");
-  const [verificationMethod, setVerificationMethod] = useState<"sms" | "whatsapp">("sms");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [hasBeenBlurred, setHasBeenBlurred] = useState(false);
+  const [hasConfirmBeenBlurred, setHasConfirmBeenBlurred] = useState(false);
 
+  const PASSWORD_ERROR_MSG =
+    "Your password must have at least 8 characters, a digit (0-9), an uppercase letter (A-Z), a special character ($,@), and match.";
+
+  const validate = (val: string) => {
+    if (val.length === 0) return false;
+    const hasNumber = /\d/.test(val);
+    const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(val);
+    const hasUpper = /[A-Z]/.test(val);
+    const hasLength = val.length >= 8;
+
+    return !(hasNumber && hasSpecial && hasLength && hasUpper);
+  };
+  const isPasswordValid = validate(password);
+  const isInvalid = validate(password);
+  const showRedError = hasBeenBlurred && isInvalid;
+
+  const passwordsMatch = password === confirmPassword;
+  const showConfirmError =
+    hasConfirmBeenBlurred && !passwordsMatch && confirmPassword.length > 0;
+  const formIsValid = phone.length >= 10 && isPasswordValid && passwordsMatch;
+
+  const handleSignup = () => {
+    console.log("Creating account...");
+  };
   return (
-    <SafeAreaView className="flex-1 bg-white">
-      <View className="flex-1 px-6 pt-10">
-
-        {/* Logo */}
-        <View className="items-center mb-12">
-          <Text className="text-[13px] text-[#9CA3AF] mb-1">
-            Welcome to
-          </Text>
-          <Text className="text-[36px] font-extrabold text-[#3B5120] tracking-[-1px]">
-            brane
-          </Text>
-        </View>
-
-        {/* Title */}
-        <View className="mb-6">
-          <Text className="text-[20px] font-semibold text-[#111827] mb-1">
+    <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.screen }}>
+      <View style={{ flex: 1, paddingHorizontal: 20, paddingTop: 24 }}>
+        <View style={{ marginBottom: 24 }}>
+          <Text
+            style={{
+              fontSize: 20,
+              fontWeight: "600",
+              color: COLORS.text,
+              textAlign: "center",
+              marginBottom: 8,
+            }}
+          >
             Create your account
           </Text>
-          <Text className="text-[13px] text-[#9CA3AF]">
-            Verify phone number to create your account
+          <Text style={{ fontSize: 12, fontWeight: 400, color: COLORS.muted, textAlign: "center" }}>
+            Welcome to the future of wealth creation
           </Text>
         </View>
 
-        {/* Phone Input */}
-        <View className="mb-8">
+        <View style={{ marginBottom: 24 }}>
+          <Text style={labelStyle}>Phone Number</Text>
           <PhoneInput
             value={phone}
             onPhoneChange={setPhone}
-            placeholder="8130000000"
+            placeholder="80298 83647 738"
           />
         </View>
 
-        {/* Verification Card */}
-        <View
-          className="bg-white rounded-[24px] p-5 mb-8 border border-[#F3F4F6]"
+        <View style={{ marginBottom: 24 }}>
+          <Text style={labelStyle}>Password</Text>
+          <FormInput
+            value={password}
+            onChangeText={(val) => {
+              setPassword(val);
+              if (hasBeenBlurred) setHasBeenBlurred(false);
+            }}
+            textContentType="oneTimeCode"
+            onFocus={() => setIsPasswordFocused(true)}
+            onBlur={() => {
+              setIsPasswordFocused(false);
+              setHasBeenBlurred(true);
+            }}
+            error={showRedError ? PASSWORD_ERROR_MSG : undefined}
+            leftContent={
+              <PassWrd
+                color={
+                  hasBeenBlurred && isInvalid
+                    ? COLORS.error
+                    : isPasswordFocused
+                    ? COLORS.primary
+                    : COLORS.muted
+                }
+                size={20}
+              />
+            }
+            rightContent={
+              <MaterialCommunityIcons
+                name={showPassword ? "eye-off-outline" : "eye-outline"}
+                size={20}
+                color={COLORS.muted}
+              />
+            }
+            rightClick={() => setShowPassword(!showPassword)}
+            secureTextEntry={!showPassword}
+          />
+
+          {password.length > 0 && !showRedError && (
+            <Text
+              style={{
+                fontSize: 11,
+                marginTop: 8,
+                color: COLORS.primary,
+                lineHeight: 16,
+              }}
+            >
+              {PASSWORD_ERROR_MSG}
+            </Text>
+          )}
+        </View>
+
+        <View style={{ marginBottom: 32 }}>
+          <Text style={labelStyle}>Confirm Password</Text>
+          <FormInput
+            value={confirmPassword}
+            onChangeText={(val) => {
+              setConfirmPassword(val);
+              if (hasConfirmBeenBlurred) setHasConfirmBeenBlurred(false);
+            }}
+            textContentType="oneTimeCode"
+            onBlur={() => setHasConfirmBeenBlurred(true)}
+            error={showConfirmError ? "Passwords do not match" : undefined}
+            leftContent={
+              <PassWrd
+                color={showConfirmError ? COLORS.error : COLORS.muted}
+                size={20}
+              />
+            }
+            rightContent={
+              <MaterialCommunityIcons
+                name={showPassword ? "eye-off-outline" : "eye-outline"}
+                size={20}
+                color={COLORS.muted}
+              />
+            }
+            rightClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            secureTextEntry={!showConfirmPassword}
+          />
+        </View>
+
+        <Text
           style={{
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 6 },
-            shadowOpacity: 0.06,
-            shadowRadius: 14,
-            elevation: 6,
+            fontSize: 12,
+            color: COLORS.muted,
+            lineHeight: 16,
+            marginBottom: 24,
+            textAlign: "center",
+            fontWeight: 400
           }}
         >
-          <Text className="text-[12px] text-[#9CA3AF] mb-4">
-            How would you like to verify your phone number
+          By clicking on the create account button, you agree to our{" "}
+          <Text style={{ color: COLORS.primary, fontWeight: 400, fontSize: 12, }}>Privacy Policy</Text> and{" "}
+          <Text style={{ color: COLORS.primary, fontWeight: 400, fontSize: 12,  }}>Terms and Conditions</Text>.
+        </Text>
+
+        <BraneButton
+          text="Create Account"
+          onPress={handleSignup}
+          disabled={!formIsValid}
+          height={52}
+          radius={12}
+          backgroundColor={COLORS.primary}
+          style={{ marginBottom: 32 }}
+        />
+
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            marginBottom: 32,
+          }}
+        >
+          <View
+            style={{ flex: 1, height: 1, backgroundColor: COLORS.border }}
+          />
+          <Text
+            style={{ marginHorizontal: 12, fontSize: 12, color: COLORS.muted, backgroundColor: COLORS.inputBg, paddingRight: 6, paddingLeft: 6, paddingBottom: 2, borderRadius: 6 }}
+          >
+            or
           </Text>
-
-          {/* WhatsApp */}
-          <Touch
-            onPress={() => setVerificationMethod("whatsapp")}
-            className={`flex-row items-center justify-between rounded-2xl px-4 py-4 mb-3 border ${
-              verificationMethod === "whatsapp"
-                ? "border-[#3B5120]"
-                : "border-[#F3F4F6]"
-            }`}
-          >
-            <View className="flex-1 pr-3">
-              <Text className="text-[14px] font-semibold text-[#111827]">
-                Via WhatsApp
-              </Text>
-              <Text className="text-[12px] text-[#9CA3AF] mt-1">
-                You will get a verification code on WhatsApp
-              </Text>
-            </View>
-
-            <View
-              className={`w-5 h-5 rounded-full border items-center justify-center ${
-                verificationMethod === "whatsapp"
-                  ? "border-[#3B5120]"
-                  : "border-[#D1D5DB]"
-              }`}
-            >
-              {verificationMethod === "whatsapp" && (
-                <View className="w-2.5 h-2.5 rounded-full bg-[#3B5120]" />
-              )}
-            </View>
-          </Touch>
-
-          {/* SMS */}
-          <Touch
-            onPress={() => setVerificationMethod("sms")}
-            className={`flex-row items-center justify-between rounded-2xl px-4 py-4 border ${
-              verificationMethod === "sms"
-                ? "border-[#3B5120]"
-                : "border-[#F3F4F6]"
-            }`}
-          >
-            <View className="flex-1 pr-3">
-              <Text className="text-[14px] font-semibold text-[#111827]">
-                Via SMS
-              </Text>
-              <Text className="text-[12px] text-[#9CA3AF] mt-1">
-                You will get a verification code via SMS
-              </Text>
-            </View>
-
-            <View
-              className={`w-5 h-5 rounded-full border items-center justify-center ${
-                verificationMethod === "sms"
-                  ? "border-[#3B5120]"
-                  : "border-[#D1D5DB]"
-              }`}
-            >
-              {verificationMethod === "sms" && (
-                <View className="w-2.5 h-2.5 rounded-full bg-[#3B5120]" />
-              )}
-            </View>
-          </Touch>
+          <View
+            style={{ flex: 1, height: 1, backgroundColor: COLORS.border }}
+          />
         </View>
 
-        {/* Social Buttons */}
-        <View className="gap-y-3">
-          <Touch className="h-14 bg-[#E7F0E3] rounded-[14px] flex-row items-center justify-center">
-            <FontAwesome
-              name="facebook-official"
-              size={18}
-              color="#1877F2"
-              style={{ marginRight: 10 }}
+        <BraneButton
+          text="Continue with Google"
+          textColor={COLORS.primary}
+          backgroundColor={COLORS.googleBg}
+          onPress={() => console.log("Google Login")}
+          height={52}
+          radius={12}
+          leftIcon={
+            <Image
+              source={require("@/assets/images/Google.png")}
+              style={{ width: 18, height: 18 }}
             />
-            <Text className="text-[#3B5120] font-semibold text-[14px]">
-              Continue with Facebook
-            </Text>
-          </Touch>
-
-          <Touch className="h-14 bg-[#E7F0E3] rounded-[14px] flex-row items-center justify-center">
-            <FontAwesome
-              name="apple"
-              size={18}
-              color="#000"
-              style={{ marginRight: 10 }}
-            />
-            <Text className="text-[#3B5120] font-semibold text-[14px]">
-              Continue with Apple
-            </Text>
-          </Touch>
-        </View>
-
+          }
+        />
       </View>
     </SafeAreaView>
   );
 }
+
+const labelStyle = {
+  fontWeight: "400" as const,
+  fontSize: 12,
+  color: COLORS.muted,
+  marginBottom: 6,
+  
+};

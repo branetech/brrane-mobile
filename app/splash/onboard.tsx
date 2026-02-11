@@ -39,7 +39,7 @@ export default function Onboarding() {
   }, []);
 
   const handleCreateAccount = () => {
-    // router.replace('/(auth)/register');
+    router.replace('/(unauthenticated)/signup');
   };
 
   const handleLogin = () => {
