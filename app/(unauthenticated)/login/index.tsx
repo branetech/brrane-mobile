@@ -62,11 +62,11 @@ export default function LoginScreen() {
           >
             Welcome back!
           </Text>
-          <Text
+          {/* <Text
             style={{ fontSize: 12, color: COLORS.muted, textAlign: "center", fontWeight: 400 }}
           >
             Lets get back from where we stop
-          </Text>
+          </Text> */}
         </View>
 
         <View style={{ marginBottom: 24 }}>
