@@ -2,7 +2,7 @@ import { BraneButton } from "@/components/brane-button";
 import { FormInput } from "@/components/formInput";
 import { PhoneInput } from "@/components/phone-input";
 import { PassWrd } from "@/components/svg";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Image, Text, TouchableOpacity, View } from "@idimma/rn-widget";
 import { router } from "expo-router";
 import React, { useState } from "react";
@@ -53,8 +53,8 @@ export default function LoginScreen() {
         <View style={{ marginBottom: 32 }}>
           <Text
             style={{
-              fontSize: 22,
-              fontWeight: "700",
+              fontSize: 20,
+              fontWeight: "600",
               color: COLORS.text,
               textAlign: "center",
               marginBottom: 8,
@@ -63,7 +63,7 @@ export default function LoginScreen() {
             Welcome back!
           </Text>
           <Text
-            style={{ fontSize: 13, color: COLORS.muted, textAlign: "center" }}
+            style={{ fontSize: 12, color: COLORS.muted, textAlign: "center", fontWeight: 400 }}
           >
             Lets get back from where we stop
           </Text>
