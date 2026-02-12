@@ -2,9 +2,9 @@ import { BraneButton } from "@/components/brane-button";
 import { FormInput } from "@/components/formInput";
 import { PhoneInput } from "@/components/phone-input";
 import { PassWrd } from "@/components/svg";
-import { VerifyMethodModal } from "@/components/verificationModal";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Image, Text, View } from "@idimma/rn-widget";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Image, Text, TouchableOpacity, View } from "@idimma/rn-widget";
+import { router } from "expo-router";
 import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -17,70 +17,55 @@ const COLORS = {
   screen: "#FFFFFF",
   inputBg: "#F7F7F8",
   googleBg: "#D2F1E4",
+  fingerBorder: "#D3EBE1"
 };
 
-export default function SignupScreen() {
+export default function LoginScreen() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [hasBeenBlurred, setHasBeenBlurred] = useState(false);
-  const [hasConfirmBeenBlurred, setHasConfirmBeenBlurred] = useState(false);
-  const [showVerifyModal, setShowVerifyModal] = useState(false);
-  const [verifyMethod, setVerifyMethod] = useState<"sms" | "whatsapp">("sms");
 
   const PASSWORD_ERROR_MSG =
-    "Your password must have at least 8 characters, a digit (0-9), an uppercase letter (A-Z), a special character ($,@), and match.";
+    "Your password must have at least 8 character, a digit (0-9), an uppercase letter(A), a special character ($,@) and match.";
 
   const validate = (val: string) => {
     if (val.length === 0) return false;
-
     const hasNumber = /\d/.test(val);
     const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(val);
     const hasUpper = /[A-Z]/.test(val);
     const hasLength = val.length >= 8;
-
     return hasNumber && hasSpecial && hasLength && hasUpper;
   };
 
   const isPasswordValid = validate(password);
   const showRedError = hasBeenBlurred && !isPasswordValid;
+  const formIsValid = phone.length >= 10 && isPasswordValid;
 
-  const passwordsMatch = password === confirmPassword;
-  const showConfirmError =
-    hasConfirmBeenBlurred && !passwordsMatch && confirmPassword.length > 0;
-  const formIsValid = phone.length >= 10 && isPasswordValid && passwordsMatch;
-
-  const handleSignup = (method: "sms" | "whatsapp") => {
-    console.log("Creating account via:", method);
+  const handleLogin = () => {
+    console.log("Logging in...");
   };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.screen }}>
       <View style={{ flex: 1, paddingHorizontal: 20, paddingTop: 24 }}>
-        <View style={{ marginBottom: 24 }}>
+        <View style={{ marginBottom: 32 }}>
           <Text
             style={{
-              fontSize: 20,
-              fontWeight: "600",
+              fontSize: 22,
+              fontWeight: "700",
               color: COLORS.text,
               textAlign: "center",
               marginBottom: 8,
             }}
           >
-            Create your account
+            Welcome back!
           </Text>
           <Text
-            style={{
-              fontSize: 12,
-              fontWeight: 400,
-              color: COLORS.muted,
-              textAlign: "center",
-            }}
+            style={{ fontSize: 13, color: COLORS.muted, textAlign: "center" }}
           >
-            Welcome to the future of wealth creation
+            Lets get back from where we stop
           </Text>
         </View>
 
@@ -89,11 +74,11 @@ export default function SignupScreen() {
           <PhoneInput
             value={phone}
             onPhoneChange={setPhone}
-            placeholder="80298 83647 738"
+            placeholder="8092738 223776"
           />
         </View>
 
-        <View style={{ marginBottom: 24 }}>
+        <View style={{ marginBottom: 16 }}>
           <Text style={labelStyle}>Password</Text>
           <FormInput
             value={password}
@@ -101,7 +86,6 @@ export default function SignupScreen() {
               setPassword(val);
               if (hasBeenBlurred) setHasBeenBlurred(false);
             }}
-            textContentType="oneTimeCode"
             onFocus={() => setIsPasswordFocused(true)}
             onBlur={() => {
               setIsPasswordFocused(false);
@@ -145,70 +129,50 @@ export default function SignupScreen() {
           )}
         </View>
 
-        <View style={{ marginBottom: 32 }}>
-          <Text style={labelStyle}>Confirm Password</Text>
-          <FormInput
-            value={confirmPassword}
-            onChangeText={(val) => {
-              setConfirmPassword(val);
-              if (hasConfirmBeenBlurred) setHasConfirmBeenBlurred(false);
-            }}
-            textContentType="oneTimeCode"
-            onBlur={() => setHasConfirmBeenBlurred(true)}
-            error={showConfirmError ? "Passwords do not match" : undefined}
-            leftContent={
-              <PassWrd
-                color={showConfirmError ? COLORS.error : COLORS.muted}
-                size={20}
-              />
-            }
-            rightContent={
-              <MaterialCommunityIcons
-                name={showConfirmPassword ? "eye-off-outline" : "eye-outline"}
-                size={20}
-                color={COLORS.muted}
-              />
-            }
-            rightClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            secureTextEntry={!showConfirmPassword}
-          />
-        </View>
+        <TouchableOpacity style={{ marginBottom: 32 }}>
+          <Text
+            style={{ fontSize: 12, fontWeight: "500", color: COLORS.primary }}
+          >
+            I Forgot My Password
+          </Text>
+        </TouchableOpacity>
 
-        <Text
+        <View
           style={{
-            fontSize: 12,
-            color: COLORS.muted,
-            lineHeight: 16,
-            marginBottom: 24,
-            textAlign: "center",
-            fontWeight: 400,
+            flexDirection: "row",
+            alignItems: "center",
+            marginBottom: 32,
           }}
         >
-          By clicking on the create account button, you agree to our{" "}
-          <Text
-            style={{ color: COLORS.primary, fontWeight: 400, fontSize: 12 }}
+          <BraneButton
+            text="Login"
+            onPress={handleLogin}
+            disabled={!formIsValid}
+            textColor={COLORS.googleBg}
+            height={52}
+            radius={12}
+            backgroundColor={COLORS.primary}
+            style={{ flex: 1, marginRight: 12 }}
+          />
+          <TouchableOpacity
+            style={{
+              width: 52,
+              height: 52,
+              borderRadius: 12,
+              borderWidth: 1,
+              borderColor: COLORS.fingerBorder,
+              justifyContent: "center",
+              alignItems: "center",
+              opacity: 0.4
+            }}
           >
-            Privacy Policy
-          </Text>{" "}
-          and{" "}
-          <Text
-            style={{ color: COLORS.primary, fontWeight: 400, fontSize: 12 }}
-          >
-            Terms and Conditions
-          </Text>
-          .
-        </Text>
-
-        <BraneButton
-          text="Create Account"
-          onPress={() => setShowVerifyModal(true)}
-          disabled={!formIsValid}
-          height={52}
-          radius={12}
-          textColor={COLORS.googleBg}
-          backgroundColor={COLORS.primary}
-          style={{ marginBottom: 32 }}
-        />
+             <Image
+              source={require("@/assets/images/finger-scan.png")}
+              style={{ width: 32, height: 32 }}
+            />
+            {/* <Ionicons name="scan-outline" size={28} color={COLORS.muted} /> */}
+          </TouchableOpacity>
+        </View>
 
         <View
           style={{
@@ -227,8 +191,8 @@ export default function SignupScreen() {
               color: COLORS.muted,
               backgroundColor: COLORS.inputBg,
               paddingRight: 6,
-              fontWeight: 500,
               paddingLeft: 6,
+              fontWeight: 500,
               paddingBottom: 2,
               borderRadius: 6,
             }}
@@ -254,15 +218,30 @@ export default function SignupScreen() {
             />
           }
         />
-        <VerifyMethodModal
-          visible={showVerifyModal}
-          onClose={() => setShowVerifyModal(false)}
-          selectedMethod={verifyMethod}
-          onSelect={(method) => {
-            setVerifyMethod(method);
-            handleSignup(method);
-          }}
-        />
+
+        <View style={{ marginTop: 32, marginBottom: 20, alignItems: "center" }}>
+          <Text
+            style={{ fontSize: 12, color: COLORS.muted, fontWeight: "400" }}
+          >
+            Are you a new user?{" "}
+            <Text
+              style={{ color: COLORS.primary, fontWeight: "400", fontSize: 12 }}
+              onPress={() => router.replace("/signup")}
+            >
+              Create Account
+            </Text>
+          </Text>
+        </View>
+
+        <View
+          style={{ marginTop: "auto", marginBottom: 20, alignItems: "center" }}
+        >
+          <Text
+            style={{ fontSize: 12, color: COLORS.muted, fontWeight: "400" }}
+          >
+            Version 1.0.6
+          </Text>
+        </View>
       </View>
     </SafeAreaView>
   );

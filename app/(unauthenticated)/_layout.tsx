@@ -1,19 +1,19 @@
-import React, {useEffect} from 'react';
-import {Slot, useRouter} from "expo-router";
+import { Slot } from "expo-router";
+import React from 'react';
 
-import {PRIMARY} from '@/utils/colors';
-import {StatusBar} from 'expo-status-bar';
-import {View} from '@idimma/rn-widget';
+import { PRIMARY } from '@/utils/colors';
+import { View } from '@idimma/rn-widget';
+import { StatusBar } from 'expo-status-bar';
 // import {useAppState} from "@/store";
 
 const Layout: React.FC<{ children: any }> = ({children}) => {
 //   const {token} = useAppState();
-  const router = useRouter()
-  useEffect(() => {
-    // if (token) {
-      router.replace('/signup')
-    //}
-  })
+  // const router = useRouter()
+  // useEffect(() => {
+  //   // if (token) {
+  //     router.replace('/signup')
+  //   //}
+  // })
 
 
   return (
