@@ -17,7 +17,19 @@ export default function ForgotPassword({ onSubmitEmail, isLoading }: registerPro
     const { form, isDisabled } = useFormHandler({
         initialValues: { email: "" },
         validationSchema: yup.object().shape({
-          email: yup.string().required("This field is required"),
+          email: yup
+          .string()
+          .required("This field is required")
+          .test(
+            "email",
+            "Please enter a valid email or phone number",
+            (value) => {
+              const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+              const isEmail = emailRegex.test(value);
+              const isNumber = /^(\+\d{1,3})?\d{6,}$/.test(value);
+              return isEmail || isNumber;
+            }
+          ),
         }),
         onSubmit: onSubmitEmail,
       });
