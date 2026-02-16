@@ -138,7 +138,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
   const theme = colorScheme === "dark" ? Colors.dark : Colors.light;
 
   const inputBg = theme.inputBackground;
-  const borderColor = colorScheme === "dark" ? "#333" : "#F7F7F8";
+  const borderColor =  "#F7F7F8";
   //const muted = colorScheme === "dark"? "#AAA" : "#999";
 
   const formatPhoneNumber = (text: string, country: Country): string => {
@@ -272,7 +272,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
               styles.phoneInput,
               disabled && styles.phoneInputDisabled,
               error && styles.inputContainerError,
-              { color: theme.text },
+              { color: '#B6B3B9' },
             ]}
             value={autoFormat ? formattedNumber : phoneNumber}
             onChangeText={handlePhoneChange}

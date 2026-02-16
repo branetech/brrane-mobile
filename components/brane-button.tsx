@@ -71,7 +71,7 @@ export const BraneButton = ({
               styles.btnText,
               {
                 color: textColor || '#fff',
-                fontSize: fontSize || 16
+                fontSize: fontSize || 14
               }
             ]}
           >
