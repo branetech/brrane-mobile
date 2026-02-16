@@ -82,8 +82,8 @@ export const FormInput = forwardRef<TextInput, FormInputProp>(
         const colorScheme = useColorScheme();
         const theme = colorScheme === "dark" ? Colors.dark : Colors.light;
 
-        const inputBg = theme.inputBg;
-        const borderColor = colorScheme === "dark" ? "#F7F7F8" : "#F7F7F8";
+        const inputBg = theme.inputBackground;
+        const borderColor = colorScheme === "dark" ? "#333" : "#F7F7F8";
         const muted = colorScheme === "dark" ? "#AAA" : "#999";
 
         return (
@@ -107,7 +107,7 @@ export const FormInput = forwardRef<TextInput, FormInputProp>(
                         styles.inputContainer,
                         {
                             backgroundColor: inputBg,
-                            borderColor: error ? "#ee7474" : borderColor,
+                            borderColor: error ? "#CB010B" : borderColor,
                         },
                         inputContainerStyle,
                     ]}
@@ -196,11 +196,11 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         borderWidth: 1,
         borderRadius: 8,
-        height: 46,
+        height: 48,
     },
 
     textInput: {
-        height: 46,
+        height: 48,
         paddingHorizontal: 12,
         fontSize: 14,
     },
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
     },
 
     errorText: {
-        color: "#ee7474",
+        color: "#CB010B",
         fontSize: 12,
         marginTop: 5,
     },

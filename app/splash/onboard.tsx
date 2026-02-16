@@ -1,11 +1,11 @@
 // app/onboarding.tsx
-import { Image, StyleSheet, Dimensions, View } from 'react-native';
-import { useCallback, useEffect, useState } from 'react';
-import { useRouter } from 'expo-router';
-import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
-import { useAppSelector } from '@/redux/store';
-import { ThemedText } from '@/components/themed-text';
 import { BraneButton } from '@/components/brane-button';
+import { ThemedText } from '@/components/themed-text';
+import { useAppSelector } from '@/redux/store';
+import { useRouter } from 'expo-router';
+import { useCallback, useEffect, useState } from 'react';
+import { Dimensions, Image, StyleSheet, View } from 'react-native';
+import Animated, { FadeInRight, FadeOutLeft } from 'react-native-reanimated';
 
 const { height } = Dimensions.get('window');
 
@@ -39,11 +39,11 @@ export default function Onboarding() {
   }, []);
 
   const handleCreateAccount = () => {
-    // router.replace('/(auth)/register');
+    router.replace('/(unauthenticated)/signup');
   };
 
   const handleLogin = () => {
-    // router.replace('/(auth)/login');
+    router.replace('/login');
   };
 
   useEffect(() => {
