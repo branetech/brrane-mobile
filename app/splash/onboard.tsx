@@ -1,7 +1,6 @@
-// app/onboarding.tsx
 import { BraneButton } from '@/components/brane-button';
 import { ThemedText } from '@/components/themed-text';
-import { useAppSelector } from '@/redux/store';
+import expoSecureStorage from '@/utils/secureStore';
 import { useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { Dimensions, Image, StyleSheet, View } from 'react-native';
@@ -30,36 +29,32 @@ const SLIDES = [
 export default function Onboarding() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const router = useRouter();
-  const { isAuthenticated, token } = useAppSelector((state) => state.auth);
 
   const goToNextSlide = useCallback(() => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === SLIDES.length - 1 ? 0 : prevIndex + 1
-    );
+    setCurrentIndex((prev) => (prev === SLIDES.length - 1 ? 0 : prev + 1));
   }, []);
-
-  const handleCreateAccount = () => {
-    router.replace('/(unauthenticated)/signup');
-  };
-
-  const handleLogin = () => {
-    router.replace('/login');
-  };
 
   useEffect(() => {
     const timer = setTimeout(goToNextSlide, 5000);
     return () => clearTimeout(timer);
   }, [currentIndex, goToNextSlide]);
 
-  useEffect(() => {
-    if (isAuthenticated || token) {
-      router.replace('/(tabs)');
-    }
-  }, [isAuthenticated, token, router]);
+  const completeOnboarding = async () => {
+    await expoSecureStorage.setItem("hasCompletedOnboarding", "true");
+  };
+
+  const handleCreateAccount = async () => {
+    await completeOnboarding();
+    router.replace('/(auth)/signup');
+  };
+
+  const handleLogin = async () => {
+    await completeOnboarding();
+    router.replace('/(auth)/login');
+  };
 
   return (
     <View style={styles.container}>
-      {/* Image Container */}
       <View style={styles.imageContainer}>
         <Animated.View
           key={currentIndex}
@@ -75,14 +70,12 @@ export default function Onboarding() {
         </Animated.View>
       </View>
 
-      {/* Content Container */}
       <View style={styles.contentContainer}>
         <View style={styles.textContainer}>
           <ThemedText style={styles.title}>{SLIDES[currentIndex].title}</ThemedText>
           <ThemedText style={styles.body}>{SLIDES[currentIndex].body}</ThemedText>
         </View>
 
-        {/* Pagination */}
         <View style={styles.pagination}>
           {SLIDES.map((_, index) => (
             <View
@@ -95,7 +88,6 @@ export default function Onboarding() {
           ))}
         </View>
 
-        {/* Buttons */}
         <View style={styles.buttonContainer}>
           <BraneButton
             onPress={handleCreateAccount}
@@ -142,20 +134,17 @@ const styles = StyleSheet.create({
   image: {
     width: '90%',
   },
-
   contentContainer: {
     flex: 1,
     paddingHorizontal: '6%',
     paddingVertical: '10%',
-    backgroundColor: '#F4FBF8E5'
-
+    backgroundColor: '#F4FBF8E5',
   },
-
   textContainer: {
     alignItems: 'center',
     marginBottom: 20,
     height: height * 0.1,
-    },
+  },
   title: {
     fontSize: 22,
     fontWeight: '700',
@@ -204,7 +193,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   loginButton: {
-    // backgroundColor: '#D2F1E4',
     height: 56,
     borderRadius: 12,
     justifyContent: 'center',

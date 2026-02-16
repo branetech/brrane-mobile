@@ -83,7 +83,7 @@ export const FormInput = forwardRef<TextInput, FormInputProp>(
         const theme = colorScheme === "dark" ? Colors.dark : Colors.light;
 
         const inputBg = theme.inputBackground;
-        const borderColor = colorScheme === "dark" ? "#333" : "#F7F7F8";
+        const borderColor = "#F7F7F8";
         const muted = colorScheme === "dark" ? "#AAA" : "#999";
 
         return (
