@@ -51,7 +51,7 @@ export const BraneButton = ({
           height: height ?? 42,
           borderRadius: radius ?? 8,
           backgroundColor: buttonBackgroundColor,
-          opacity: isDisabled && !loading ? 0.6 : 1,
+          opacity: isDisabled && !loading ? 0.4 : 1,
         }
       ]}
       disabled={isDisabled}

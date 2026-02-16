@@ -82,8 +82,8 @@ export const FormInput = forwardRef<TextInput, FormInputProp>(
         const colorScheme = useColorScheme();
         const theme = colorScheme === "dark" ? Colors.dark : Colors.light;
 
-        const inputBg = theme.background;
-        const borderColor = colorScheme === "dark" ? "#333" : "#D0D0D0";
+        const inputBg = theme.inputBg;
+        const borderColor = colorScheme === "dark" ? "#F7F7F8" : "#F7F7F8";
         const muted = colorScheme === "dark" ? "#AAA" : "#999";
 
         return (
@@ -128,7 +128,7 @@ export const FormInput = forwardRef<TextInput, FormInputProp>(
                         ref={ref}
                         style={[
                             styles.textInput,
-                            { color: theme.text },
+                            { color: '#0B0014' },
                             leftContent ? styles.textInputWithLeftContent : undefined,
                             rightContent ? styles.textInputWithRightContent : undefined,
                             disabled ? { color: muted } : undefined,
@@ -186,9 +186,9 @@ const styles = StyleSheet.create({
     inputWrapper: {},
 
     label: {
-        fontSize: 16,
+        fontSize: 12,
         marginBottom: 8,
-        fontWeight: "500",
+        fontWeight: "400",
     },
 
     inputContainer: {

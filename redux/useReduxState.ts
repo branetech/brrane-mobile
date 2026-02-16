@@ -9,7 +9,7 @@ type IReduxState<T> = [
 
 
 export const useReduxState = <T, >(initialValue: T, reference: string): IReduxState<T> => {
-  const state = useAppState();
+  const state = useAppState('auth');
   const value: T = [undefined, null].includes(state?.[reference]) ? initialValue : state?.[reference];
 
   const setValue = (newValue: T) => {
