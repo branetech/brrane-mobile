@@ -138,7 +138,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
   const theme = colorScheme === "dark" ? Colors.dark : Colors.light;
 
   const inputBg = theme.inputBackground;
-  const borderColor =  "#F7F7F8";
+  const borderColor =  colorScheme === "dark" ? Colors.dark.borderColor : Colors.light.borderColor;
   //const muted = colorScheme === "dark"? "#AAA" : "#999";
 
   const formatPhoneNumber = (text: string, country: Country): string => {
@@ -217,12 +217,6 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
     </TouchableOpacity>
   );
 
-  // const getInputContainerStyle = () => [
-  // styles.inputContainer,
-  // error && styles.inputContainerError,
-  // disabled && styles.inputContainerDisabled,
-  // style
-  // ];
 
   return (
     <View style={styles.container}>

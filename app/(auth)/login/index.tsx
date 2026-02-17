@@ -68,11 +68,6 @@ export default function LoginScreen() {
                 </View>
 
                 <View>
-                  <ThemedText
-                    style={{ fontSize: 12, color: C.muted, marginBottom: 6 }}
-                  >
-                    Password
-                  </ThemedText>
                   <FormInput
                     leftContent={
                       <PassWrd
@@ -98,6 +93,7 @@ export default function LoginScreen() {
                       </TouchableOpacity>
                     }
                     {...mapFormikProps("password", form)}
+                       labelText="Password"
                   />
                 </View>
               </View>
