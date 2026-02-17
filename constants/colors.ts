@@ -10,10 +10,8 @@ export const Colors = {
     icon: '#013D25',
     tabIconDefault: '#131927',
     tabIconSelected: tintColorLight,
-    borderColor: "#D0D0D0",
+    borderColor: "#F7F7F8",
     inputBg: "#F7F7F8",
-
-    // infused from COLORS
     primary: "#013D25",
     muted: "#85808A",
     border: "#E6E4E8",
@@ -30,10 +28,8 @@ export const Colors = {
     icon: '#013D25',
     tabIconDefault: '#9BA1A6',
     tabIconSelected: tintColorDark,
-    borderColor: "#333",
+    borderColor: "#F7F7F8",
     inputBg: "#F7F7F8",
-
-    // infused from COLORS
     primary: "#013D25",
     muted: "#85808A",
     border: "#E6E4E8",

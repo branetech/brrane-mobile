@@ -65,10 +65,7 @@ export default function LoginScreen() {
                 />
               </View>
 
-              <View>
-                <ThemedText style={{ fontSize: 12, color: C.muted, marginBottom: 6 }}>
-                  Password
-                </ThemedText>
+              <View gap={8}>
                 <FormInput
                   leftContent={
                     <PassWrd
@@ -78,6 +75,7 @@ export default function LoginScreen() {
                           : C.muted
                       }
                       size={20}
+                      
                     />
                   }
                   placeholder="Enter password"
@@ -90,15 +88,15 @@ export default function LoginScreen() {
                     </TouchableOpacity>
                   }
                   {...mapFormikProps("password", form)}
+                  labelText="Password"
                 />
-              </View>
-            </View>
-
-            <TouchableOpacity onPress={() => router.push("/(auth)/forgot-password")}>
+                <TouchableOpacity onPress={() => router.push("/(auth)/forgot-password")}>
               <ThemedText style={{ fontSize: 12, fontWeight: "500", color: C.primary }}>
                 I Forgot My Password
               </ThemedText>
             </TouchableOpacity>
+              </View>
+            </View>
           </View>
 
           <View gap={16}>
