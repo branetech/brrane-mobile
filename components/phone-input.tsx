@@ -361,7 +361,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // backgroundColor: '#3B51200A',
     width: 90, // Adjusted width to accommodate the dial code
-    height: 46,
+    height: 48,
     justifyContent: "center",
     marginRight: 16,
     borderRadius: 8,
@@ -383,7 +383,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 12,
-    height: 46,
+    height: 48,
     borderRadius: 8,
     borderWidth: 1,
   },
