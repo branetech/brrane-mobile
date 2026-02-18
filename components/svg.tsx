@@ -1,6 +1,5 @@
 import React from "react";
-import Svg, { Defs, Ellipse, LinearGradient, Path, Stop } from "react-native-svg";
-
+import Svg, { Path, G, Defs, Ellipse, Filter, FeFlood, FeBlend, FeGaussianBlur, LinearGradient, Stop } from "react-native-svg";
 export const PassWrd = ({
   color = "#89888B",
   size = 20,
@@ -124,4 +123,51 @@ export const GoldCurve = ({
       fill="#013D25"
     />
   </Svg>
+  );
+
+  export const SuccessBackground = () => (
+    <Svg width="100%" height="100%" viewBox="0 0 360 320" fill="none">
+      <G opacity="0.7" filter="url(#filter0_f)">
+        <Path d="M259.362 50.5347L269.428 53.6413C259.337 67.1251 258.086 81.8385 266.27 91.0724C273.841 99.658 288.347 102.302 304.145 97.9627L304.205 107.783C283.883 113.345 265.162 109.904 255.382 98.8123C244.816 86.8507 246.372 67.8897 259.398 50.5142L259.362 50.5347Z" fill="#C3A93F"/>
+      </G>
+      <Path opacity="0.2" d="M171 158.367L172.931 156.576C174.589 160.447 177.618 162.557 180.64 161.939C183.445 161.373 185.831 158.563 186.866 154.6L189 155.815C187.664 160.91 184.579 164.533 180.955 165.264C177.044 166.056 173.134 163.349 171 158.357V158.367Z" fill="#C3A93F"/>
+      <G filter="url(#filter1_f)">
+        <Path d="M53.8945 165.693L57.3271 162.509C60.2746 169.389 65.6598 173.14 71.0325 172.042C76.0197 171.036 80.2606 166.04 82.1012 158.995L85.8945 161.155C83.5191 170.212 78.0345 176.654 71.5922 177.953C64.64 179.362 57.6878 174.549 53.8945 165.674V165.693Z" fill="#FFCC00"/>
+      </G>
+      <Path d="M66.8945 168.051L67.5381 167.454C68.0908 168.744 69.1005 169.447 70.1079 169.242C71.043 169.053 71.8382 168.116 72.1833 166.795L72.8945 167.2C72.4491 168.899 71.4208 170.106 70.2128 170.35C68.9093 170.614 67.6058 169.712 66.8945 168.048V168.051Z" fill="#C3A93F"/>
+      <Path opacity="0.4" d="M145 128.911L146.287 127.717C147.393 130.297 149.412 131.704 151.427 131.292C153.297 130.915 154.887 129.042 155.578 126.4L157 127.21C156.109 130.606 154.052 133.022 151.637 133.509C149.03 134.037 146.422 132.233 145 128.904V128.911Z" fill="#C3A93F"/>
+      <Path opacity="0.5" d="M229.105 94.2922L230.393 95.4862C231.498 92.9061 233.517 91.4994 235.532 91.9111C237.402 92.2885 238.993 94.1618 239.683 96.8037L241.105 95.994C240.215 92.5973 238.158 90.1819 235.742 89.6947C233.135 89.1663 230.528 90.971 229.105 94.2991V94.2922Z" fill="#C3A93F"/>
+      <G filter="url(#filter2_f)">
+        <Path opacity="0.5" d="M294.878 276.661L295.461 272.016C302.141 275.392 308.678 274.804 312.088 270.509C315.261 266.533 315.299 259.98 312.18 253.4L316.474 252.616C320.477 261.082 320.416 269.541 316.316 274.677C311.896 280.226 303.476 281.008 294.866 276.647L294.878 276.661Z" fill="#34C759"/>
+      </G>
+      <G filter="url(#filter3_f)">
+        <Path d="M343.874 177.17C447.216 155.302 513.313 54.0307 491.506 -49.0256C469.699 -152.082 368.245 -217.898 264.903 -196.03C161.561 -174.163 95.4635 -72.8915 117.271 30.1649C139.078 133.221 240.532 199.038 343.874 177.17Z" fill="url(#paint0_linear)" fillOpacity={0.15}/>
+      </G>
+      <Defs>
+        <Filter id="filter0_f" x="224.42" y="26.5142" width="103.785" height="107.887" filterUnits="userSpaceOnUse">
+          <FeFlood floodOpacity={0} result="BackgroundImageFix"/>
+          <FeBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+          <FeGaussianBlur stdDeviation={12} result="effect1_foregroundBlur"/>
+        </Filter>
+        <Filter id="filter1_f" x="33.8945" y="138.995" width="72" height="59.2006" filterUnits="userSpaceOnUse">
+          <FeFlood floodOpacity={0} result="BackgroundImageFix"/>
+          <FeBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+          <FeGaussianBlur stdDeviation={10} result="effect1_foregroundBlur"/>
+        </Filter>
+        <Filter id="filter2_f" x="280.866" y="238.616" width="52.5684" height="54.8338" filterUnits="userSpaceOnUse">
+          <FeFlood floodOpacity={0} result="BackgroundImageFix"/>
+          <FeBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+          <FeGaussianBlur stdDeviation={7} result="effect1_foregroundBlur"/>
+        </Filter>
+        <Filter id="filter3_f" x="-16.8887" y="-330.224" width="642.555" height="641.588" filterUnits="userSpaceOnUse">
+          <FeFlood floodOpacity={0} result="BackgroundImageFix"/>
+          <FeBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+          <FeGaussianBlur stdDeviation={65} result="effect1_foregroundBlur"/>
+        </Filter>
+        <LinearGradient id="paint0_linear" x1="-11.5153" y1="9.33726" x2="457.677" y2="235.423" gradientUnits="userSpaceOnUse">
+          <Stop stopColor="#EEAAAE"/>
+          <Stop offset={1} stopColor="#E0D39E"/>
+        </LinearGradient>
+      </Defs>
+    </Svg>
   );
