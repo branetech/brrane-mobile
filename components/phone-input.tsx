@@ -242,7 +242,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
         >
           <ThemedText style={styles.flag}>{selectedCountry.flag}</ThemedText>
           <ThemedText
-            style={[disabled && styles.dialCodeDisabled, { fontSize: 12 }]}
+            style={[disabled && styles.dialCodeDisabled, { fontSize: 14 }]}
           >
             {selectedCountry.dialCode}
           </ThemedText>
@@ -266,7 +266,7 @@ export const PhoneInput: React.FC<PhoneInputProps> = ({
               styles.phoneInput,
               disabled && styles.phoneInputDisabled,
               error && styles.inputContainerError,
-              { color: '#B6B3B9' },
+              { color: '#0B0014' },
             ]}
             value={autoFormat ? formattedNumber : phoneNumber}
             onChangeText={handlePhoneChange}
@@ -391,7 +391,7 @@ const styles = StyleSheet.create({
   },
   phoneInput: {
     flex: 1,
-    fontSize: 12,
+    fontSize: 14,
     color: "#000000",
     paddingVertical: 12,
   },

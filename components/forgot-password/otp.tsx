@@ -1,10 +1,10 @@
 import { ThemedText } from "@/components/themed-text";
 import { TouchableOpacity, View } from "@idimma/rn-widget";
+import { useState } from "react";
+import { KeyboardAvoidingView, Platform } from "react-native";
 import Back from "../Back";
 import { BraneButton } from "../brane-button";
-import { KeyboardAvoidingView, Platform } from "react-native";
 import { OTPInput } from "../otp-input";
-import { useState } from "react";
 
 interface RegisterProps {
   onSubmitEmail: (otp: string) => void;
@@ -53,10 +53,7 @@ export default function OTP({
             </ThemedText>
           </View>
           <View mt={8}>
-            <OTPInput
-              length={6}
-              onComplete={handleChange}
-            />
+            <OTPInput length={6} onComplete={handleChange} />
           </View>
           <TouchableOpacity
             mt={8}
@@ -78,6 +75,8 @@ export default function OTP({
             loading={isLoading}
             text={"Proceed"}
             textColor="#D2F1E4"
+            height={52}
+            radius={12}
             onPress={() => onSubmitEmail(localOtp)}
           />
         </View>
