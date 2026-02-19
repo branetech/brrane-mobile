@@ -2,10 +2,9 @@ import OTP from "@/components/forgot-password/otp";
 import SetPinScreen from "@/components/sign-up/setUpPin";
 import { SignupForm } from "@/components/sign-up/signupForm";
 import SetUsernameScreen from "@/components/sign-up/userNameForm";
-import { Colors } from "@/constants/colors";
 import { useReduxState } from "@/redux/useReduxState";
 import { useState } from "react";
-import { KeyboardAvoidingView, Platform, useColorScheme } from "react-native";
+import { KeyboardAvoidingView, Platform} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 type Page = "signup" | "otp" | "setUsername" | "setPin";
@@ -16,8 +15,6 @@ type SignupData = {
 };
 
 export default function SignupScreen() {
-  const scheme = useColorScheme();
-  const C = Colors[scheme ?? "light"];
   const [page, setPage] = useReduxState<Page>("signup", "signupPage");
   const [otp, setOtp] = useReduxState("", "signupOtp");
   const [isLoading, setIsLoading] = useState(false);
