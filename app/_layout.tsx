@@ -32,7 +32,8 @@ function RootLayoutContent() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider value={colorScheme === 'light' ? DarkTheme : DefaultTheme}>
-        <Stack screenOptions={{ headerShown: false }} />
+        <Stack screenOptions={{ headerShown: false, contentStyle: { flex: 1, paddingHorizontal: '6%', paddingVertical: '12%' },
+ }}/>
         <StatusBar hidden={true} />
         <Toaster />
       </ThemeProvider>

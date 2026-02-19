@@ -1,3 +1,4 @@
+import { HomeHeader } from '@/components/home';
 import { ThemedText } from '@/components/themed-text';
 import { View } from '@idimma/rn-widget';
 import { StyleSheet } from 'react-native';
@@ -6,7 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 export default function HomeScreen() {
   return (
    <SafeAreaView style={styles.container}>
-      <ThemedText>Hello</ThemedText>
+    <HomeHeader/>
    </SafeAreaView>
   );
 }
@@ -14,21 +15,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: '10%',
-    paddingVertical: '6%',
     gap: 20,
     position: 'relative',
-  },
-
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
   },
 });
