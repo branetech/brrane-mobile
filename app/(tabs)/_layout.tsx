@@ -1,6 +1,6 @@
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { Tabs } from 'expo-router';
-import { Gift, Home3, Profile, Receipt1 } from 'iconsax-react-nativejs';
+import { Chart1, Receipt, WifiSquare, Home3, Profile } from 'iconsax-react-native';
 import React from 'react';
 import { Platform } from 'react-native';
 
@@ -31,26 +31,33 @@ export default function TabLayout() {
     name="index"
     options={{
       title: 'Home',
-      tabBarIcon: ({ color }) => <Home3 size={24} color={color}/>,
+      tabBarIcon: ({ color, focused }) => <Home3 size={24} color={color} variant={focused ? 'Bold' : 'Outline'}/>,
     }}
   />
+  <Tabs.Screen
+        name="utilities"
+        options={{
+          title: 'Utilities',
+          tabBarIcon: ({ color, focused }) => <WifiSquare size={24} color={color} variant={focused ? 'Bold' : 'Outline'}/>,        }}
+      />
+      
+      <Tabs.Screen
+        name="portfolio"
+        options={{
+          title: 'Portfolio',
+          tabBarIcon: ({ color, focused }) => <Chart1 size={24} color={color} variant={focused ? 'Bold' : 'Outline'}/>,        }}
+      />
       <Tabs.Screen
         name="transactions"
         options={{
           title: 'Transactions',
-          tabBarIcon: ({ color }) => <Receipt1 size={24} color={color}/>,        }}
-      />
-      <Tabs.Screen
-        name="stocks"
-        options={{
-          title: 'Stocks',
-          tabBarIcon: ({ color }) => <Gift size={24} color={color}/>,        }}
+          tabBarIcon: ({ color, focused }) => <Receipt size={24} color={color} variant={focused ? 'Bold' : 'Outline'}/>,        }}
       />
        <Tabs.Screen
         name="account"
         options={{
           title: 'Account',
-          tabBarIcon: ({ color }) => <Profile size={24} color={color}/>,        }}
+          tabBarIcon: ({ color, focused }) => <Profile size={24} color={color} variant={focused ? 'Bold' : 'Outline'}/>,        }}
       />
     </Tabs>
   );

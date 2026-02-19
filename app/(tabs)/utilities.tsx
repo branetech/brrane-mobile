@@ -3,7 +3,7 @@ import { View } from '@idimma/rn-widget';
 import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function HomeScreen() {
+export default function UtiliScreen() {
   return (
    <SafeAreaView style={styles.container}>
       <ThemedText>Hello</ThemedText>
@@ -14,8 +14,8 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingHorizontal: '10%',
-    paddingVertical: '6%',
+    paddingHorizontal: '12%',
+    paddingVertical: '5%',
     gap: 20,
     position: 'relative',
   },

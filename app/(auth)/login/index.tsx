@@ -7,7 +7,7 @@ import { Colors } from "@/constants/colors";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useFormHandler } from "@/hooks/use-formik";
 import { Image, TouchableOpacity, View } from "@idimma/rn-widget";
-import { router } from "expo-router";
+import { useRouter } from "expo-router";
 import { Eye, EyeSlash } from "iconsax-react-native";
 import { useState } from "react";
 import { KeyboardAvoidingView, Platform } from "react-native";
@@ -15,6 +15,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import * as yup from "yup";
 
 export default function LoginScreen() {
+  const router = useRouter();
   const scheme = useColorScheme();
   const C = Colors[scheme ?? "light"];
   const [showPassword, setShowPassword] = useState(false);
@@ -36,12 +37,14 @@ export default function LoginScreen() {
         ),
     }),
     onSubmit: (data) => {
+      router.replace('/(tabs)')
       console.log("Logging in...", data);
+
     },
   });
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: C.background }}>
+    <SafeAreaView style={{ flex: 1}}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}

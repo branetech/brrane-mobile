@@ -19,6 +19,7 @@
     "@react-navigation/elements": "^2.6.3",
     "@react-navigation/native": "^7.1.8",
     "@reduxjs/toolkit": "^2.11.2",
+    "axios": "^1.13.5",
     "date-fns": "^4.1.0",
     "expo": "~54.0.33",
     "expo-constants": "~18.0.13",
@@ -51,6 +52,7 @@
     "react-redux": "^9.2.0",
     "redux-persist": "^6.0.0",
     "sonner-native": "^0.23.0",
+    "swr": "^2.4.0",
     "yup": "^1.7.1"
   },
   "devDependencies": {

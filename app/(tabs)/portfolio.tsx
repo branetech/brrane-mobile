@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text } from 'react-native';
 
-export default function StocksScreen() {
+export default function PortfolioScreen() {
   return (
    <View style={styles.titleContainer}>
       <Text>Hello</Text>
