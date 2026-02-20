@@ -40,7 +40,7 @@ export default function ForgotPassword({ onSubmitEmail, isLoading }: registerPro
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={{ flex: 1 }}
     >
-      <View flex spaced>
+      <View flex spaced px={'6%'} py={'12%'}>
         <View gap={24}>
           <Back />
           <View gap={8}>

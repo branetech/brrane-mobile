@@ -44,12 +44,12 @@ export default function LoginScreen() {
   });
 
   return (
-    <SafeAreaView style={{ flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAvoidingView
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
-        <View style={{ flex: 1, justifyContent: "space-between",  }}>
+        <View style={{ flex: 1, justifyContent: "space-between", padding: '6%' }}>
           <View>
             <View style={{ gap: 30 }}>
               <View style={{ alignItems: "center", gap: 8 }}>
@@ -70,7 +70,7 @@ export default function LoginScreen() {
                   />
                 </View>
 
-                <View>
+                <View gap={8}>
                   <FormInput
                     leftContent={
                       <PassWrd
@@ -98,10 +98,7 @@ export default function LoginScreen() {
                     {...mapFormikProps("password", form)}
                        labelText="Password"
                   />
-                </View>
-              </View>
-
-              <TouchableOpacity
+                   <TouchableOpacity
                 onPress={() => router.push("/(auth)/forgot-password")}
               >
                 <ThemedText
@@ -115,6 +112,10 @@ export default function LoginScreen() {
                   I Forgot My Password
                 </ThemedText>
               </TouchableOpacity>
+                </View>
+              </View>
+
+             
             </View>
 
             <View style={{ gap: 16 }}>

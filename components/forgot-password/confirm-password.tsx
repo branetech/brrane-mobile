@@ -45,7 +45,7 @@ export default function ConfirmPassword({ onSubmitEmail, isLoading, back }: Regi
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={{ flex: 1 }}
     >
-      <View flex py={"12%"} px={"5%"} spaced>
+      <View flex py={"12%"} px={"6%"} spaced>
         <View gap={24}>
           <Back onPress={back} />
           <View gap={8}>
