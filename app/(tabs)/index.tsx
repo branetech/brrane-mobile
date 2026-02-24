@@ -1,4 +1,5 @@
 import { HomeHeader } from '@/components/home';
+import { HomeCard } from '@/components/home/home-card';
 import { ThemedText } from '@/components/themed-text';
 import { View } from '@idimma/rn-widget';
 import { StyleSheet } from 'react-native';
@@ -8,6 +9,7 @@ export default function HomeScreen() {
   return (
    <SafeAreaView style={styles.container}>
     <HomeHeader/>
+    <HomeCard/>
    </SafeAreaView>
   );
 }
@@ -17,6 +19,6 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 20,
     position: 'relative',
-    paddingHorizontal: 24,
+    paddingHorizontal: 16,
   },
 });
