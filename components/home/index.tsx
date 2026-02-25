@@ -46,7 +46,7 @@ export const HomeHeader = () => {
         <View row gap={4} aligned>
         <TouchableOpacity
           
-          onPress={() => router.push("/account")}
+          onPress={() => router.push("/(tabs)/(account)")}
         >
           {/* <Avatar
             size={48}
