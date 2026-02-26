@@ -1,29 +1,7 @@
 export const VERSION = "1.0.5";
 
-import {
-  BracsAllocationIcon,
-  ChangePassword,
-  ChangeUsername,
-  ChatIcon,
-  HelpDesk,
-  Kin,
-  Preference,
-  Privacy,
-  ResetPin,
-  StockIcn,
-  StockIcn2,
-  Terms,
-  User,
-  UserGroup,
-} from "@/components/Svgs";
-import {
-  Bank,
-  Cards,
-  Information,
-  Photoshop,
-  SafeHome,
-  User as User2,
-} from "iconsax-react";
+
+import { Lock, Message2, MessageQuestion, PasswordCheck, Profile2User, Setting3, TagUser, User, UserOctagon, Verify } from "iconsax-react-native";
 import { jwtDecode } from "jwt-decode";
 import { ReactNode } from "react";
 
@@ -184,85 +162,33 @@ export interface Acc {
   content: Accn[];
 }
 
-export const accnt: Acc[] = [
+export const accnt = (): Acc[] => [
   {
     title: "My account",
     content: [
-      {
-        icon: <User />,
-        text: "Account Details",
-        routes: "account-details",
-      },
-      {
-        icon: <UserGroup />,
-        text: "Manage beneficiaries",
-        routes: "beneficiary",
-      },
-      {
-        icon: <Kin />,
-        text: "Next of Kin details",
-        routes: "update-kin-details",
-      },
-      {
-        icon: <BracsAllocationIcon />,
-        text: "Bracs Investment Trigger",
-        routes: "bracs-investment-trigger",
-      },
-      // {
-      //   icon: <BracsAllocationIcon />,
-      //   text: "Bracs Allocation",
-      //   routes: "bracs-allocation",
-      // },
+      { icon: <User size={20} color="#013D25" />, text: "Account Details", routes: "account-details" },
+      { icon: <Profile2User size={20} color="#013D25" />, text: "Manage beneficiaries", routes: "beneficiary" },
+      { icon: <TagUser size={20} color="#013D25" />, text: "Next of Kin details", routes: "update-kin-details" },
+      { icon: <Verify size={20} color="#013D25" />, text: "Account verification", routes: "account-verification" },
+      { icon: <Verify size={20} color="#013D25" />, text: "Bracs Investment Trigger", routes: "bracs-investment-trigger" },
     ],
   },
   {
     title: "Security & Privacy",
     content: [
-      {
-        icon: <ChangePassword />,
-        text: "Change password",
-        routes: "change-password",
-      },
-      {
-        icon: <ResetPin />,
-        text: "Reset transaction PIN",
-        routes: "reset-transaction-pin",
-      },
-      {
-        icon: <ChangeUsername />,
-        text: "Change username",
-        routes: "change-username",
-      },
+      { icon: <Lock size={20} color="#013D25" />, text: "Change password", routes: "change-password" },
+      { icon: <PasswordCheck size={20} color="#013D25" />, text: "Reset transaction PIN", routes: "reset-transaction-pin" },
+      { icon: <UserOctagon size={20} color="#013D25" />, text: "Change username", routes: "change-username" },
     ],
   },
   {
     title: "More",
     content: [
-      {
-        icon: <Preference />,
-        text: "Preferences",
-        routes: "preferences",
-      },
-      {
-        icon: <HelpDesk />,
-        text: "Help desk",
-        routes: "help-desk",
-      },
-      {
-        icon: <ChatIcon />,
-        text: "Live chat",
-        routes: "chat",
-      },
-      {
-        icon: <Terms />,
-        text: "Terms & conditions",
-        routes: "terms-conditions",
-      },
-      {
-        icon: <Privacy />,
-        text: "Privacy policy",
-        routes: "privacy-policy",
-      },
+      { icon: <Setting3 size={20} color="#013D25" />, text: "Preferences", routes: "preferences" },
+      { icon: <MessageQuestion size={20} color="#013D25" />, text: "Help desk", routes: "help-desk" },
+      { icon: <Message2 size={20} color="#013D25" />, text: "Live chat", routes: "chat" },
+      { icon: <Verify size={20} color="#013D25" />, text: "Terms & conditions", routes: "terms-conditions" },
+      { icon: <Verify size={20} color="#013D25" />, text: "Privacy policy", routes: "privacy-policy" },
     ],
   },
 ];
@@ -597,103 +523,103 @@ export const svgWithText = ({ text }: any) => {
   );
 };
 
-export const Finicials = [
-  {
-    title: "0.1 units of Stocks earned on ₦200 MTN airtime recharge",
-    icon: <StockIcn />,
-    date: "Jan 25, 2023 at 11:00 PM",
-  },
-  {
-    title: "20 units of stocks purchased",
-    icon: <StockIcn2 />,
-    date: "Jan 25, 2023 at 11:00 PM",
-  },
-  {
-    title: "0.1 units of Stocks earned on ₦200 MTN airtime recharge",
-    icon: <StockIcn />,
-    date: "Jan 25, 2023 at 11:00 PM",
-  },
-  {
-    title: "20 units of stocks purchased",
-    icon: <StockIcn2 />,
-    date: "Jan 25, 2023 at 11:00 PM",
-  },
-  {
-    title: "0.1 units of Stocks earned on ₦200 MTN airtime recharge",
-    icon: <StockIcn />,
-    date: "Jan 25, 2023 at 11:00 PM",
-  },
-  {
-    title: "20 units of stocks purchased",
-    icon: <StockIcn2 />,
-    date: "Jan 25, 2023 at 11:00 PM",
-  },
-  {
-    title: "0.1 units of Stocks earned on ₦200 MTN airtime recharge",
-    icon: <StockIcn />,
-    date: "Jan 25, 2023 at 11:00 PM",
-  },
-  {
-    title: "20 units of stocks purchased",
-    icon: <StockIcn2 />,
-    date: "Jan 25, 2023 at 11:00 PM",
-  },
-  {
-    title: "0.1 units of Stocks earned on ₦200 MTN airtime recharge",
-    icon: <StockIcn />,
-    date: "Jan 25, 2023 at 11:00 PM",
-  },
-  {
-    title: "20 units of stocks purchased",
-    icon: <StockIcn2 />,
-    date: "Jan 25, 2023 at 11:00 PM",
-  },
-];
+// export const Finicials = [
+//   {
+//     title: "0.1 units of Stocks earned on ₦200 MTN airtime recharge",
+//     icon: <StockIcn />,
+//     date: "Jan 25, 2023 at 11:00 PM",
+//   },
+//   {
+//     title: "20 units of stocks purchased",
+//     icon: <StockIcn2 />,
+//     date: "Jan 25, 2023 at 11:00 PM",
+//   },
+//   {
+//     title: "0.1 units of Stocks earned on ₦200 MTN airtime recharge",
+//     icon: <StockIcn />,
+//     date: "Jan 25, 2023 at 11:00 PM",
+//   },
+//   {
+//     title: "20 units of stocks purchased",
+//     icon: <StockIcn2 />,
+//     date: "Jan 25, 2023 at 11:00 PM",
+//   },
+//   {
+//     title: "0.1 units of Stocks earned on ₦200 MTN airtime recharge",
+//     icon: <StockIcn />,
+//     date: "Jan 25, 2023 at 11:00 PM",
+//   },
+//   {
+//     title: "20 units of stocks purchased",
+//     icon: <StockIcn2 />,
+//     date: "Jan 25, 2023 at 11:00 PM",
+//   },
+//   {
+//     title: "0.1 units of Stocks earned on ₦200 MTN airtime recharge",
+//     icon: <StockIcn />,
+//     date: "Jan 25, 2023 at 11:00 PM",
+//   },
+//   {
+//     title: "20 units of stocks purchased",
+//     icon: <StockIcn2 />,
+//     date: "Jan 25, 2023 at 11:00 PM",
+//   },
+//   {
+//     title: "0.1 units of Stocks earned on ₦200 MTN airtime recharge",
+//     icon: <StockIcn />,
+//     date: "Jan 25, 2023 at 11:00 PM",
+//   },
+//   {
+//     title: "20 units of stocks purchased",
+//     icon: <StockIcn2 />,
+//     date: "Jan 25, 2023 at 11:00 PM",
+//   },
+// ];
 
-export const KYC_LIST = [
-  {
-    icon: <Information color="#013d25" size={16} variant="Outline" />,
-    title: "Personal Details",
-    route: "/verification",
-    type: "name",
-  },
-  {
-    icon: <User2 color="#013d25" size={16} variant="Outline" />,
-    title: "Next of Kin",
-    route: "/kin-details",
-    type: "kin",
-  },
-  {
-    id: 4,
-    icon: <Bank color="#013d25" size={16} variant="Outline" />,
-    title: "Add Bank Details",
-    route: "/information/bank-details",
-    type: "bank",
-  },
-  {
-    id: 5,
-    icon: <Cards color="#013d25" size={16} variant="Outline" />,
-    title: "Bvn Verification",
-    route: "/information/bvn-verification",
-    type: "bvn",
-  },
-  {
-    icon: <SafeHome color="#013d25" size={16} variant="Outline" />,
-    title: "Address Verification",
-    route: "/identity-verification/address-verification",
-    type: "address",
-  },
-  {
-    icon: <User2 color="#013d25" size={16} variant="Outline" />,
-    title: "Identity Verification",
-    route: "/identity-verification/id-verification",
-    type: "identity",
-  },
-  {
-    id: 3,
-    icon: <Photoshop color="#013d25" size={16} variant="Outline" />,
-    title: "Photograph Verification",
-    route: "/identity-verification/photograph-verification",
-    type: "photo",
-  },
-];
+// export const KYC_LIST = [
+//   {
+//     icon: <Information color="#013d25" size={16} variant="Outline" />,
+//     title: "Personal Details",
+//     route: "/verification",
+//     type: "name",
+//   },
+//   {
+//     icon: <User2 color="#013d25" size={16} variant="Outline" />,
+//     title: "Next of Kin",
+//     route: "/kin-details",
+//     type: "kin",
+//   },
+//   {
+//     id: 4,
+//     icon: <Bank color="#013d25" size={16} variant="Outline" />,
+//     title: "Add Bank Details",
+//     route: "/information/bank-details",
+//     type: "bank",
+//   },
+//   {
+//     id: 5,
+//     icon: <Cards color="#013d25" size={16} variant="Outline" />,
+//     title: "Bvn Verification",
+//     route: "/information/bvn-verification",
+//     type: "bvn",
+//   },
+//   {
+//     icon: <SafeHome color="#013d25" size={16} variant="Outline" />,
+//     title: "Address Verification",
+//     route: "/identity-verification/address-verification",
+//     type: "address",
+//   },
+//   {
+//     icon: <User2 color="#013d25" size={16} variant="Outline" />,
+//     title: "Identity Verification",
+//     route: "/identity-verification/id-verification",
+//     type: "identity",
+//   },
+//   {
+//     id: 3,
+//     icon: <Photoshop color="#013d25" size={16} variant="Outline" />,
+//     title: "Photograph Verification",
+//     route: "/identity-verification/photograph-verification",
+//     type: "photo",
+//   },
+// ];

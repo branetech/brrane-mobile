@@ -1,12 +1,11 @@
-import { router } from "expo-router";
-import { useCallback, useEffect, useRef, useState } from "react";
-import BaseRequest, { catchError } from "./index";
-import useSWR, { KeyedMutator, mutate } from "swr";
-import type { SWRConfiguration } from "swr";
-import { useAppState } from "@/redux/store";
-import { hideAppLoader, showAppLoader } from "@/utils/helpers";
-
-// ─── Pagination Types ─────────────────────────────────────────────────────────
+import { useRouter } from "expo-router";
+import {useCallback, useEffect, useState} from "react";
+import BaseRequest, { catchError} from "./index";
+import useSWR, {KeyedMutator, mutate} from "swr";
+import {FullConfiguration} from "swr/_internal";
+import {useAppState} from "@/redux/store";
+import {hideAppLoader, showAppLoader} from "@/utils/helpers";
+// import axios from "axios";
 
 export interface PaginationLink {
   url: string;
@@ -14,7 +13,7 @@ export interface PaginationLink {
   active: boolean;
 }
 
-export interface PaginationState {
+export interface PaginationProp {
   current_page?: number;
   currentPage?: number;
   first_page_url?: string | null;
@@ -22,6 +21,7 @@ export interface PaginationState {
   last_page?: number;
   last_page_url?: string | null;
   links?: PaginationLink[];
+  data?: any[];
   next_page_url?: string | null;
   path?: string;
   per_page?: number;
@@ -31,302 +31,222 @@ export interface PaginationState {
   totalPages?: number;
   totalRecords?: number;
   perPage?: number;
+  isValidating?: boolean;
 }
 
-// ─── Config Types ─────────────────────────────────────────────────────────────
-
-interface RequestConfig<TData = unknown> extends SWRConfiguration {
-  /** Which HTTP method to use. Defaults to "get". */
-  method?: "get" | "post" | "put" | "patch" | "delete";
-  /** Override the base URL for this request. */
-  baseUrl?: string;
-  /** Dot-notated path to pluck from the response, e.g. "data" or "data.records". */
-  node?: string;
-  /** Fallback value before data arrives. */
-  initialValue?: TData;
-  /** Default query params. */
-  params?: Record<string, unknown>;
-  /** Show the global app loader while fetching. */
-  showLoading?: boolean;
-  /** Show a global error toast on failure. */
-  showError?: boolean;
-  /** Navigate back if the request fails. */
-  goBackOnError?: boolean;
-  /** Accumulate pages instead of replacing data (infinite scroll). */
-  keepPaginatedData?: boolean;
-  /** Called once when new data arrives. */
-  onDone?: (data: TData) => void;
-  /** Custom error handler. */
-  handleError?: (error: unknown) => void;
+interface DefaultConfig {
+  goBackOnError: boolean;
+  handleError: (error: any) => any;
+  initialValue: {};
+  params: Record<string, any>;
+  keepPreviousData: boolean;
+  method: string;
+  baseUrl: string;
+  node: string;
+  onDone: (data: any) => any;
+  refreshInterval: number;
+  revalidateIfStale: boolean;
+  noCache: boolean;
+  revalidateOnFocus: boolean;
+  revalidateOnReconnect: boolean;
+  shouldRetryOnError: boolean;
+  showError: boolean;
+  showLoading: boolean;
+  keepPaginatedData: boolean;
 }
 
-const DEFAULT_CONFIG: Required<
-  Pick<
-    RequestConfig,
-    | "method"
-    | "node"
-    | "initialValue"
-    | "params"
-    | "showLoading"
-    | "showError"
-    | "goBackOnError"
-    | "keepPaginatedData"
-    | "revalidateIfStale"
-    | "revalidateOnFocus"
-    | "revalidateOnReconnect"
-    | "refreshInterval"
-    | "shouldRetryOnError"
-    | "keepPreviousData"
-  >
-> = {
+interface ConfigProp {
+  [key: string]: any;
+}
+
+const defaultConfig: DefaultConfig = {
   method: "get",
-  node: "data",
+  baseUrl: "",
+  onDone: (data) => data,
+  handleError: (error) => error,
   initialValue: {},
-  params: {},
-  showLoading: false,
+  node: "data",
   showError: false,
-  goBackOnError: false,
-  keepPaginatedData: false,
+  noCache: true,
+  showLoading: false,
   revalidateIfStale: true,
-  revalidateOnFocus: false, // avoid aggressive refetching on RN app focus events
+  revalidateOnFocus: true,
   revalidateOnReconnect: true,
   refreshInterval: 0,
   shouldRetryOnError: false,
   keepPreviousData: true,
+  keepPaginatedData: false,
+  goBackOnError: false,
+  params: {},
 };
 
-// ─── Response Type ────────────────────────────────────────────────────────────
-
-export interface RequestResponse<TData = unknown> extends PaginationState {
-  data: TData;
-  isLoading: boolean;
+export interface ResponseProps extends PaginationProp {
   isValidating: boolean;
-  params: Record<string, unknown>;
-  /**
-   * Typed as `KeyedMutator<any>` intentionally: Axios interceptors transform
-   * the response at runtime (returning `response.data`), but Axios's static
-   * types still declare `AxiosResponse` as the return. SWR infers its cache
-   * type from those static types, creating an unresolvable mismatch with any
-   * other generic. `any` here is accurate — it reflects the real runtime shape.
-   */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  isLoading: boolean;
+  data: any;
+  onRefresh: () => void;
+  onChangeParams: (param: Record<string, any>) => void;
+  setParams: (param: Record<string, any>) => void;
   mutate: KeyedMutator<any>;
-  onRefresh: () => Promise<void>;
-  onChangeParams: (patch: Record<string, unknown>) => void;
-  setParams: React.Dispatch<React.SetStateAction<Record<string, unknown>>>;
+  params: Record<string, any>;
   onLoadMore: () => void;
   onLoadPrevious: () => void;
 }
 
-// ─── Fetcher ──────────────────────────────────────────────────────────────────
+// {...rest, data: res,}
 
-/**
- * Wraps BaseRequest in a plain async function so SWR doesn't see Axios's
- * `AxiosResponse` wrapper type — just the resolved data value.
- */
-const makeFetcher =
-  (method: RequestConfig["method"] = "get") =>
-  async (url: string): Promise<unknown> => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const result = await (BaseRequest[method] as any)(url);
-    return result;
+export const useRequest = (
+  path: string,
+  configuration?: FullConfiguration | DefaultConfig | ConfigProp,
+  options = {}
+) => {
+  // @ts-ignore
+  const {token} = useAppState();
+  const router = useRouter();
+  const config = {...defaultConfig, ...configuration};
+  const {params: defaultParams} = config;
+  const [params, setParams] = useState<Record<string, any>>(defaultParams);
+  const onChangeParams = (state: object) =>
+    setParams((prevState: any) => ({...prevState, ...state}));
+
+  const others = {
+    revalidateIfStale: config?.revalidateIfStale,
+    revalidateOnFocus: config?.revalidateOnFocus,
+    revalidateOnReconnect: config?.revalidateOnReconnect,
+    refreshInterval: config?.refreshInterval,
+    shouldRetryOnError: config?.shouldRetryOnError,
+    keepPreviousData: config?.keepPreviousData,
+
+    ...options,
   };
+  if (token)
+    BaseRequest.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  if (config?.noCache) {
+    BaseRequest.defaults.headers["Cache-Control"] = "no-cache";
+    BaseRequest.defaults.headers["cache"] = false;
+  }
+  //@ts-ignore
+  let fetcher: any = path ? BaseRequest?.[config?.method || "get"] : {};
+  if (config.baseUrl) {
+    //@ts-ignore
+    fetcher = path ? fetch : {};
+  }
+  let url = path;
+  if (typeof params == "object") {
+    const searchParams = new URLSearchParams(params).toString();
+    url = `${path}${searchParams ? `?${searchParams}` : ""}`;
+  }
+  const {data, error, isValidating, mutate} = useSWR(url, fetcher, others);
 
-// ─── Hook ─────────────────────────────────────────────────────────────────────
+  const [initialValue, setInitialValue] = useState(config?.initialValue);
+  const [paginated, setPaginated] = useState([]);
+  const [paginationState, setPaginationState] = useState<PaginationProp | any>({});
 
-export const useRequest = <TData = unknown>(
-  path: string | null,
-  configuration?: RequestConfig<TData>
-): RequestResponse<TData> => {
-  const { token } = useAppState();
-  const config = { ...DEFAULT_CONFIG, ...configuration };
-
-  // Keep a stable fetcher reference — only recreate if method changes
-  const fetcherRef = useRef(makeFetcher(config.method));
-  useEffect(() => {
-    fetcherRef.current = makeFetcher(config.method);
-  }, [config.method]);
-
-  // Sync auth token into BaseRequest headers reactively
-  useEffect(() => {
-    BaseRequest.setToken(token ?? null);
-  }, [token]);
-
-  // ── Params ──────────────────────────────────────────────────────────────
-  const [params, setParams] = useState<Record<string, unknown>>(config.params);
-
-  const onChangeParams = useCallback((patch: Record<string, unknown>) => {
-    setParams((prev) => ({ ...prev, ...patch }));
-  }, []);
-
-  // Build the full URL with query string; null key pauses SWR fetching
-  const url = path
-    ? (() => {
-        const qs = new URLSearchParams(
-          Object.entries(params).reduce<Record<string, string>>(
-            (acc, [k, v]) => {
-              if (v !== undefined && v !== null) acc[k] = String(v);
-              return acc;
-            },
-            {}
-          )
-        ).toString();
-        return `${path}${qs ? `?${qs}` : ""}`;
-      })()
-    : null;
-
-  // ── SWR ─────────────────────────────────────────────────────────────────
-  const {
-    data: rawData,
-    error,
-    isValidating,
-    mutate: swrMutate,
-  } = useSWR(url, fetcherRef.current, {
-    revalidateIfStale: config.revalidateIfStale,
-    revalidateOnFocus: config.revalidateOnFocus,
-    revalidateOnReconnect: config.revalidateOnReconnect,
-    refreshInterval: config.refreshInterval,
-    shouldRetryOnError: config.shouldRetryOnError,
-    keepPreviousData: config.keepPreviousData,
-  });
-
-  // ── Derived State ────────────────────────────────────────────────────────
-  const [resolvedData, setResolvedData] = useState<TData>(
-    config.initialValue as TData
-  );
-  const [paginationState, setPaginationState] = useState<PaginationState>({});
-  const [accumulatedPages, setAccumulatedPages] = useState<unknown[]>([]);
-
-  // ── Side effects: error handling ─────────────────────────────────────────
-  useEffect(() => {
-    if (!error) return;
-    if (config.goBackOnError) router.back();
-    if (config.showError) catchError(error);
-    config.handleError?.(error);
-  }, [error]);
-
-  // ── Side effects: loader ─────────────────────────────────────────────────
-  useEffect(() => {
-    if (!config.showLoading) return;
-    if (isValidating && !rawData) showAppLoader();
-    else hideAppLoader();
-  }, [isValidating, rawData, config.showLoading]);
-
-  // ── Side effects: data processing ───────────────────────────────────────
-  useEffect(() => {
-    if (rawData === undefined) return;
-    processData(rawData);
-    config.onDone?.(rawData as TData);
-  }, [config, rawData]);
-
-  const processData = useCallback(
-    (raw: unknown) => {
-      const node = config.node ?? "";
-
-      if (typeof raw !== "object" || raw === null) {
-        setResolvedData((raw as TData) ?? (config.initialValue as TData));
-        setPaginationState({});
-        return;
-      }
-
-      const obj = raw as Record<string, unknown>;
-
-      // Standard `{ data: { records, ...pagination } }` shape
-      if (node === "data" && "data" in obj) {
-        const inner = obj.data as Record<string, unknown>;
-
-        if (inner && typeof inner === "object" && "records" in inner) {
-          const { records, ...pagination } = inner as {
-            records: unknown[];
-            [key: string]: unknown;
-          };
-          setPaginationState(pagination as PaginationState);
-
-          const incoming = records ?? (config.initialValue as unknown[]);
-          if (config.keepPaginatedData) {
-            setAccumulatedPages((prev) => [...prev, ...incoming]);
-          } else {
-            setResolvedData(incoming as TData);
-          }
-          return;
-        }
-
-        setPaginationState({});
-        setResolvedData(
-          ((inner as TData) ?? config.initialValue) as TData
-        );
-        return;
-      }
-
-      // Dot-notated deep access, e.g. node = "meta.items"
-      if (node.includes(".")) {
-        let cursor: unknown = obj;
-        for (const key of node.split(".")) {
-          if (cursor && typeof cursor === "object" && key in (cursor as object)) {
-            cursor = (cursor as Record<string, unknown>)[key];
-          } else {
-            cursor = undefined;
-            break;
-          }
-        }
-        setResolvedData((cursor as TData) ?? (config.initialValue as TData));
-        return;
-      }
-
-      setResolvedData((obj as TData) ?? (config.initialValue as TData));
-      setPaginationState({});
-    },
-    [config.node, config.initialValue, config.keepPaginatedData]
-  );
-
-  // ── Pagination helpers ───────────────────────────────────────────────────
   const onLoadMore = useCallback(() => {
-    const current = paginationState.current_page ?? 1;
-    const last = paginationState.last_page ?? 1;
-    if (current < last) onChangeParams({ page: current + 1 });
-  }, [paginationState, onChangeParams]);
+    let current_page = paginationState?.current_page || 1;
+    let last_page = paginationState?.last_page || 1;
+    let page = last_page;
+    if (current_page < last_page) page = current_page + 1;
+    setPaginated(paginated);
+    onChangeParams({page});
+  }, [paginationState, paginated]);
 
   const onLoadPrevious = useCallback(() => {
-    const current = paginationState.current_page ?? 1;
-    if (current > 1) onChangeParams({ page: current - 1 });
-  }, [paginationState, onChangeParams]);
+    let current_page = paginationState?.current_page || 1;
+    let last_page = paginationState?.last_page || 1;
+    let page = 1;
+    if (current_page > 1 && current_page < last_page) page = current_page - 1;
+    setPaginated(paginated);
+    onChangeParams({page});
+  }, [paginationState, paginated]);
 
-  // ── Refresh ──────────────────────────────────────────────────────────────
-  const onRefresh = useCallback(async () => {
-    await swrMutate(undefined, { revalidate: true });
-  }, [swrMutate]);
+  useEffect(() => {
+    if (error) {
+      if (config.goBackOnError) router.back();
+      if (config.showError) catchError(error);
+      if (config?.handleError) config?.handleError(error);
+    }
+  }, [error]);
 
-  // ── Return ───────────────────────────────────────────────────────────────
-  return {
-    ...paginationState,
-    data: config.keepPaginatedData ? (accumulatedPages as TData) : resolvedData,
-    isLoading: isValidating && !rawData,
-    isValidating,
-    params,
-    mutate: swrMutate,
-    onRefresh,
-    onChangeParams,
-    setParams,
-    onLoadMore,
-    onLoadPrevious,
+  useEffect(() => {
+    if (config.showLoading) {
+      if (isValidating && !data) showAppLoader();
+      else hideAppLoader();
+    }
+  }, [isValidating]);
+
+  useEffect(() => {
+    if (data && config.onDone) config?.onDone(data);
+    handleDataCleaning();
+  }, [data]);
+
+  const handleDataCleaning = () => {
+    let node = config?.node || "";
+    if (typeof data === "object") {
+      if (node === "data" && data.hasOwnProperty("data")) {
+        if (data?.data?.records) {
+          const {records, ...p} = data?.data
+          setPaginationState(p || {});
+          const currentData = records || config?.initialValue;
+          if (config.keepPaginatedData) {
+            //@ts-ignore
+            setPaginated([...paginated, ...currentData]);
+            return;
+          }
+          setInitialValue(currentData);
+          return;
+        }
+        setPaginationState({});
+        setInitialValue(data?.data || config?.initialValue);
+        return;
+      }
+
+      if (node.includes(".")) {
+        const nodes = node.split(".");
+        let expected = data;
+        try {
+          nodes.forEach((n) => (expected = expected[n]));
+        } catch (e) {
+        }
+        setInitialValue(expected || config?.initialValue);
+        return;
+      }
+    }
+    setInitialValue(data || config?.initialValue);
+    setPaginationState({});
   };
+
+  const onRefresh = async () => {
+    handleDataCleaning();
+    await mutate({data}, {revalidate: true});
+  };
+  const RESPONSE: ResponseProps = {
+    ...paginationState,
+    isValidating,
+    mutate,
+    data: config.keepPaginatedData ? paginated : initialValue,
+    isLoading: isValidating,
+    params,
+    onChangeParams,
+    onLoadPrevious,
+    onLoadMore,
+    setParams,
+    onRefresh,
+  };
+  return RESPONSE;
 };
 
-// ─── Utilities ────────────────────────────────────────────────────────────────
 
-/** Generate a placeholder image URL from dummyimage.com */
 export const textToImage = (
   text: string,
   w = 640,
   h = 640,
   bg = "FFFFFF",
   color = "000000"
-): string =>
-  `https://dummyimage.com/${w}x${h}/${bg}/${color}?text=${encodeURIComponent(text)}`;
+) => `https://dummyimage.com/${w}x${h}/${bg}/${color}?text=${text}`;
 
-/** No-op placeholder */
-export const noAction = (): void => {};
-
-/** Invalidate all SWR keys globally, forcing a refetch everywhere. */
-export const reloadAllData = (): Promise<unknown> =>
-  mutate(() => true, undefined, { revalidate: true });
+export const noAction = () => {
+};
+export const onReloadData = async () => {
+  await mutate((key:any) => key);
+}

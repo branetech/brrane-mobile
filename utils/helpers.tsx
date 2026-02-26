@@ -425,3 +425,8 @@ export const getInitials = (name: string, maxChars = 2): string => {
     .join('')
     .toUpperCase();
 };
+
+export const UseNgnPhone = (phone: string): string => {
+  const digits = phone.replace(/^\+?234|^0/, "");
+  return `+234${digits}`;
+};
