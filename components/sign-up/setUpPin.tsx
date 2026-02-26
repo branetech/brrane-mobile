@@ -111,7 +111,7 @@ export default function SetPinScreen({ back, onComplete }: Props) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
-        <View flex px={"5%"}>
+        <View flex>
           <Back onPress={back} />
 
           <View style={{ marginVertical: 24 }}>

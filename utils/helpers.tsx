@@ -9,9 +9,6 @@ import { toast } from "sonner-native";
 import { getEarnedBracs } from "./brac";
 import { TextStyle, ViewStyle } from "react-native";
 
-export const getInitials = (name: string | undefined | null): string => 
-  ((name || "").match(/\b\w/g) || []).join('').toUpperCase();
-
 export const getSchoolInitials = (name: string): string => {
   const school = universities?.universities?.find((s) => s.name === name) || null;
   return String(school?.code || getInitials(name)).toUpperCase();
@@ -100,21 +97,21 @@ export function formatPhoneNumber(phoneNumber: string): string {
 }
 
 // For React Native, you'll need to use Image component differently
-export const getNetworkIcon = (ticker: string): string | null => {
-  if (ticker?.toLowerCase().includes('mtn')) {
-    return require('@/assets/images/network/mtn.png');
-  }
-  if (ticker?.toLowerCase().includes('glo')) {
-    return require('@/assets/images/network/glo.png');
-  }
-  if (ticker?.toLowerCase().includes('9mobile')) {
-    return require('@/assets/images/network/9mobile.png');
-  }
-  if (ticker?.toLowerCase().includes('airtel')) {
-    return require('@/assets/images/network/airtel.png');
-  }
-  return null;
-};
+// export const getNetworkIcon = (ticker: string): string | null => {
+//   if (ticker?.toLowerCase().includes('mtn')) {
+//     return require('@/assets/images/network/mtn.png');
+//   }
+//   if (ticker?.toLowerCase().includes('glo')) {
+//     return require('@/assets/images/network/glo.png');
+//   }
+//   if (ticker?.toLowerCase().includes('9mobile')) {
+//     return require('@/assets/images/network/9mobile.png');
+//   }
+//   if (ticker?.toLowerCase().includes('airtel')) {
+//     return require('@/assets/images/network/airtel.png');
+//   }
+//   return null;
+// };
 
 // Usage in component:
 // const iconSource = getNetworkIcon(ticker);
@@ -410,4 +407,21 @@ export const calculateRemainingDays = (maturityDate: string) => {
   const remainingTime = maturityDateTime - currentTime;
   const remainingDays = Math.ceil(remainingTime / (1000 * 3600 * 24));
   return remainingDays;
+};
+
+// utils/getInitials.ts
+export const getInitials = (name: string, maxChars = 2): string => {
+  if (!name) return '';
+
+  const words = name.trim().split(/\s+/);
+
+  if (words.length === 1) {
+    return words[0].slice(0, maxChars).toUpperCase();
+  }
+
+  return words
+    .slice(0, maxChars)
+    .map((word) => word[0])
+    .join('')
+    .toUpperCase();
 };
