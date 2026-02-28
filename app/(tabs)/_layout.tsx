@@ -14,14 +14,16 @@ export default function TabLayout() {
         headerShown: false,
         tabBarShowLabel: true,
         tabBarIconStyle: { marginHorizontal: 'auto' },
+        
         tabBarStyle: Platform.select({
             ios: {
                 position: 'absolute',
                 height: 80,
                 paddingTop: 12,
+                backgroundColor: '#F7F7F8E5',
             },
             default: {
-                // backgroundColor: '#F7F7F8E5',
+                backgroundColor: '#F7F7F8E5',
                 height: 80,
                 paddingTop: 12,
             },
@@ -54,7 +56,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color, focused }) => <Receipt size={24} color={color} variant={focused ? 'Bold' : 'Outline'}/>,        }}
       />
        <Tabs.Screen
-        name="account"
+        name="(account)"
         options={{
           title: 'Account',
           tabBarIcon: ({ color, focused }) => <Profile size={24} color={color} variant={focused ? 'Bold' : 'Outline'}/>,        }}
