@@ -6,12 +6,12 @@ import { View } from "@idimma/rn-widget";
 import { router } from "expo-router";
 import React, { useRef, useState } from "react";
 import {
-    KeyboardAvoidingView,
-    Platform,
-    View as RNView,
-    StyleSheet,
-    TextInput,
-    TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  View as RNView,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Back from "../Back";
@@ -24,9 +24,10 @@ type Props = {
 
 export default function SetPinScreen({ back, onComplete }: Props) {
   const scheme = useColorScheme();
-  const C = Colors[scheme ?? "light"];
+  const themeKey: "light" | "dark" = scheme === "dark" ? "dark" : "light";
+  const C = Colors[themeKey];
   const [focusedInput, setFocusedInput] = useState<"pin" | "confirm" | null>(
-    "pin"
+    "pin",
   );
   const [pin, setPin] = useState("");
   const [confirmPin, setConfirmPin] = useState("");
@@ -49,7 +50,7 @@ export default function SetPinScreen({ back, onComplete }: Props) {
     onPress: () => void,
     label?: string,
     isFocused?: boolean,
-    isError?: boolean
+    isError?: boolean,
   ) => {
     const boxes = [];
 
@@ -88,13 +89,19 @@ export default function SetPinScreen({ back, onComplete }: Props) {
               |
             </ThemedText>
           ) : null}
-        </RNView>
+        </RNView>,
       );
     }
 
     return (
       <RNView style={{ marginBottom: 24 }}>
-        {label && <ThemedText style={{ fontSize: 12, color: C.muted, marginVertical: 6 }}>{label}</ThemedText>}
+        {label && (
+          <ThemedText
+            style={{ fontSize: 12, color: C.muted, marginVertical: 6 }}
+          >
+            {label}
+          </ThemedText>
+        )}
         <TouchableOpacity
           activeOpacity={1}
           onPress={onPress}
@@ -112,11 +119,11 @@ export default function SetPinScreen({ back, onComplete }: Props) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
-        <View flex style={{paddingHorizontal: "6%"}}>
+        <View flex style={{ paddingHorizontal: "6%" }}>
           <Back onPress={back} />
 
           <View style={{ marginVertical: 24 }}>
-            <ThemedText type="subtitle" >Set-up Transaction Pin</ThemedText>
+            <ThemedText type="subtitle">Set-up Transaction Pin</ThemedText>
             <ThemedText style={{ fontSize: 12, color: C.muted, marginTop: 6 }}>
               Create and confirm your 6-digit transaction pin
             </ThemedText>
@@ -126,7 +133,7 @@ export default function SetPinScreen({ back, onComplete }: Props) {
             pin,
             () => pinInputRef.current?.focus(),
             "Transaction PIN",
-            focusedInput === "pin"
+            focusedInput === "pin",
           )}
           <TextInput
             ref={pinInputRef}
@@ -149,11 +156,18 @@ export default function SetPinScreen({ back, onComplete }: Props) {
             () => confirmInputRef.current?.focus(),
             "Confirm Transaction PIN",
             focusedInput === "confirm",
-            isMismatched
+            isMismatched,
           )}
-          
+
           {isMismatched && (
-            <ThemedText style={{ color: "#E02B2B", fontSize: 12, marginTop: -8, marginBottom: 12 }}>
+            <ThemedText
+              style={{
+                color: "#E02B2B",
+                fontSize: 12,
+                marginTop: -8,
+                marginBottom: 12,
+              }}
+            >
               Pin does not match
             </ThemedText>
           )}
@@ -191,7 +205,7 @@ export default function SetPinScreen({ back, onComplete }: Props) {
           onContinue={() => {
             setShowSuccess(false);
             onComplete();
-            router.replace("/home")
+            router.replace("/(tabs)");
           }}
         />
       </KeyboardAvoidingView>

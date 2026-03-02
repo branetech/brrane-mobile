@@ -7,56 +7,58 @@ import React from "react";
 import { Modal, StyleSheet, View } from "react-native";
 
 export const PinSuccessModal = ({
-    visible,
-    onContinue,
-  }: {
-    visible: boolean;
-    onContinue: () => void;
-  }) => {
-    const scheme = useColorScheme();
-    const C = Colors[scheme ?? "light"];
-  
-    return (
-      <Modal visible={visible} transparent animationType="fade">
-        <View style={styles.overlay}>
-          <View style={styles.card}>
-            <View style={StyleSheet.absoluteFill}>
-              <SuccessBackground />
-            </View>
+  visible,
+  onContinue,
+}: {
+  visible: boolean;
+  onContinue: () => void;
+}) => {
+  const scheme = useColorScheme();
+  const themeKey: "light" | "dark" = scheme === "dark" ? "dark" : "light";
+  const C = Colors[themeKey];
 
-            <View style={styles.iconContainer}>
-              <PinCreated size={80} />
-            </View>
-  
-            <View style={{ alignItems: "center", paddingHorizontal: 20 }}>
-              <ThemedText type="subtitle">
-                Pin Created
-              </ThemedText>
-              <ThemedText style={{ 
-                fontSize: 12, 
-                color: C.muted, 
-                textAlign: "center", 
-                marginTop: 8,
-                lineHeight: 18 
-              }}>
-                You have successfully created your transaction PIN, Continue to perform your first transaction.
-              </ThemedText>
-            </View>
-  
-            <BraneButton
-              text="Continue"
-              onPress={onContinue}
-              height={48}
-              radius={12}
-              backgroundColor="#013D25"
-              textColor="#D2F1E4"
-              style={{ width: 280 }}
-            />
+  return (
+    <Modal visible={visible} transparent animationType="fade">
+      <View style={styles.overlay}>
+        <View style={styles.card}>
+          <View style={StyleSheet.absoluteFill}>
+            <SuccessBackground />
           </View>
+
+          <View style={styles.iconContainer}>
+            <PinCreated size={80} />
+          </View>
+
+          <View style={{ alignItems: "center", paddingHorizontal: 20 }}>
+            <ThemedText type="subtitle">Pin Created</ThemedText>
+            <ThemedText
+              style={{
+                fontSize: 12,
+                color: C.muted,
+                textAlign: "center",
+                marginTop: 8,
+                lineHeight: 18,
+              }}
+            >
+              You have successfully created your transaction PIN, Continue to
+              perform your first transaction.
+            </ThemedText>
+          </View>
+
+          <BraneButton
+            text="Continue"
+            onPress={onContinue}
+            height={48}
+            radius={12}
+            backgroundColor="#013D25"
+            textColor="#D2F1E4"
+            style={{ width: 280 }}
+          />
         </View>
-      </Modal>
-    );
-  };
+      </View>
+    </Modal>
+  );
+};
 
 const styles = StyleSheet.create({
   overlay: {

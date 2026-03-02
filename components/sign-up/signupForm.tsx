@@ -1,17 +1,17 @@
 import { BraneButton } from "@/components/brane-button";
 import { FormInput, mapFormikProps } from "@/components/formInput";
 import { PhoneInput } from "@/components/phone-input";
+import { VerifyMethodModal } from "@/components/sign-up/verificationModal";
 import { PassWrd } from "@/components/svg";
 import { ThemedText } from "@/components/themed-text";
-import { VerifyMethodModal } from "@/components/sign-up/verificationModal";
 import { Colors } from "@/constants/colors";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useFormHandler } from "@/hooks/use-formik";
 import { Image, TouchableOpacity, View } from "@idimma/rn-widget";
+import { router } from "expo-router";
 import { Eye, EyeSlash } from "iconsax-react-native";
 import { useState } from "react";
 import * as yup from "yup";
-import { router } from "expo-router";
 
 type SignupFormProps = {
   initialValues: {
@@ -45,7 +45,8 @@ export function SignupForm({
   onChangeValues,
 }: SignupFormProps) {
   const scheme = useColorScheme();
-  const C = Colors[scheme ?? "light"];
+  const themeKey: "light" | "dark" = scheme === "dark" ? "dark" : "light";
+  const C = Colors[themeKey];
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { form } = useFormHandler({
@@ -61,7 +62,7 @@ export function SignupForm({
         .required("Password is required")
         .matches(
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\.,_-])(?=.{8,})/,
-          "Password must have at least: 8 characters, a number, an uppercase letter, and a special character."
+          "Password must have at least: 8 characters, a number, an uppercase letter, and a special character.",
         ),
       confirmPassword: yup
         .string()
@@ -86,7 +87,7 @@ export function SignupForm({
   };
 
   return (
-    <View flex px={'6%'}>
+    <View flex px={"6%"}>
       <View gap={24}>
         <View gap={8} style={{ alignItems: "center" }}>
           <ThemedText type={"subtitle"}>Create your account</ThemedText>

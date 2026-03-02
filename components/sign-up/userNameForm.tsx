@@ -19,7 +19,8 @@ type Props = {
 
 export default function SetUsernameScreen({ back, onSubmit }: Props) {
   const scheme = useColorScheme();
-  const C = Colors[scheme ?? "light"];
+  const themeKey: "light" | "dark" = scheme === "dark" ? "dark" : "light";
+  const C = Colors[themeKey];
 
   const { form, isDisabled } = useFormHandler({
     initialValues: { username: "" },
@@ -42,7 +43,7 @@ export default function SetUsernameScreen({ back, onSubmit }: Props) {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
-        <View flex style={{paddingHorizontal: "6%"}}>
+        <View flex style={{ paddingHorizontal: "6%" }}>
           <Back onPress={back} />
           <View style={{ marginTop: 24, marginBottom: 24 }}>
             <ThemedText type="subtitle">Create your username</ThemedText>

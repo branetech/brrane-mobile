@@ -1,6 +1,6 @@
 import { ArrowRight2 } from "iconsax-react-native";
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Switch } from "react-native";
+import { StyleSheet, Switch, Text, View } from "react-native";
 
 type Accn = {
   icon: React.ReactNode;
@@ -13,13 +13,11 @@ export const AccountItem = ({ icon, text }: Accn) => {
 
   return (
     <View style={styles.container}>
-      {/* LEFT */}
       <View style={styles.left}>
-        <View>{icon}</View>
+        <View style={styles.iconWrapper}>{icon}</View>
         <Text style={styles.text}>{text}</Text>
       </View>
 
-      {/* RIGHT */}
       <View>
         {text === "Show balance" ? (
           <Switch
@@ -29,7 +27,7 @@ export const AccountItem = ({ icon, text }: Accn) => {
             thumbColor={enabled ? "#013D25" : "#8B0000"}
           />
         ) : (
-          <ArrowRight2 color="#013D25" size={20} />
+          <ArrowRight2 color="#85808A" size={16} />
         )}
       </View>
     </View>
@@ -37,21 +35,30 @@ export const AccountItem = ({ icon, text }: Accn) => {
 };
 
 const styles = StyleSheet.create({
-    container: {
-      paddingVertical: 20,
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      borderBottomWidth: 1,
-      borderColor: "#f7f7f8",
-    },
-    left: {
-      flexDirection: "row",
-      alignItems: "center",
-      gap: 8,
-    },
-    text: {
-      fontSize: 14,
-      fontWeight: "500",
-    },
-  });
+  container: {
+    paddingVertical: 16,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderColor: "#F7F7F8",
+  },
+  left: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+  },
+  iconWrapper: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: "#D2F1E4",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  text: {
+    fontSize: 14,
+    fontWeight: "500",
+    color: "#0B0014",
+  },
+});
