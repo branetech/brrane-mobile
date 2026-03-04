@@ -17,7 +17,8 @@ import * as yup from "yup";
 export default function LoginScreen() {
   const router = useRouter();
   const scheme = useColorScheme();
-  const C = Colors[scheme ?? "light"];
+  const themeKey: "light" | "dark" = scheme === "dark" ? "dark" : "light";
+  const C = Colors[themeKey];
   const [showPassword, setShowPassword] = useState(false);
 
   const { form, isDisabled } = useFormHandler({
@@ -33,13 +34,12 @@ export default function LoginScreen() {
         .required("Password is required")
         .matches(
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\.,_-])(?=.{8,})/,
-          "Your password must have at least 8 characters, a digit (0-9), an uppercase letter (A), a special character ($, @, etc.)"
+          "Your password must have at least 8 characters, a digit (0-9), an uppercase letter (A), a special character ($, @, etc.)",
         ),
     }),
     onSubmit: (data) => {
-      router.replace('/(tabs)')
+      router.replace("/(tabs)");
       console.log("Logging in...", data);
-
     },
   });
 
@@ -49,7 +49,13 @@ export default function LoginScreen() {
         behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={{ flex: 1 }}
       >
-        <View style={{ flex: 1, justifyContent: "space-between", paddingHorizontal: '6%' }}>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "space-between",
+            paddingHorizontal: "6%",
+          }}
+        >
           <View>
             <View style={{ gap: 30 }}>
               <View style={{ alignItems: "center", gap: 8 }}>
@@ -96,26 +102,24 @@ export default function LoginScreen() {
                       </TouchableOpacity>
                     }
                     {...mapFormikProps("password", form)}
-                       labelText="Password"
+                    labelText="Password"
                   />
-                   <TouchableOpacity
-                onPress={() => router.push("/(auth)/forgot-password")}
-              >
-                <ThemedText
-                  style={{
-                    fontSize: 12,
-                    fontWeight: "500",
-                    color: C.primary,
-                    marginBottom: 32,
-                  }}
-                >
-                  I Forgot My Password
-                </ThemedText>
-              </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => router.push("/(auth)/forgot-password")}
+                  >
+                    <ThemedText
+                      style={{
+                        fontSize: 12,
+                        fontWeight: "500",
+                        color: C.primary,
+                        marginBottom: 32,
+                      }}
+                    >
+                      I Forgot My Password
+                    </ThemedText>
+                  </TouchableOpacity>
                 </View>
               </View>
-
-             
             </View>
 
             <View style={{ gap: 16 }}>
@@ -162,7 +166,9 @@ export default function LoginScreen() {
                   marginBottom: 32,
                 }}
               >
-                <View style={{ flex: 1, height: 1, backgroundColor: C.border }} />
+                <View
+                  style={{ flex: 1, height: 1, backgroundColor: C.border }}
+                />
                 <ThemedText
                   style={{
                     marginHorizontal: 12,
@@ -177,7 +183,9 @@ export default function LoginScreen() {
                 >
                   or
                 </ThemedText>
-                <View style={{ flex: 1, height: 1, backgroundColor: C.border }} />
+                <View
+                  style={{ flex: 1, height: 1, backgroundColor: C.border }}
+                />
               </View>
 
               <BraneButton
@@ -196,7 +204,7 @@ export default function LoginScreen() {
                 fontSize={14}
               />
 
-              <View style={{ alignItems: "center", marginTop: 32, }}>
+              <View style={{ alignItems: "center", marginTop: 32 }}>
                 <ThemedText style={{ fontSize: 12, color: C.muted }}>
                   Are you a new user?{" "}
                   <ThemedText
