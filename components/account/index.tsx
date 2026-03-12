@@ -1,14 +1,12 @@
+import { accnt, VERSION } from "@/utils";
 import { useBooleans } from "@/utils/hooks";
-import { useRouter } from "expo-router";
-import { LogoutCurve, ArrowRight2 } from "iconsax-react-native";
-import { VERSION } from "lodash";
-import { View, FlatList, Pressable, Text, StyleSheet } from "react-native";
+import { LogoutCurve } from "iconsax-react-native";
+import { ReactNode } from "react";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import LogOutModal from "../log-out";
 import { AccountItem } from "./transaction";
-import { accnt } from "@/utils";
 
-export const Account = () => {
-  const router = useRouter();
+export const Account = ({ header }: { header?: ReactNode }) => {
   const [isOpen, openModal, closeModal] = useBooleans();
   const acc = accnt();
 
@@ -19,6 +17,7 @@ export const Account = () => {
         keyExtractor={(item) => item.title}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.contentContainer}
+        ListHeaderComponent={header ? <>{header}</> : null}
         renderItem={({ item: itm }) => (
           <View style={styles.sectionWrapper}>
             <Text style={styles.sectionTitle}>{itm.title}</Text>

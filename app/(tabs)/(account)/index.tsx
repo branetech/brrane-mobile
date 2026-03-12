@@ -1,39 +1,72 @@
-import {Account} from "@/components/account";
+import { Account } from "@/components/account";
 import { Avatar } from "@/components/avatar";
-import { BraneButton } from "@/components/brane-button";
 import { ThemedText } from "@/components/themed-text";
+import { Colors } from "@/constants/colors";
+import { useColorScheme } from "@/hooks/use-color-scheme";
 import { View } from "@idimma/rn-widget";
-import { router } from "expo-router";
-import {ArrowRight2 } from "iconsax-react-native";
-import { ScrollView, StyleSheet} from "react-native";
+import { ArrowRight2 } from "iconsax-react-native";
+import { View as RNView, StyleSheet, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+
 export default function AccountScreen() {
-  return (
-    <SafeAreaView style={styles.container}>
-      <ThemedText type='subtitle'>Account</ThemedText>
-      <View style={{gap: 10, flex: 1, flexDirection: 'column'}}>
-        <View w='100%' px={12} gap={10} py={16} h={175} bg='#FFFDFA' radius={12} style={{borderColor: '#FFFAF0', borderWidth: 1}}>
-          <View row spaced center>
-            <View>
-              <ThemedText type='subtitle'>John Doe</ThemedText>
-              <ThemedText>@oluy112</ThemedText>
-            </View>
-            <Avatar name="John Doe" size="lg" shape="rounded" />
+  const scheme = useColorScheme();
+  const C = Colors[scheme === "dark" ? "dark" : "light"];
+
+  const header = (
+    <RNView style={styles.headerWrapper}>
+      <ThemedText type="subtitle" style={styles.pageTitle}>
+        Account
+      </ThemedText>
+
+      <View w="100%" style={styles.profileCard} bg="#FFFDFA">
+        <View row spaced aligned w="100%">
+          <View gap={2}>
+            <ThemedText type="subtitle" style={styles.userName}>
+              John Doe
+            </ThemedText>
+            <ThemedText style={{ fontSize: 13, color: C.muted }}>
+              @oluy112
+            </ThemedText>
           </View>
-          <View w='100%' gap={8} p={12} h={90} bg='#FFFFFF' radius={12} style={{borderColor: '#FFFFFF', borderWidth: 1}} row spaced>
-            <View style={{overflow: 'hidden'}}>
-            <ThemedText type="defaultSemiBold" style={{fontSize: 13}}>Complete Your KYC</ThemedText>
-            <ThemedText style={{fontSize: 12}}>Complete verification for more seamless experience</ThemedText>
-              <View mt={2} row aligned>
-              <ThemedText style={{fontSize: 13, color: '#A28C34'}}>Complete Verification</ThemedText>
-              <ArrowRight2 size={18} color={'#013D25'}/>
-              </View>
-            </View>
-            <ThemedText type="defaultSemiBold" style={{fontSize: 13, color: '#013D25'}}>50%</ThemedText>
-          </View>
+          <Avatar name="John Doe" size="lg" shape="circle" />
         </View>
-        <Account/>
+
+        <View w="100%" style={styles.kycCard} bg="#FFFFFF">
+          <View row spaced aligned w="100%">
+            <View style={{ flex: 1 }}>
+              <ThemedText type="defaultSemiBold" style={{ fontSize: 13 }}>
+                Complete Your KYC
+              </ThemedText>
+              <ThemedText
+                style={{ fontSize: 12, color: C.muted, marginTop: 2 }}
+              >
+                Complete verification for more seamless experience
+              </ThemedText>
+            </View>
+            <ThemedText
+              type="defaultSemiBold"
+              style={{ fontSize: 13, color: "#013D25", marginLeft: 8 }}
+            >
+              50%
+            </ThemedText>
+          </View>
+
+          <TouchableOpacity onPress={() => {}} style={styles.kycLink}>
+            <ThemedText
+              style={{ fontSize: 13, color: "#A28C34", fontWeight: "500" }}
+            >
+              Complete Verification
+            </ThemedText>
+            <ArrowRight2 size={16} color="#013D25" />
+          </TouchableOpacity>
+        </View>
       </View>
+    </RNView>
+  );
+
+  return (
+    <SafeAreaView style={[styles.container, { backgroundColor: C.background }]}>
+      <Account header={header} />
     </SafeAreaView>
   );
 }
@@ -41,8 +74,34 @@ export default function AccountScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    gap: 20,
-    position: 'relative',
-    paddingHorizontal: 16,
+  },
+  headerWrapper: {
+    paddingTop: 8,
+    gap: 16,
+  },
+  pageTitle: {
+    marginTop: 8,
+  },
+  profileCard: {
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: "#FFFAF0",
+    padding: 16,
+    gap: 12,
+    marginTop: 16,
+  },
+  userName: {
+    fontSize: 18,
+  },
+  kycCard: {
+    borderRadius: 12,
+    padding: 12,
+    gap: 10,
+  },
+  kycLink: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 2,
+    alignSelf: "flex-start",
   },
 });
