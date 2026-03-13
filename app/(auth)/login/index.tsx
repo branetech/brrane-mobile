@@ -6,20 +6,26 @@ import { ThemedText } from "@/components/themed-text";
 import { Colors } from "@/constants/colors";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { useFormHandler } from "@/hooks/use-formik";
+import { setRefreshToken, setToken, setUser } from "@/redux/slice/auth-slice";
+import BaseRequest, { parseNetworkError } from "@/services";
+import { formatPhoneNumber, showError } from "@/utils/helpers";
 import { Image, TouchableOpacity, View } from "@idimma/rn-widget";
 import { useRouter } from "expo-router";
 import { Eye, EyeSlash } from "iconsax-react-native";
 import { useState } from "react";
 import { KeyboardAvoidingView, Platform } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useDispatch } from "react-redux";
 import * as yup from "yup";
 
 export default function LoginScreen() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const scheme = useColorScheme();
   const themeKey: "light" | "dark" = scheme === "dark" ? "dark" : "light";
   const C = Colors[themeKey];
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { form, isDisabled } = useFormHandler({
     initialValues: { phone: "", password: "" },
@@ -37,9 +43,39 @@ export default function LoginScreen() {
           "Your password must have at least 8 characters, a digit (0-9), an uppercase letter (A), a special character ($, @, etc.)",
         ),
     }),
-    onSubmit: (data) => {
-      router.replace("/(tabs)");
-      console.log("Logging in...", data);
+    onSubmit: async (data) => {
+      setIsLoading(true);
+      try {
+        const payload = {
+          phone: formatPhoneNumber(data.phone),
+          password: data.password,
+        };
+
+        const response: any = await BaseRequest.post(
+          "/auth-service/signin",
+          payload,
+        );
+        const authCredentials =
+          response?.data?.authCredentials || response?.authCredentials;
+        const user = response?.data
+          ? { ...response.data, authCredentials: undefined }
+          : response;
+
+        if (!authCredentials?.accessToken) {
+          showError("Unable to complete login. Please try again.");
+          return;
+        }
+
+        dispatch(setUser(user));
+        dispatch(setToken(authCredentials.accessToken));
+        dispatch(setRefreshToken(authCredentials.refreshToken || null));
+        router.replace("/(tabs)");
+      } catch (error: any) {
+        const { message } = parseNetworkError(error);
+        showError(message);
+      } finally {
+        setIsLoading(false);
+      }
     },
   });
 
@@ -133,7 +169,8 @@ export default function LoginScreen() {
                 <BraneButton
                   text="Login"
                   onPress={() => form.handleSubmit()}
-                  disabled={isDisabled}
+                  disabled={isDisabled || isLoading}
+                  loading={isLoading}
                   textColor={C.googleBg}
                   backgroundColor={C.primary}
                   height={52}
