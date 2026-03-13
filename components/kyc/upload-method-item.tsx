@@ -7,6 +7,7 @@ import { Image, Pressable, StyleSheet, View } from "react-native";
 type UploadMethodItemProps = {
   selected: boolean;
   title: string;
+  icon?: React.ReactNode;
   onSelect: () => void;
   onFileChange: (uri?: string) => void;
   status?: string;
@@ -15,6 +16,7 @@ type UploadMethodItemProps = {
 export default function UploadMethodItem({
   selected,
   title,
+  icon,
   onSelect,
   onFileChange,
   status,
@@ -37,27 +39,97 @@ export default function UploadMethodItem({
     onFileChange(fileUri);
   };
 
-  const done = String(status || "").toLowerCase() === "completed";
+  const canUpload = ["", "failed", "rejected"].includes(
+    String(status || "").toLowerCase(),
+  );
 
   return (
     <View style={styles.wrap}>
-      <Pressable style={styles.row} onPress={onSelect}>
-        <ThemedText type="defaultSemiBold">{title}</ThemedText>
-        {done ? <ThemedText style={styles.done}>Verified</ThemedText> : null}
+      <Pressable
+        style={[styles.selectorRow, selected && styles.selectorRowSelected]}
+        onPress={canUpload ? onSelect : undefined}
+      >
+        <View style={styles.selectorLeft}>
+          <View style={styles.iconWrap}>{icon}</View>
+          <ThemedText type="defaultSemiBold">{title}</ThemedText>
+        </View>
+
+        <View style={styles.selectorRight}>
+          {status ? (
+            <View style={styles.pill}>
+              <ThemedText style={styles.pillText}>{status} Approval</ThemedText>
+            </View>
+          ) : null}
+
+          {canUpload ? (
+            <View
+              style={[
+                styles.selectRing,
+                selected ? styles.selectRingActive : undefined,
+              ]}
+            >
+              <View
+                style={[
+                  styles.selectDot,
+                  selected ? styles.selectDotActive : undefined,
+                ]}
+              />
+            </View>
+          ) : null}
+        </View>
       </Pressable>
 
-      {selected && !done && (
+      {selected && canUpload && (
         <View style={styles.body}>
-          {uri ? <Image source={{ uri }} style={styles.preview} /> : null}
-          <BraneButton
-            text={uri ? "Change file" : "Choose file"}
-            onPress={pickImage}
-            height={40}
-          />
+          {!uri ? (
+            <Pressable style={styles.uploadCard} onPress={pickImage}>
+              <ThemedText type="defaultSemiBold" style={styles.uploadTitle}>
+                Click here to upload {title}
+              </ThemedText>
+              <ThemedText style={styles.uploadHint}>
+                PNG, JPG (max. 10MB)
+              </ThemedText>
+            </Pressable>
+          ) : (
+            <View style={styles.fileCard}>
+              <View style={styles.fileMeta}>
+                <Image source={{ uri }} style={styles.preview} />
+                <View style={{ flex: 1 }}>
+                  <ThemedText
+                    numberOfLines={1}
+                    type="defaultSemiBold"
+                    style={styles.fileName}
+                  >
+                    {uri.split("/").pop()}
+                  </ThemedText>
+                  <ThemedText style={styles.fileSubtext}>
+                    Ready for upload
+                  </ThemedText>
+                </View>
+              </View>
+
+              <BraneButton
+                text="Change Document"
+                onPress={pickImage}
+                height={36}
+                backgroundColor="#D2F1E4"
+                textColor="#013D25"
+                style={{ marginTop: 10 }}
+              />
+            </View>
+          )}
+
           {uri ? (
-            <ThemedText style={styles.filename}>
-              {uri.split("/").pop()}
-            </ThemedText>
+            <Pressable
+              onPress={() => {
+                setUri(undefined);
+                onFileChange(undefined);
+              }}
+            >
+              <ThemedText style={styles.clearFile}>
+                Remove selected file
+              </ThemedText>
+            </Pressable>
           ) : null}
         </View>
       )}
@@ -67,14 +139,74 @@ export default function UploadMethodItem({
 
 const styles = StyleSheet.create({
   wrap: {
-    borderBottomWidth: 1,
-    borderBottomColor: "#F7F7F8",
-    paddingVertical: 12,
+    marginTop: 12,
   },
-  row: {
+  selectorRow: {
+    borderWidth: 1,
+    borderColor: "#F7F7F8",
+    borderRadius: 12,
+    backgroundColor: "#FFFFFF",
+    minHeight: 62,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+  },
+  selectorRowSelected: {
+    backgroundColor: "#F8F5E8",
+  },
+  selectorLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    flex: 1,
+  },
+  iconWrap: {
+    width: 24,
+    alignItems: "center",
+  },
+  selectorRight: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    marginLeft: 10,
+  },
+  pill: {
+    backgroundColor: "#F0FAF6",
+    borderRadius: 10,
+    paddingHorizontal: 8,
+    height: 22,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  pillText: {
+    color: "#008753",
+    fontSize: 10,
+    fontWeight: "600",
+    textTransform: "capitalize",
+  },
+  selectRing: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#D1D5DB",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FFFFFF",
+  },
+  selectRingActive: {
+    borderColor: "#22C55E",
+  },
+  selectDot: {
+    width: 10,
+    height: 10,
+    borderRadius: 5,
+    backgroundColor: "#FFFFFF",
+  },
+  selectDotActive: {
+    backgroundColor: "#22C55E",
   },
   done: {
     color: "#008753",
@@ -84,15 +216,57 @@ const styles = StyleSheet.create({
   body: {
     marginTop: 10,
     gap: 8,
+    borderWidth: 1,
+    borderColor: "#F7F7F8",
+    borderRadius: 12,
+    padding: 12,
+  },
+  uploadCard: {
+    backgroundColor: "#FBFEFD",
+    borderWidth: 1,
+    borderStyle: "dashed",
+    borderColor: "#0F766E",
+    borderRadius: 10,
+    paddingHorizontal: 12,
+    paddingVertical: 14,
+  },
+  uploadTitle: {
+    fontSize: 13,
+    color: "#0B0014",
+  },
+  uploadHint: {
+    marginTop: 4,
+    color: "#85808A",
+    fontSize: 11,
+  },
+  fileCard: {
+    borderWidth: 1,
+    borderColor: "#F7F7F8",
+    borderRadius: 10,
+    padding: 10,
+    backgroundColor: "#FFFFFF",
+  },
+  fileMeta: {
+    flexDirection: "row",
+    gap: 10,
+    alignItems: "center",
   },
   preview: {
-    width: "100%",
-    height: 120,
+    width: 48,
+    height: 48,
     borderRadius: 8,
     backgroundColor: "#F7F7F8",
   },
-  filename: {
+  fileName: {
+    fontSize: 13,
+  },
+  fileSubtext: {
+    marginTop: 4,
     color: "#85808A",
+    fontSize: 11,
+  },
+  clearFile: {
+    color: "#CB010B",
     fontSize: 12,
   },
 });
