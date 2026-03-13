@@ -1,5 +1,6 @@
 import { accnt, VERSION } from "@/utils";
 import { useBooleans } from "@/utils/hooks";
+import { useRouter } from "expo-router";
 import { LogoutCurve } from "iconsax-react-native";
 import { ReactNode } from "react";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
@@ -8,6 +9,7 @@ import { AccountItem } from "./transaction";
 
 export const Account = ({ header }: { header?: ReactNode }) => {
   const [isOpen, openModal, closeModal] = useBooleans();
+  const router = useRouter();
   const acc = accnt();
 
   return (
@@ -28,7 +30,7 @@ export const Account = ({ header }: { header?: ReactNode }) => {
                   if (item.routes === "chat") {
                     console.log("open chat");
                   } else if (item.routes) {
-                    // router.push(`/(tabs)/(account)/${item.routes}`);
+                    router.push(`/account/${item.routes}` as any);
                   }
                 }}
               >

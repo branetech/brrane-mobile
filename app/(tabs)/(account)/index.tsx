@@ -3,6 +3,7 @@ import { Avatar } from "@/components/avatar";
 import { ThemedText } from "@/components/themed-text";
 import { Colors } from "@/constants/colors";
 import { useColorScheme } from "@/hooks/use-color-scheme";
+import { useAppState } from "@/redux/store";
 import { View } from "@idimma/rn-widget";
 import { ArrowRight2 } from "iconsax-react-native";
 import { View as RNView, StyleSheet, TouchableOpacity } from "react-native";
@@ -11,6 +12,18 @@ import { SafeAreaView } from "react-native-safe-area-context";
 export default function AccountScreen() {
   const scheme = useColorScheme();
   const C = Colors[scheme === "dark" ? "dark" : "light"];
+  const { user } = useAppState();
+
+  const fullName = [user?.firstName, user?.lastName]
+    .filter(Boolean)
+    .join(" ")
+    .trim();
+  const displayName = fullName || user?.name || user?.username || "User";
+  const username = user?.username
+    ? `@${user.username}`
+    : user?.email
+      ? `@${String(user.email).split("@")[0]}`
+      : "@user";
 
   const header = (
     <RNView style={styles.headerWrapper}>
@@ -22,13 +35,13 @@ export default function AccountScreen() {
         <View row spaced aligned w="100%">
           <View gap={2}>
             <ThemedText type="subtitle" style={styles.userName}>
-              John Doe
+              {displayName}
             </ThemedText>
             <ThemedText style={{ fontSize: 13, color: C.muted }}>
-              @oluy112
+              {username}
             </ThemedText>
           </View>
-          <Avatar name="John Doe" size="lg" shape="circle" />
+          <Avatar name={displayName} src={user?.image} size="lg" shape="circle" />
         </View>
 
         <View w="100%" style={styles.kycCard} bg="#FFFFFF">

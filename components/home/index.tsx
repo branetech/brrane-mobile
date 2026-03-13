@@ -1,3 +1,4 @@
+import { useAppState } from "@/redux/store";
 import { TouchableOpacity, View } from "@idimma/rn-widget";
 import { useRouter } from "expo-router";
 import { Messages2, Notification } from "iconsax-react-native";
@@ -6,7 +7,7 @@ import { Avatar } from "../avatar";
 import { ThemedText } from "../themed-text";
 
 export const HomeHeader = () => {
-  // const { user } = useAppState();
+  const { user } = useAppState();
   const router = useRouter();
   // const { data: notifications } = useRequest(
   //   "/notification-service/notifications/user",
@@ -29,6 +30,17 @@ export const HomeHeader = () => {
   const timeOfDay: string =
     currentHour >= 16 ? "evening" : currentHour >= 12 ? "afternoon" : "morning";
 
+  const fullName = [user?.firstName, user?.lastName]
+    .filter(Boolean)
+    .join(" ")
+    .trim();
+  const displayName = fullName || user?.name || user?.username || "User";
+  const username = user?.username
+    ? `@${user.username}`
+    : user?.email
+      ? `@${String(user.email).split("@")[0]}`
+      : "@user";
+
   // const hasUnreadNotifications = useMemo(() => {
   //   if (Array.isArray(notifications))
   //     return notifications?.some(
@@ -50,11 +62,18 @@ export const HomeHeader = () => {
           >
             {getInitials("Tomi Balo")}
           </Avatar> */}
-          <Avatar name="John Doe" size="lg" shape="rounded" />
+          <Avatar
+            name={displayName}
+            src={user?.image}
+            size="lg"
+            shape="rounded"
+          />
         </TouchableOpacity>
         <View>
           <ThemedText>Good {timeOfDay} ☀️,</ThemedText>
-          <ThemedText type="defaultSemiBold">@{"Tomi Balo"}</ThemedText>
+          <ThemedText type="defaultSemiBold">
+            {username || displayName}
+          </ThemedText>
         </View>
       </View>
 
