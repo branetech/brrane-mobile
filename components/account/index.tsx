@@ -1,5 +1,6 @@
 import { accnt, VERSION } from "@/utils";
 import { useBooleans } from "@/utils/hooks";
+import { useRouter } from "expo-router";
 import { LogoutCurve } from "iconsax-react-native";
 import { ReactNode } from "react";
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
@@ -8,7 +9,36 @@ import { AccountItem } from "./transaction";
 
 export const Account = ({ header }: { header?: ReactNode }) => {
   const [isOpen, openModal, closeModal] = useBooleans();
+  const router = useRouter();
   const acc = accnt();
+  const resolveRoute = (label: string, routeKey?: string) => {
+    const byLabel: Record<string, string> = {
+      Preferences: "/account/preference",
+      "Help desk": "/account/helpdesk",
+      "Terms & conditions": "/account/terms-condition",
+      "Privacy policy": "/account/privacy",
+    };
+
+    if (byLabel[label]) return byLabel[label];
+
+    const byKey: Record<string, string> = {
+      "account-details": "/account/account-details",
+      beneficiary: "/account/beneficiary",
+      "update-kin-details": "/account/update-kin-details",
+      "account-verification": "/account/account-verification",
+      "bracs-investment-trigger": "/account/bracs-investment-trigger",
+      "change-password": "/account/change-password",
+      "reset-transaction-pin": "/account/reset-transaction-pin",
+      "change-username": "/account/change-username",
+      preferences: "/account/preference",
+      "help-desk": "/account/helpdesk",
+      "terms-conditions": "/account/terms-condition",
+      "privacy-policy": "/account/privacy",
+      chat: "/support",
+    };
+
+    return routeKey ? byKey[routeKey] : undefined;
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -25,11 +55,9 @@ export const Account = ({ header }: { header?: ReactNode }) => {
               <Pressable
                 key={item.text}
                 onPress={() => {
-                  if (item.routes === "chat") {
-                    console.log("open chat");
-                  } else if (item.routes) {
-                    // router.push(`/(tabs)/(account)/${item.routes}`);
-                  }
+                  const target = resolveRoute(item.text, item.routes);
+                  if (!target) return;
+                  router.push(target as any);
                 }}
               >
                 <AccountItem icon={item.icon} text={item.text} />

@@ -80,7 +80,12 @@ export const Quick = () => {
           icon={<Mobile size={16} color="#013D25" />}
           bg="#D3EBE1"
           height={88}
-          onPress={() => console.log("Airtime pressed")}
+          onPress={() =>
+            router.push({
+              pathname: "/bills-utilities/select",
+              params: { service: "airtime" },
+            })
+          }
           iconBg="#E1F4EC"
         />
         <ServicesCard
@@ -98,7 +103,7 @@ export const Quick = () => {
           icon={<WifiSquare size={16} color="#013D25" />}
           bg="#F5F1E0"
           height={88}
-          onPress={() => console.log("Airtime pressed")}
+          onPress={() => router.push("/utilities")}
           iconBg="#E7DCB1"
         />
         <ServicesCard
@@ -116,8 +121,6 @@ export const Quick = () => {
 };
 
 export const Transactions = () => {
-  const router = useRouter();
-
   return (
     <View w="100%" mt={24} gap={20} minH={260}>
       <View row spaced>
@@ -150,8 +153,6 @@ export const Transactions = () => {
 };
 
 export const Learning = () => {
-  const router = useRouter();
-
   return (
     <View w="100%" gap={16}>
       <View row spaced>

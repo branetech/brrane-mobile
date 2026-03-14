@@ -3,7 +3,6 @@ import { ThemedText } from "@/components/themed-text";
 import { Colors } from "@/constants/colors";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { View } from "@idimma/rn-widget";
-import { router } from "expo-router";
 import React, { useRef, useState } from "react";
 import {
     KeyboardAvoidingView,
@@ -20,10 +19,15 @@ import { PinSuccessModal } from "./pinModal";
 
 type Props = {
   back: () => void;
-  onComplete: () => void;
+  onComplete: (pin: string) => void;
+  isLoading?: boolean;
 };
 
-export default function SetPinScreen({ back, onComplete }: Props) {
+export default function SetPinScreen({
+  back,
+  onComplete,
+  isLoading = false,
+}: Props) {
   const scheme = useColorScheme();
   const themeKey: "light" | "dark" = scheme === "dark" ? "dark" : "light";
   const C = Colors[themeKey];
@@ -43,7 +47,7 @@ export default function SetPinScreen({ back, onComplete }: Props) {
   const isButtonDisabled = !pinsMatch;
 
   const handleSetPin = () => {
-    if (pinsMatch) setShowSuccess(true);
+    if (pinsMatch && !isLoading) setShowSuccess(true);
   };
 
   const renderPinBoxes = (
@@ -192,7 +196,8 @@ export default function SetPinScreen({ back, onComplete }: Props) {
             <BraneButton
               text="Set Pin"
               onPress={handleSetPin}
-              disabled={isButtonDisabled}
+              disabled={isButtonDisabled || isLoading}
+              loading={isLoading}
               height={52}
               radius={12}
               textColor={C.googleBg}
@@ -205,8 +210,7 @@ export default function SetPinScreen({ back, onComplete }: Props) {
           visible={showSuccess}
           onContinue={() => {
             setShowSuccess(false);
-            onComplete();
-            router.replace("/(tabs)");
+            onComplete(pin);
           }}
         />
       </KeyboardAvoidingView>

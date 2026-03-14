@@ -15,9 +15,14 @@ import { ChangeUsername } from "../svg";
 type Props = {
   back: () => void;
   onSubmit: (username: string) => void;
+  isLoading?: boolean;
 };
 
-export default function SetUsernameScreen({ back, onSubmit }: Props) {
+export default function SetUsernameScreen({
+  back,
+  onSubmit,
+  isLoading = false,
+}: Props) {
   const scheme = useColorScheme();
   const themeKey: "light" | "dark" = scheme === "dark" ? "dark" : "light";
   const C = Colors[themeKey];
@@ -94,7 +99,8 @@ export default function SetUsernameScreen({ back, onSubmit }: Props) {
             <BraneButton
               text="Set Username"
               onPress={() => form.handleSubmit()}
-              disabled={isDisabled}
+              disabled={isDisabled || isLoading}
+              loading={isLoading}
               height={52}
               radius={12}
               textColor={C.googleBg}

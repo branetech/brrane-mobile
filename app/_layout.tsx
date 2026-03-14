@@ -19,6 +19,7 @@ function RootLayoutContent() {
   // Protect routes based on authentication
   useRouteProtection(isReady);
 
+  
   // Show nothing while initializing
   if (!isReady) {
     return null;
