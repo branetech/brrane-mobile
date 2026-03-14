@@ -246,17 +246,23 @@ const normalizeOption = (item: any, index: number): SelectOption => {
 
 const normalizeElectricityProviders = (payload: any): SelectOption[] => {
   const providerMap = payload?.providers || payload?.data?.providers || {};
+  const seenIds = new Map<string, number>();
+
   return Object.keys(providerMap).map((key, index) => {
     const left = String(key || "");
     const right = String(providerMap[key] || "");
-    const keyGuess =
+    const baseId =
       getElectricityImageKey(`${left} ${right}`) ||
-      normalizeKey(left).replace(/\s+/g, "-");
+      normalizeKey(left).replace(/\s+/g, "-") ||
+      `provider-${index}`;
+    const seenCount = seenIds.get(baseId) || 0;
+    seenIds.set(baseId, seenCount + 1);
+    const uniqueId = seenCount === 0 ? baseId : `${baseId}-${seenCount + 1}`;
     const humanLabel = /\s|-/g.test(left) ? left : right || left;
     const meta = humanLabel === left ? right : left;
 
     return {
-      id: keyGuess,
+      id: uniqueId,
       label: humanLabel,
       description: meta || `provider-${index}`,
     };
@@ -935,733 +941,761 @@ export default function UtilitySelectScreen() {
       ) : null}
 
       {!isFetchingMeta ? (
-      <React.Fragment>
-      <ScrollView
-        contentContainerStyle={styles.content}
-        showsVerticalScrollIndicator={false}
-      >
-        {service === "airtime" || service === "data" ? (
-          <View style={styles.segmentTabs}>
-            <TouchableOpacity
-              style={[
-                styles.segmentTab,
-                service === "airtime" && styles.segmentTabActive,
-              ]}
-              onPress={() => onSwitchService("airtime")}
-            >
-              <Mobile
-                size={16}
-                color={service === "airtime" ? "#013D25" : "#7F7F86"}
-                variant="Outline"
-              />
-              <ThemedText
-                style={[
-                  styles.segmentTabText,
-                  service === "airtime" && styles.segmentTabTextActive,
-                ]}
-              >
-                Airtime
-              </ThemedText>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[
-                styles.segmentTab,
-                service === "data" && styles.segmentTabActive,
-              ]}
-              onPress={() => onSwitchService("data")}
-            >
-              <WifiSquare
-                size={16}
-                color={service === "data" ? "#013D25" : "#7F7F86"}
-                variant="Outline"
-              />
-              <ThemedText
-                style={[
-                  styles.segmentTabText,
-                  service === "data" && styles.segmentTabTextActive,
-                ]}
-              >
-                Data
-              </ThemedText>
-            </TouchableOpacity>
-          </View>
-        ) : null}
-
-        {(service === "airtime" || service === "data") && (
-          <View style={styles.airtimeDataCard}>
-            <ThemedText style={styles.sectionTitle}>
-              Select network provider
-            </ThemedText>
-            <View style={styles.networkGrid}>
-              {orderedNetworks.map((item) => {
-                const selected = network === item.id;
-                const networkImageKey = getNetworkImageKey(
-                  `${item.id} ${item.label} ${item.description || ""}`,
-                );
-                return (
-                  <TouchableOpacity
-                    key={item.id}
+        <React.Fragment>
+          <ScrollView
+            contentContainerStyle={styles.content}
+            showsVerticalScrollIndicator={false}
+          >
+            {service === "airtime" || service === "data" ? (
+              <View style={styles.segmentTabs}>
+                <TouchableOpacity
+                  style={[
+                    styles.segmentTab,
+                    service === "airtime" && styles.segmentTabActive,
+                  ]}
+                  onPress={() => onSwitchService("airtime")}
+                >
+                  <Mobile
+                    size={16}
+                    color={service === "airtime" ? "#013D25" : "#7F7F86"}
+                    variant="Outline"
+                  />
+                  <ThemedText
                     style={[
-                      styles.networkTile,
-                      selected && styles.networkTileActive,
+                      styles.segmentTabText,
+                      service === "airtime" && styles.segmentTabTextActive,
                     ]}
-                    onPress={() => setNetwork(item.id)}
                   >
-                    <Image
-                      source={
-                        NETWORK_IMAGES[networkImageKey] || NETWORK_IMAGES.mtn
-                      }
-                      style={styles.networkLogo}
-                      resizeMode="contain"
-                    />
-                    <ThemedText
-                      style={[
-                        styles.networkText,
-                        selected && styles.networkTextActive,
-                      ]}
-                    >
-                      {item.label}
-                    </ThemedText>
-                  </TouchableOpacity>
-                );
-              })}
-              {networks.length === 0 ? (
-                <ThemedText style={styles.emptyBeneficiaryText}>
-                  No network provider available.
-                </ThemedText>
-              ) : null}
-            </View>
+                    Airtime
+                  </ThemedText>
+                </TouchableOpacity>
 
-            <ThemedText style={styles.fieldLabel}>Phone Number</ThemedText>
-            <View
-              style={[
-                styles.inlineInput,
-                phoneError ? styles.inlineInputError : undefined,
-              ]}
-            >
-              <ThemedText style={styles.phonePrefix}>+234</ThemedText>
-              <TextInput
-                style={styles.inlineInputText}
-                placeholder="Enter phone number"
-                placeholderTextColor="#A9A9AE"
-                keyboardType="number-pad"
-                value={phone}
-                onChangeText={(value) => {
-                  setPhone(value.replace(/[^0-9+]/g, ""));
-                  setPhoneError(undefined);
-                }}
-              />
-              <Add size={18} color="#9B9BA2" variant="Outline" />
-            </View>
-            {phoneError ? (
-              <ThemedText style={styles.errorText}>{phoneError}</ThemedText>
+                <TouchableOpacity
+                  style={[
+                    styles.segmentTab,
+                    service === "data" && styles.segmentTabActive,
+                  ]}
+                  onPress={() => onSwitchService("data")}
+                >
+                  <WifiSquare
+                    size={16}
+                    color={service === "data" ? "#013D25" : "#7F7F86"}
+                    variant="Outline"
+                  />
+                  <ThemedText
+                    style={[
+                      styles.segmentTabText,
+                      service === "data" && styles.segmentTabTextActive,
+                    ]}
+                  >
+                    Data
+                  </ThemedText>
+                </TouchableOpacity>
+              </View>
             ) : null}
 
-            <View style={styles.beneficiaryRow}>
-              <ThemedText style={styles.beneficiaryText}>
-                Add to beneficiaries
-              </ThemedText>
-              <Switch
-                value={addToBeneficiaries}
-                onValueChange={setAddToBeneficiaries}
-                trackColor={{ false: "#E6E6E8", true: "#D2F1E4" }}
-                thumbColor={addToBeneficiaries ? "#013D25" : "#B9B9BD"}
-              />
-            </View>
-
-            <View style={styles.beneficiariesWrap}>
-              <ThemedText style={styles.fieldLabel}>
-                Select Beneficiary
-              </ThemedText>
-              <View style={styles.searchRow}>
-                <SearchNormal1 size={16} color="#88888F" variant="Outline" />
-                <TextInput
-                  style={styles.searchInput}
-                  placeholder="Search by name or phone number"
-                  placeholderTextColor="#A9A9AE"
-                  value={beneficiarySearch}
-                  onChangeText={setBeneficiarySearch}
-                />
-              </View>
-
-              {beneficiarySearch.trim().length > 0 &&
-              filteredBeneficiaries[0] ? (
-                <TouchableOpacity
-                  style={styles.beneficiaryResultRow}
-                  onPress={() => {
-                    const item = filteredBeneficiaries[0];
-                    setPhone(item.phone);
-                    const matchedNetwork = networks.find(
-                      (option) =>
-                        getNetworkImageKey(
-                          `${option.id} ${option.label} ${option.description || ""}`,
-                        ) === getNetworkImageKey(item.networkProvider || ""),
+            {(service === "airtime" || service === "data") && (
+              <View style={styles.airtimeDataCard}>
+                <ThemedText style={styles.sectionTitle}>
+                  Select network provider
+                </ThemedText>
+                <View style={styles.networkGrid}>
+                  {orderedNetworks.map((item) => {
+                    const selected = network === item.id;
+                    const networkImageKey = getNetworkImageKey(
+                      `${item.id} ${item.label} ${item.description || ""}`,
                     );
-                    if (matchedNetwork) {
-                      setNetwork(matchedNetwork.id);
-                    }
-                    setBeneficiarySearch("");
-                  }}
-                >
-                  <ThemedText style={styles.beneficiaryResultText}>
-                    {filteredBeneficiaries[0].name} -{" "}
-                    {filteredBeneficiaries[0].phone}
-                  </ThemedText>
-                </TouchableOpacity>
-              ) : null}
-            </View>
-          </View>
-        )}
-
-        {service === "airtime" && (
-          <View style={styles.sectionCard}>
-            <ThemedText style={styles.sectionTitle}>Choose amount</ThemedText>
-            <View style={styles.amountRow}>
-              {AMOUNT_PRESETS.map((preset) => (
-                <TouchableOpacity
-                  key={preset}
-                  style={[
-                    styles.amountChip,
-                    amount === preset && styles.amountChipActive,
-                  ]}
-                  onPress={() => {
-                    setAmount(preset);
-                    setAmountError(undefined);
-                  }}
-                >
-                  <ThemedText
-                    style={[
-                      styles.amountChipText,
-                      amount === preset && styles.amountChipTextActive,
-                    ]}
-                  >
-                    ₦ {preset}
-                  </ThemedText>
-                </TouchableOpacity>
-              ))}
-            </View>
-            <View
-              style={[
-                styles.inlineInput,
-                amountError ? styles.inlineInputError : undefined,
-              ]}
-            >
-              <ThemedText style={styles.currencyPrefix}>₦</ThemedText>
-              <TextInput
-                style={styles.inlineInputText}
-                placeholder="Enter custom amount"
-                placeholderTextColor="#A9A9AE"
-                keyboardType="number-pad"
-                value={amount}
-                onChangeText={(value) => {
-                  setAmount(value.replace(/\D/g, ""));
-                  setAmountError(undefined);
-                }}
-              />
-            </View>
-            {amountError ? (
-              <ThemedText style={styles.errorText}>{amountError}</ThemedText>
-            ) : null}
-          </View>
-        )}
-
-        {service === "data" && (
-          <View style={styles.sectionCard}>
-            <ThemedText style={styles.sectionTitle}>
-              Select data plan
-            </ThemedText>
-            {dataPlans.length > 0 ? (
-              <TouchableOpacity
-                style={styles.planSelector}
-                onPress={() => setShowDataPlanModal(true)}
-                activeOpacity={0.8}
-              >
-                <View style={styles.planSelectorTextWrap}>
-                  <ThemedText style={styles.planSelectorTitle}>
-                    {selectedDataPlan
-                      ? selectedDataPlan.label
-                      : "Select data plan"}
-                  </ThemedText>
-                  {selectedDataPlan ? (
-                    <ThemedText style={styles.planSelectorAmount}>
-                      ₦{selectedDataPlan.amount.toLocaleString("en-NG")}
+                    return (
+                      <TouchableOpacity
+                        key={item.id}
+                        style={[
+                          styles.networkTile,
+                          selected && styles.networkTileActive,
+                        ]}
+                        onPress={() => setNetwork(item.id)}
+                      >
+                        <Image
+                          source={
+                            NETWORK_IMAGES[networkImageKey] ||
+                            NETWORK_IMAGES.mtn
+                          }
+                          style={styles.networkLogo}
+                          resizeMode="contain"
+                        />
+                        <ThemedText
+                          style={[
+                            styles.networkText,
+                            selected && styles.networkTextActive,
+                          ]}
+                        >
+                          {item.label}
+                        </ThemedText>
+                      </TouchableOpacity>
+                    );
+                  })}
+                  {networks.length === 0 ? (
+                    <ThemedText style={styles.emptyBeneficiaryText}>
+                      No network provider available.
                     </ThemedText>
                   ) : null}
                 </View>
-                <ArrowDown2 size={18} color="#6E6E75" />
-              </TouchableOpacity>
-            ) : (
-              <ThemedText style={styles.emptyBeneficiaryText}>
-                No data plan available for this provider.
-              </ThemedText>
-            )}
-          </View>
-        )}
 
-        {service === "betting" && (
-          <>
-            <ThemedText style={styles.label}>Betting Provider</ThemedText>
-            <View style={styles.providersRow}>
-              {bettingProviders.map((item) => (
-                <TouchableOpacity
-                  key={item.id}
+                <ThemedText style={styles.fieldLabel}>Phone Number</ThemedText>
+                <View
                   style={[
-                    styles.providerBtn,
-                    bettingProvider === item.id && styles.providerBtnActive,
+                    styles.inlineInput,
+                    phoneError ? styles.inlineInputError : undefined,
                   ]}
-                  onPress={() => setBettingProvider(item.id)}
                 >
-                  <ThemedText
-                    style={[
-                      styles.providerText,
-                      bettingProvider === item.id && styles.providerTextActive,
-                    ]}
-                  >
-                    {item.label}
+                  <ThemedText style={styles.phonePrefix}>+234</ThemedText>
+                  <TextInput
+                    style={styles.inlineInputText}
+                    placeholder="Enter phone number"
+                    placeholderTextColor="#A9A9AE"
+                    keyboardType="number-pad"
+                    value={phone}
+                    onChangeText={(value) => {
+                      setPhone(value.replace(/[^0-9+]/g, ""));
+                      setPhoneError(undefined);
+                    }}
+                  />
+                  <Add size={18} color="#9B9BA2" variant="Outline" />
+                </View>
+                {phoneError ? (
+                  <ThemedText style={styles.errorText}>{phoneError}</ThemedText>
+                ) : null}
+
+                <View style={styles.beneficiaryRow}>
+                  <ThemedText style={styles.beneficiaryText}>
+                    Add to beneficiaries
                   </ThemedText>
-                </TouchableOpacity>
-              ))}
-              {bettingProviders.length === 0 ? (
-                <ThemedText style={styles.emptyBeneficiaryText}>
-                  No betting provider available.
-                </ThemedText>
-              ) : null}
-            </View>
+                  <Switch
+                    value={addToBeneficiaries}
+                    onValueChange={setAddToBeneficiaries}
+                    trackColor={{ false: "#E6E6E8", true: "#D2F1E4" }}
+                    thumbColor={addToBeneficiaries ? "#013D25" : "#B9B9BD"}
+                  />
+                </View>
 
-            <ThemedText style={styles.label}>Customer ID</ThemedText>
-            <FormInput
-              placeholder="Enter customer ID"
-              value={customerId}
-              onChangeText={(value) => {
-                setCustomerId(value);
-                setCustomerIdError(undefined);
-              }}
-              error={customerIdError}
-              inputContainerStyle={styles.inputContainer}
-              inputStyle={styles.inputText}
-            />
+                <View style={styles.beneficiariesWrap}>
+                  <ThemedText style={styles.fieldLabel}>
+                    Select Beneficiary
+                  </ThemedText>
+                  <View style={styles.searchRow}>
+                    <SearchNormal1
+                      size={16}
+                      color="#88888F"
+                      variant="Outline"
+                    />
+                    <TextInput
+                      style={styles.searchInput}
+                      placeholder="Search by name or phone number"
+                      placeholderTextColor="#A9A9AE"
+                      value={beneficiarySearch}
+                      onChangeText={setBeneficiarySearch}
+                    />
+                  </View>
 
-            <ThemedText style={styles.label}>Amount</ThemedText>
-            <FormInput
-              placeholder="Enter amount"
-              keyboardType="number-pad"
-              value={amount}
-              onChangeText={(value) => {
-                setAmount(value.replace(/\D/g, ""));
-                setAmountError(undefined);
-              }}
-              error={amountError}
-              inputContainerStyle={styles.inputContainer}
-              inputStyle={styles.inputText}
-            />
-          </>
-        )}
-
-        {service === "cable" && (
-          <View style={styles.sectionCard}>
-            <ThemedText style={styles.sectionTitle}>Cable Provider</ThemedText>
-            <View style={styles.cableGrid}>
-              {cableProviders.map((item) => {
-                const imageKey = getCableImageKey(
-                  `${item.id} ${item.label} ${item.description || ""}`,
-                );
-                const source = imageKey ? CABLE_IMAGES[imageKey] : undefined;
-                return (
-                  <TouchableOpacity
-                    key={item.id}
-                    style={[
-                      styles.cableTile,
-                      cableProvider === item.id && styles.cableTileActive,
-                    ]}
-                    onPress={() => setCableProvider(item.id)}
-                  >
-                    {source ? (
-                      <Image
-                        source={source}
-                        style={styles.cableLogo}
-                        resizeMode="contain"
-                      />
-                    ) : null}
-                    <ThemedText
-                      style={[
-                        styles.cableText,
-                        cableProvider === item.id && styles.cableTextActive,
-                      ]}
+                  {beneficiarySearch.trim().length > 0 &&
+                  filteredBeneficiaries[0] ? (
+                    <TouchableOpacity
+                      style={styles.beneficiaryResultRow}
+                      onPress={() => {
+                        const item = filteredBeneficiaries[0];
+                        setPhone(item.phone);
+                        const matchedNetwork = networks.find(
+                          (option) =>
+                            getNetworkImageKey(
+                              `${option.id} ${option.label} ${option.description || ""}`,
+                            ) ===
+                            getNetworkImageKey(item.networkProvider || ""),
+                        );
+                        if (matchedNetwork) {
+                          setNetwork(matchedNetwork.id);
+                        }
+                        setBeneficiarySearch("");
+                      }}
                     >
-                      {item.label}
-                    </ThemedText>
-                  </TouchableOpacity>
-                );
-              })}
-              {cableProviders.length === 0 ? (
-                <ThemedText style={styles.emptyBeneficiaryText}>
-                  No cable provider available.
-                </ThemedText>
-              ) : null}
-            </View>
-
-            <ThemedText style={styles.fieldLabel}>
-              Smart Card / IUC Number
-            </ThemedText>
-            <FormInput
-              placeholder="Enter smart card number"
-              value={cardNumber}
-              onChangeText={(value) => {
-                setCardNumber(value.replace(/\D/g, ""));
-                setCardError(undefined);
-              }}
-              error={cardError}
-              inputContainerStyle={styles.inputContainer}
-              inputStyle={styles.inputText}
-            />
-
-            <BraneButton
-              text="Verify card"
-              onPress={async () => {
-                if (!cardNumber || cardNumber.length < 6) {
-                  setCardError("Enter a valid smart card / IUC number");
-                  return;
-                }
-                try {
-                  const response: any = await BaseRequest.post(
-                    MOBILE_SERVICE.VERIFY_CABLE_CARD,
-                    {
-                      serviceId: cableProvider,
-                      billersCode: cardNumber,
-                    },
-                  );
-                  const details = response?.data || response;
-                  const name =
-                    details?.customerName ||
-                    details?.name ||
-                    details?.customer_name ||
-                    "";
-                  setCardHolderName(String(name));
-                } catch (error) {
-                  const { message } = parseNetworkError(error);
-                  showError(message);
-                }
-              }}
-              height={38}
-              radius={8}
-              backgroundColor="#D2F1E4"
-              textColor="#013D25"
-              fontSize={11}
-              style={styles.verifyBtn}
-            />
-
-            {cardHolderName ? (
-              <View style={styles.verifiedCard}>
-                <ThemedText style={styles.verifiedLabel}>
-                  Verified Name
-                </ThemedText>
-                <ThemedText style={styles.verifiedValue}>
-                  {cardHolderName}
-                </ThemedText>
+                      <ThemedText style={styles.beneficiaryResultText}>
+                        {filteredBeneficiaries[0].name} -{" "}
+                        {filteredBeneficiaries[0].phone}
+                      </ThemedText>
+                    </TouchableOpacity>
+                  ) : null}
+                </View>
               </View>
-            ) : null}
-
-            <ThemedText style={styles.fieldLabel}>Subscription Plan</ThemedText>
-            {cablePlans.length > 0 ? (
-              <TouchableOpacity
-                style={styles.planSelector}
-                onPress={() => setShowCablePlanModal(true)}
-                activeOpacity={0.8}
-              >
-                <View style={styles.planSelectorTextWrap}>
-                  <ThemedText style={styles.planSelectorTitle}>
-                    {selectedCablePlan
-                      ? selectedCablePlan.label
-                      : "Select subscription plan"}
-                  </ThemedText>
-                  {selectedCablePlan ? (
-                    <ThemedText style={styles.planSelectorAmount}>
-                      ₦{selectedCablePlan.amount.toLocaleString("en-NG")}
-                    </ThemedText>
-                  ) : null}
-                </View>
-                <ArrowDown2 size={18} color="#6E6E75" />
-              </TouchableOpacity>
-            ) : (
-              <ThemedText style={styles.emptyBeneficiaryText}>
-                No subscription plan available for this provider.
-              </ThemedText>
-            )}
-          </View>
-        )}
-
-        {service === "electricity" && (
-          <View style={styles.sectionCard}>
-            <ThemedText style={styles.sectionTitle}>Electricity</ThemedText>
-            <ThemedText style={styles.fieldLabel}>Select Provider</ThemedText>
-            {electricityProviders.length > 0 ? (
-              <TouchableOpacity
-                style={styles.planSelector}
-                onPress={() => setShowElectricityProviderModal(true)}
-                activeOpacity={0.8}
-              >
-                <View style={styles.planSelectorTextWrap}>
-                  <ThemedText style={styles.planSelectorTitle}>
-                    {selectedElectricityProvider
-                      ? selectedElectricityProvider.label.toUpperCase()
-                      : "Select a provider"}
-                  </ThemedText>
-                  {selectedElectricityProvider?.description ? (
-                    <ThemedText style={styles.planSelectorAmount}>
-                      {selectedElectricityProvider.description
-                        .replace(/-/g, " ")
-                        .toUpperCase()}
-                    </ThemedText>
-                  ) : null}
-                </View>
-                <ArrowDown2 size={18} color="#6E6E75" />
-              </TouchableOpacity>
-            ) : (
-              <ThemedText style={styles.emptyBeneficiaryText}>
-                No electricity provider available.
-              </ThemedText>
             )}
 
-            <ThemedText style={styles.fieldLabel}>Meter Type</ThemedText>
-            <View style={styles.amountRow}>
-              {ELECTRICITY_PRODUCTS.map((product) => (
-                <TouchableOpacity
-                  key={product}
+            {service === "airtime" && (
+              <View style={styles.sectionCard}>
+                <ThemedText style={styles.sectionTitle}>
+                  Choose amount
+                </ThemedText>
+                <View style={styles.amountRow}>
+                  {AMOUNT_PRESETS.map((preset) => (
+                    <TouchableOpacity
+                      key={preset}
+                      style={[
+                        styles.amountChip,
+                        amount === preset && styles.amountChipActive,
+                      ]}
+                      onPress={() => {
+                        setAmount(preset);
+                        setAmountError(undefined);
+                      }}
+                    >
+                      <ThemedText
+                        style={[
+                          styles.amountChipText,
+                          amount === preset && styles.amountChipTextActive,
+                        ]}
+                      >
+                        ₦ {preset}
+                      </ThemedText>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+                <View
                   style={[
-                    styles.amountChip,
-                    electricityProduct === product && styles.amountChipActive,
+                    styles.inlineInput,
+                    amountError ? styles.inlineInputError : undefined,
                   ]}
-                  onPress={() => setElectricityProduct(product)}
                 >
-                  <ThemedText
-                    style={[
-                      styles.amountChipText,
-                      electricityProduct === product &&
-                        styles.amountChipTextActive,
-                    ]}
-                  >
-                    {product}
+                  <ThemedText style={styles.currencyPrefix}>₦</ThemedText>
+                  <TextInput
+                    style={styles.inlineInputText}
+                    placeholder="Enter custom amount"
+                    placeholderTextColor="#A9A9AE"
+                    keyboardType="number-pad"
+                    value={amount}
+                    onChangeText={(value) => {
+                      setAmount(value.replace(/\D/g, ""));
+                      setAmountError(undefined);
+                    }}
+                  />
+                </View>
+                {amountError ? (
+                  <ThemedText style={styles.errorText}>
+                    {amountError}
                   </ThemedText>
-                </TouchableOpacity>
-              ))}
-            </View>
-
-            <ThemedText style={styles.fieldLabel}>Meter Number</ThemedText>
-            <FormInput
-              placeholder="Enter meter number"
-              value={meterNumber}
-              onChangeText={(value) => {
-                setMeterNumber(value.replace(/\D/g, ""));
-                setCardError(undefined);
-              }}
-              error={cardError}
-              inputContainerStyle={styles.inputContainer}
-              inputStyle={styles.inputText}
-            />
-
-            <BraneButton
-              text="Verify meter"
-              onPress={async () => {
-                if (!meterNumber || meterNumber.length < 6) {
-                  setCardError("Enter a valid meter number");
-                  return;
-                }
-                try {
-                  const provider = electricityProviders.find(
-                    (item) => item.id === electricityProvider,
-                  );
-                  const response: any = await BaseRequest.post(
-                    MOBILE_SERVICE.ELECTRICITY_METER_VERIFY,
-                    {
-                      serviceId: provider?.description || provider?.label,
-                      billersCode: meterNumber,
-                      variationCode: electricityProduct,
-                    },
-                  );
-                  const details = response?.data || response;
-                  const name =
-                    details?.customerName ||
-                    details?.name ||
-                    details?.Customer_Name ||
-                    "";
-                  setElectricityAccountName(String(name));
-                } catch (error) {
-                  const { message } = parseNetworkError(error);
-                  showError(message);
-                }
-              }}
-              height={38}
-              radius={8}
-              backgroundColor="#D2F1E4"
-              textColor="#013D25"
-              fontSize={11}
-              style={styles.verifyBtn}
-            />
-
-            {electricityAccountName ? (
-              <View style={styles.verifiedCard}>
-                <ThemedText style={styles.verifiedLabel}>
-                  Verified Name
-                </ThemedText>
-                <ThemedText style={styles.verifiedValue}>
-                  {electricityAccountName}
-                </ThemedText>
+                ) : null}
               </View>
-            ) : null}
+            )}
 
-            <ThemedText style={styles.fieldLabel}>Amount</ThemedText>
-            <View style={styles.amountRow}>
-              {ELECTRICITY_AMOUNTS.map((preset) => (
-                <TouchableOpacity
-                  key={preset}
-                  style={[
-                    styles.amountChip,
-                    amount === preset && styles.amountChipActive,
-                  ]}
-                  onPress={() => {
-                    setAmount(preset);
+            {service === "data" && (
+              <View style={styles.sectionCard}>
+                <ThemedText style={styles.sectionTitle}>
+                  Select data plan
+                </ThemedText>
+                {dataPlans.length > 0 ? (
+                  <TouchableOpacity
+                    style={styles.planSelector}
+                    onPress={() => setShowDataPlanModal(true)}
+                    activeOpacity={0.8}
+                  >
+                    <View style={styles.planSelectorTextWrap}>
+                      <ThemedText style={styles.planSelectorTitle}>
+                        {selectedDataPlan
+                          ? selectedDataPlan.label
+                          : "Select data plan"}
+                      </ThemedText>
+                      {selectedDataPlan ? (
+                        <ThemedText style={styles.planSelectorAmount}>
+                          ₦{selectedDataPlan.amount.toLocaleString("en-NG")}
+                        </ThemedText>
+                      ) : null}
+                    </View>
+                    <ArrowDown2 size={18} color="#6E6E75" />
+                  </TouchableOpacity>
+                ) : (
+                  <ThemedText style={styles.emptyBeneficiaryText}>
+                    No data plan available for this provider.
+                  </ThemedText>
+                )}
+              </View>
+            )}
+
+            {service === "betting" && (
+              <>
+                <ThemedText style={styles.label}>Betting Provider</ThemedText>
+                <View style={styles.providersRow}>
+                  {bettingProviders.map((item) => (
+                    <TouchableOpacity
+                      key={item.id}
+                      style={[
+                        styles.providerBtn,
+                        bettingProvider === item.id && styles.providerBtnActive,
+                      ]}
+                      onPress={() => setBettingProvider(item.id)}
+                    >
+                      <ThemedText
+                        style={[
+                          styles.providerText,
+                          bettingProvider === item.id &&
+                            styles.providerTextActive,
+                        ]}
+                      >
+                        {item.label}
+                      </ThemedText>
+                    </TouchableOpacity>
+                  ))}
+                  {bettingProviders.length === 0 ? (
+                    <ThemedText style={styles.emptyBeneficiaryText}>
+                      No betting provider available.
+                    </ThemedText>
+                  ) : null}
+                </View>
+
+                <ThemedText style={styles.label}>Customer ID</ThemedText>
+                <FormInput
+                  placeholder="Enter customer ID"
+                  value={customerId}
+                  onChangeText={(value) => {
+                    setCustomerId(value);
+                    setCustomerIdError(undefined);
+                  }}
+                  error={customerIdError}
+                  inputContainerStyle={styles.inputContainer}
+                  inputStyle={styles.inputText}
+                />
+
+                <ThemedText style={styles.label}>Amount</ThemedText>
+                <FormInput
+                  placeholder="Enter amount"
+                  keyboardType="number-pad"
+                  value={amount}
+                  onChangeText={(value) => {
+                    setAmount(value.replace(/\D/g, ""));
                     setAmountError(undefined);
                   }}
-                >
-                  <ThemedText
-                    style={[
-                      styles.amountChipText,
-                      amount === preset && styles.amountChipTextActive,
-                    ]}
-                  >
-                    ₦ {preset}
-                  </ThemedText>
-                </TouchableOpacity>
-              ))}
-            </View>
-            <View
-              style={[
-                styles.inlineInput,
-                amountError ? styles.inlineInputError : undefined,
-              ]}
-            >
-              <ThemedText style={styles.currencyPrefix}>₦</ThemedText>
-              <TextInput
-                style={styles.inlineInputText}
-                placeholder="Enter custom amount"
-                placeholderTextColor="#A9A9AE"
-                keyboardType="number-pad"
-                value={amount}
-                onChangeText={(value) => {
-                  setAmount(value.replace(/\D/g, ""));
-                  setAmountError(undefined);
-                }}
-              />
-            </View>
-          </View>
-        )}
+                  error={amountError}
+                  inputContainerStyle={styles.inputContainer}
+                  inputStyle={styles.inputText}
+                />
+              </>
+            )}
 
-        {service === "transportation" && (
-          <View style={styles.sectionCard}>
-            <ThemedText style={styles.sectionTitle}>Transportation</ThemedText>
-
-            <ThemedText style={styles.fieldLabel}>
-              Transport Provider
-            </ThemedText>
-            <View style={styles.providersRow}>
-              {transportProviders.map((item) => (
-                <TouchableOpacity
-                  key={item.id}
-                  style={[
-                    styles.providerBtn,
-                    transportProvider === item.id && styles.providerBtnActive,
-                  ]}
-                  onPress={() => setTransportProvider(item.id)}
-                >
-                  <ThemedText
-                    style={[
-                      styles.providerText,
-                      transportProvider === item.id &&
-                        styles.providerTextActive,
-                    ]}
-                  >
-                    {item.label}
-                  </ThemedText>
-                </TouchableOpacity>
-              ))}
-              {transportProviders.length === 0 ? (
-                <ThemedText style={styles.emptyBeneficiaryText}>
-                  No transportation provider available.
+            {service === "cable" && (
+              <View style={styles.sectionCard}>
+                <ThemedText style={styles.sectionTitle}>
+                  Cable Provider
                 </ThemedText>
-              ) : null}
-            </View>
-
-            <ThemedText style={styles.fieldLabel}>Reference Number</ThemedText>
-            <FormInput
-              placeholder="Enter reference number"
-              value={transportReference}
-              onChangeText={(value) => {
-                setTransportReference(value);
-                setCustomerIdError(undefined);
-              }}
-              error={customerIdError}
-              inputContainerStyle={styles.inputContainer}
-              inputStyle={styles.inputText}
-            />
-
-            <ThemedText style={styles.fieldLabel}>Transport Plan</ThemedText>
-            {transportPlans.length > 0 ? (
-              <TouchableOpacity
-                style={styles.planSelector}
-                onPress={() => setShowTransportPlanModal(true)}
-                activeOpacity={0.8}
-              >
-                <View style={styles.planSelectorTextWrap}>
-                  <ThemedText style={styles.planSelectorTitle}>
-                    {selectedTransportPlan
-                      ? selectedTransportPlan.label
-                      : "Select transport plan"}
-                  </ThemedText>
-                  {selectedTransportPlan ? (
-                    <ThemedText style={styles.planSelectorAmount}>
-                      ₦{selectedTransportPlan.amount.toLocaleString("en-NG")}
+                <View style={styles.cableGrid}>
+                  {cableProviders.map((item) => {
+                    const imageKey = getCableImageKey(
+                      `${item.id} ${item.label} ${item.description || ""}`,
+                    );
+                    const source = imageKey
+                      ? CABLE_IMAGES[imageKey]
+                      : undefined;
+                    return (
+                      <TouchableOpacity
+                        key={item.id}
+                        style={[
+                          styles.cableTile,
+                          cableProvider === item.id && styles.cableTileActive,
+                        ]}
+                        onPress={() => setCableProvider(item.id)}
+                      >
+                        {source ? (
+                          <Image
+                            source={source}
+                            style={styles.cableLogo}
+                            resizeMode="contain"
+                          />
+                        ) : null}
+                        <ThemedText
+                          style={[
+                            styles.cableText,
+                            cableProvider === item.id && styles.cableTextActive,
+                          ]}
+                        >
+                          {item.label}
+                        </ThemedText>
+                      </TouchableOpacity>
+                    );
+                  })}
+                  {cableProviders.length === 0 ? (
+                    <ThemedText style={styles.emptyBeneficiaryText}>
+                      No cable provider available.
                     </ThemedText>
                   ) : null}
                 </View>
-                <ArrowDown2 size={18} color="#6E6E75" />
-              </TouchableOpacity>
+
+                <ThemedText style={styles.fieldLabel}>
+                  Smart Card / IUC Number
+                </ThemedText>
+                <FormInput
+                  placeholder="Enter smart card number"
+                  value={cardNumber}
+                  onChangeText={(value) => {
+                    setCardNumber(value.replace(/\D/g, ""));
+                    setCardError(undefined);
+                  }}
+                  error={cardError}
+                  inputContainerStyle={styles.inputContainer}
+                  inputStyle={styles.inputText}
+                />
+
+                <BraneButton
+                  text="Verify card"
+                  onPress={async () => {
+                    if (!cardNumber || cardNumber.length < 6) {
+                      setCardError("Enter a valid smart card / IUC number");
+                      return;
+                    }
+                    try {
+                      const response: any = await BaseRequest.post(
+                        MOBILE_SERVICE.VERIFY_CABLE_CARD,
+                        {
+                          serviceId: cableProvider,
+                          billersCode: cardNumber,
+                        },
+                      );
+                      const details = response?.data || response;
+                      const name =
+                        details?.customerName ||
+                        details?.name ||
+                        details?.customer_name ||
+                        "";
+                      setCardHolderName(String(name));
+                    } catch (error) {
+                      const { message } = parseNetworkError(error);
+                      showError(message);
+                    }
+                  }}
+                  height={38}
+                  radius={8}
+                  backgroundColor="#D2F1E4"
+                  textColor="#013D25"
+                  fontSize={11}
+                  style={styles.verifyBtn}
+                />
+
+                {cardHolderName ? (
+                  <View style={styles.verifiedCard}>
+                    <ThemedText style={styles.verifiedLabel}>
+                      Verified Name
+                    </ThemedText>
+                    <ThemedText style={styles.verifiedValue}>
+                      {cardHolderName}
+                    </ThemedText>
+                  </View>
+                ) : null}
+
+                <ThemedText style={styles.fieldLabel}>
+                  Subscription Plan
+                </ThemedText>
+                {cablePlans.length > 0 ? (
+                  <TouchableOpacity
+                    style={styles.planSelector}
+                    onPress={() => setShowCablePlanModal(true)}
+                    activeOpacity={0.8}
+                  >
+                    <View style={styles.planSelectorTextWrap}>
+                      <ThemedText style={styles.planSelectorTitle}>
+                        {selectedCablePlan
+                          ? selectedCablePlan.label
+                          : "Select subscription plan"}
+                      </ThemedText>
+                      {selectedCablePlan ? (
+                        <ThemedText style={styles.planSelectorAmount}>
+                          ₦{selectedCablePlan.amount.toLocaleString("en-NG")}
+                        </ThemedText>
+                      ) : null}
+                    </View>
+                    <ArrowDown2 size={18} color="#6E6E75" />
+                  </TouchableOpacity>
+                ) : (
+                  <ThemedText style={styles.emptyBeneficiaryText}>
+                    No subscription plan available for this provider.
+                  </ThemedText>
+                )}
+              </View>
+            )}
+
+            {service === "electricity" && (
+              <View style={styles.sectionCard}>
+                <ThemedText style={styles.sectionTitle}>Electricity</ThemedText>
+                <ThemedText style={styles.fieldLabel}>
+                  Select Provider
+                </ThemedText>
+                {electricityProviders.length > 0 ? (
+                  <TouchableOpacity
+                    style={styles.planSelector}
+                    onPress={() => setShowElectricityProviderModal(true)}
+                    activeOpacity={0.8}
+                  >
+                    <View style={styles.planSelectorTextWrap}>
+                      <ThemedText style={styles.planSelectorTitle}>
+                        {selectedElectricityProvider
+                          ? selectedElectricityProvider.label.toUpperCase()
+                          : "Select a provider"}
+                      </ThemedText>
+                      {selectedElectricityProvider?.description ? (
+                        <ThemedText style={styles.planSelectorAmount}>
+                          {selectedElectricityProvider.description
+                            .replace(/-/g, " ")
+                            .toUpperCase()}
+                        </ThemedText>
+                      ) : null}
+                    </View>
+                    <ArrowDown2 size={18} color="#6E6E75" />
+                  </TouchableOpacity>
+                ) : (
+                  <ThemedText style={styles.emptyBeneficiaryText}>
+                    No electricity provider available.
+                  </ThemedText>
+                )}
+
+                <ThemedText style={styles.fieldLabel}>Meter Type</ThemedText>
+                <View style={styles.amountRow}>
+                  {ELECTRICITY_PRODUCTS.map((product) => (
+                    <TouchableOpacity
+                      key={product}
+                      style={[
+                        styles.amountChip,
+                        electricityProduct === product &&
+                          styles.amountChipActive,
+                      ]}
+                      onPress={() => setElectricityProduct(product)}
+                    >
+                      <ThemedText
+                        style={[
+                          styles.amountChipText,
+                          electricityProduct === product &&
+                            styles.amountChipTextActive,
+                        ]}
+                      >
+                        {product}
+                      </ThemedText>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+
+                <ThemedText style={styles.fieldLabel}>Meter Number</ThemedText>
+                <FormInput
+                  placeholder="Enter meter number"
+                  value={meterNumber}
+                  onChangeText={(value) => {
+                    setMeterNumber(value.replace(/\D/g, ""));
+                    setCardError(undefined);
+                  }}
+                  error={cardError}
+                  inputContainerStyle={styles.inputContainer}
+                  inputStyle={styles.inputText}
+                />
+
+                <BraneButton
+                  text="Verify meter"
+                  onPress={async () => {
+                    if (!meterNumber || meterNumber.length < 6) {
+                      setCardError("Enter a valid meter number");
+                      return;
+                    }
+                    try {
+                      const provider = electricityProviders.find(
+                        (item) => item.id === electricityProvider,
+                      );
+                      const response: any = await BaseRequest.post(
+                        MOBILE_SERVICE.ELECTRICITY_METER_VERIFY,
+                        {
+                          serviceId: provider?.description || provider?.label,
+                          billersCode: meterNumber,
+                          variationCode: electricityProduct,
+                        },
+                      );
+                      const details = response?.data || response;
+                      const name =
+                        details?.customerName ||
+                        details?.name ||
+                        details?.Customer_Name ||
+                        "";
+                      setElectricityAccountName(String(name));
+                    } catch (error) {
+                      const { message } = parseNetworkError(error);
+                      showError(message);
+                    }
+                  }}
+                  height={38}
+                  radius={8}
+                  backgroundColor="#D2F1E4"
+                  textColor="#013D25"
+                  fontSize={11}
+                  style={styles.verifyBtn}
+                />
+
+                {electricityAccountName ? (
+                  <View style={styles.verifiedCard}>
+                    <ThemedText style={styles.verifiedLabel}>
+                      Verified Name
+                    </ThemedText>
+                    <ThemedText style={styles.verifiedValue}>
+                      {electricityAccountName}
+                    </ThemedText>
+                  </View>
+                ) : null}
+
+                <ThemedText style={styles.fieldLabel}>Amount</ThemedText>
+                <View style={styles.amountRow}>
+                  {ELECTRICITY_AMOUNTS.map((preset) => (
+                    <TouchableOpacity
+                      key={preset}
+                      style={[
+                        styles.amountChip,
+                        amount === preset && styles.amountChipActive,
+                      ]}
+                      onPress={() => {
+                        setAmount(preset);
+                        setAmountError(undefined);
+                      }}
+                    >
+                      <ThemedText
+                        style={[
+                          styles.amountChipText,
+                          amount === preset && styles.amountChipTextActive,
+                        ]}
+                      >
+                        ₦ {preset}
+                      </ThemedText>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+                <View
+                  style={[
+                    styles.inlineInput,
+                    amountError ? styles.inlineInputError : undefined,
+                  ]}
+                >
+                  <ThemedText style={styles.currencyPrefix}>₦</ThemedText>
+                  <TextInput
+                    style={styles.inlineInputText}
+                    placeholder="Enter custom amount"
+                    placeholderTextColor="#A9A9AE"
+                    keyboardType="number-pad"
+                    value={amount}
+                    onChangeText={(value) => {
+                      setAmount(value.replace(/\D/g, ""));
+                      setAmountError(undefined);
+                    }}
+                  />
+                </View>
+              </View>
+            )}
+
+            {service === "transportation" && (
+              <View style={styles.sectionCard}>
+                <ThemedText style={styles.sectionTitle}>
+                  Transportation
+                </ThemedText>
+
+                <ThemedText style={styles.fieldLabel}>
+                  Transport Provider
+                </ThemedText>
+                <View style={styles.providersRow}>
+                  {transportProviders.map((item) => (
+                    <TouchableOpacity
+                      key={item.id}
+                      style={[
+                        styles.providerBtn,
+                        transportProvider === item.id &&
+                          styles.providerBtnActive,
+                      ]}
+                      onPress={() => setTransportProvider(item.id)}
+                    >
+                      <ThemedText
+                        style={[
+                          styles.providerText,
+                          transportProvider === item.id &&
+                            styles.providerTextActive,
+                        ]}
+                      >
+                        {item.label}
+                      </ThemedText>
+                    </TouchableOpacity>
+                  ))}
+                  {transportProviders.length === 0 ? (
+                    <ThemedText style={styles.emptyBeneficiaryText}>
+                      No transportation provider available.
+                    </ThemedText>
+                  ) : null}
+                </View>
+
+                <ThemedText style={styles.fieldLabel}>
+                  Reference Number
+                </ThemedText>
+                <FormInput
+                  placeholder="Enter reference number"
+                  value={transportReference}
+                  onChangeText={(value) => {
+                    setTransportReference(value);
+                    setCustomerIdError(undefined);
+                  }}
+                  error={customerIdError}
+                  inputContainerStyle={styles.inputContainer}
+                  inputStyle={styles.inputText}
+                />
+
+                <ThemedText style={styles.fieldLabel}>
+                  Transport Plan
+                </ThemedText>
+                {transportPlans.length > 0 ? (
+                  <TouchableOpacity
+                    style={styles.planSelector}
+                    onPress={() => setShowTransportPlanModal(true)}
+                    activeOpacity={0.8}
+                  >
+                    <View style={styles.planSelectorTextWrap}>
+                      <ThemedText style={styles.planSelectorTitle}>
+                        {selectedTransportPlan
+                          ? selectedTransportPlan.label
+                          : "Select transport plan"}
+                      </ThemedText>
+                      {selectedTransportPlan ? (
+                        <ThemedText style={styles.planSelectorAmount}>
+                          ₦
+                          {selectedTransportPlan.amount.toLocaleString("en-NG")}
+                        </ThemedText>
+                      ) : null}
+                    </View>
+                    <ArrowDown2 size={18} color="#6E6E75" />
+                  </TouchableOpacity>
+                ) : (
+                  <ThemedText style={styles.emptyBeneficiaryText}>
+                    No transportation plan available.
+                  </ThemedText>
+                )}
+              </View>
+            )}
+
+            {paymentOptions.length > 0 ? (
+              <PaymentMethodSelector
+                options={paymentOptions}
+                selectedId={paymentId}
+                onSelect={setPaymentId}
+              />
             ) : (
               <ThemedText style={styles.emptyBeneficiaryText}>
-                No transportation plan available.
+                Payment methods unavailable at the moment.
               </ThemedText>
             )}
+          </ScrollView>
+
+          <View style={styles.footer}>
+            <BraneButton
+              text={`Proceed - ₦ ${Number(amountToPay || 0).toLocaleString("en-NG")}`}
+              onPress={() => {
+                if (!validateForm()) return;
+                setShowPinValidator(true);
+              }}
+              backgroundColor="#013D25"
+              textColor="#D2F1E4"
+              height={48}
+              radius={8}
+              loading={isSubmitting}
+            />
           </View>
-        )}
-
-        {paymentOptions.length > 0 ? (
-          <PaymentMethodSelector
-            options={paymentOptions}
-            selectedId={paymentId}
-            onSelect={setPaymentId}
-          />
-        ) : (
-          <ThemedText style={styles.emptyBeneficiaryText}>
-            Payment methods unavailable at the moment.
-          </ThemedText>
-        )}
-      </ScrollView>
-
-      <View style={styles.footer}>
-        <BraneButton
-          text={`Proceed - ₦ ${Number(amountToPay || 0).toLocaleString("en-NG")}`}
-          onPress={() => {
-            if (!validateForm()) return;
-            setShowPinValidator(true);
-          }}
-          backgroundColor="#013D25"
-          textColor="#D2F1E4"
-          height={48}
-          radius={8}
-          loading={isSubmitting}
-        />
-      </View>
-      </React.Fragment>
+        </React.Fragment>
       ) : null}
 
       <TransactionPinValidator
