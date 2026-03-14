@@ -4,8 +4,8 @@ import BaseRequest from "@/services";
 import { TRANSACTION_SERVICE } from "@/services/routes";
 import { formatDate, parseTransaction, priceFormatter } from "@/utils/helpers";
 import { ITransactionDetail } from "@/utils/index";
-import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import { SearchNormal1, Setting3 } from "iconsax-react-native";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
     ActivityIndicator,
@@ -114,12 +114,12 @@ export default function TransactionScreen() {
         <Back onPress={() => router.back()} />
         <ThemedText style={styles.title}>Transaction History</ThemedText>
         <TouchableOpacity onPress={() => setShowFilterModal(true)}>
-          <Ionicons name="options-outline" size={20} color="#0B0014" />
+          <Setting3 size={20} color="#0B0014" variant="Outline" />
         </TouchableOpacity>
       </View>
 
       <View style={styles.searchRow}>
-        <Ionicons name="search-outline" size={16} color="#7A7A80" />
+        <SearchNormal1 size={16} color="#7A7A80" variant="Outline" />
         <TextInput
           style={styles.searchInput}
           placeholder="Search transactions"

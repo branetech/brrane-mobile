@@ -24,8 +24,15 @@ import {
     TRANSACTION_SERVICE,
 } from "@/services/routes";
 import { showError } from "@/utils/helpers";
-import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import {
+    Add,
+    ArrowDown2,
+    CloseCircle,
+    Mobile,
+    SearchNormal1,
+    WifiSquare,
+} from "iconsax-react-native";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
     ActivityIndicator,
@@ -132,8 +139,14 @@ const ELECTRICITY_IMAGES: Record<string, any> = {
   yedc: require("@/assets/images/network/yedc.png"),
 };
 
+const normalizeKey = (value: string) =>
+  String(value || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+
 const getNetworkImageKey = (value: string) => {
-  const key = String(value || "").toLowerCase();
+  const key = normalizeKey(value);
   if (key.includes("mtn")) return "mtn";
   if (key.includes("airtel")) return "airtel";
   if (key.includes("glo")) return "glo";
@@ -143,28 +156,39 @@ const getNetworkImageKey = (value: string) => {
 };
 
 const getCableImageKey = (value: string) => {
-  const key = String(value || "").toLowerCase();
+  const key = normalizeKey(value);
   if (key.includes("dstv")) return "dstv";
   if (key.includes("gotv")) return "gotv";
-  if (key.includes("startimes")) return "startimes";
+  if (
+    key.includes("startimes") ||
+    key.includes("star times") ||
+    key.includes("startime")
+  )
+    return "startimes";
   if (key.includes("showmax")) return "showmax";
   return "";
 };
 
 const getElectricityImageKey = (value: string) => {
-  const key = String(value || "").toLowerCase();
+  const key = normalizeKey(value);
+  if (key.includes("ikeja") || key.includes("ikedc")) return "ikedc";
+  if (key.includes("eko") || key.includes("ekedc")) return "ekedc";
+  if (key.includes("ibadan") || key.includes("ibedc")) return "ibedc";
+  if (key.includes("enugu") || key.includes("eedc")) return "eedc";
+  if (key.includes("abuja") || key.includes("aedc")) return "aedc";
+  if (key.includes("benin") || key.includes("bedc")) return "bedc";
+  if (key.includes("jos") || key.includes("jed")) return "jed";
+  if (key.includes("kaduna") || key.includes("kaedco")) return "kaedco";
+  if (key.includes("kano") || key.includes("kedco")) return "kedco";
   if (key.includes("ikedc")) return "ikedc";
   if (key.includes("ekedc")) return "ekedc";
   if (key.includes("ibedc")) return "ibedc";
   if (key.includes("eedc")) return "eedc";
   if (key.includes("aedc")) return "aedc";
   if (key.includes("bedc")) return "bedc";
-  if (key.includes("jed")) return "jed";
-  if (key.includes("kaedco")) return "kaedco";
-  if (key.includes("kedco")) return "kedco";
+  if (key.includes("port harcourt") || key.includes("phed")) return "phed";
+  if (key.includes("yola") || key.includes("yedc")) return "yedc";
   if (key.includes("kedc")) return "kedc";
-  if (key.includes("phed")) return "phed";
-  if (key.includes("yedc")) return "yedc";
   return "";
 };
 
@@ -222,11 +246,21 @@ const normalizeOption = (item: any, index: number): SelectOption => {
 
 const normalizeElectricityProviders = (payload: any): SelectOption[] => {
   const providerMap = payload?.providers || payload?.data?.providers || {};
-  return Object.keys(providerMap).map((key, index) => ({
-    id: String(key).toLowerCase(),
-    label: String(key),
-    description: String(providerMap[key] || `provider-${index}`),
-  }));
+  return Object.keys(providerMap).map((key, index) => {
+    const left = String(key || "");
+    const right = String(providerMap[key] || "");
+    const keyGuess =
+      getElectricityImageKey(`${left} ${right}`) ||
+      normalizeKey(left).replace(/\s+/g, "-");
+    const humanLabel = /\s|-/g.test(left) ? left : right || left;
+    const meta = humanLabel === left ? right : left;
+
+    return {
+      id: keyGuess,
+      label: humanLabel,
+      description: meta || `provider-${index}`,
+    };
+  });
 };
 
 const normalizeDataPlan = (item: any, index: number): DataPlan => {
@@ -365,8 +399,12 @@ export default function UtilitySelectScreen() {
 
   const orderedNetworks = useMemo(() => {
     return [...networks].sort((a, b) => {
-      const aKey = getNetworkImageKey(a.id || a.label);
-      const bKey = getNetworkImageKey(b.id || b.label);
+      const aKey = getNetworkImageKey(
+        `${a.id} ${a.label} ${a.description || ""}`,
+      );
+      const bKey = getNetworkImageKey(
+        `${b.id} ${b.label} ${b.description || ""}`,
+      );
       const ai = NETWORK_ORDER.findIndex((item) => aKey.includes(item));
       const bi = NETWORK_ORDER.findIndex((item) => bKey.includes(item));
       const safeAi = ai === -1 ? 999 : ai;
@@ -887,19 +925,21 @@ export default function UtilitySelectScreen() {
         <View style={styles.headerSpacer} />
       </View>
 
+      {isFetchingMeta ? (
+        <View style={styles.fullPageLoader}>
+          <ActivityIndicator size="large" color="#013D25" />
+          <ThemedText style={styles.loadingText}>
+            Loading services...
+          </ThemedText>
+        </View>
+      ) : null}
+
+      {!isFetchingMeta ? (
+      <React.Fragment>
       <ScrollView
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
-        {isFetchingMeta ? (
-          <View style={styles.loadingRow}>
-            <ActivityIndicator size="small" color="#013D25" />
-            <ThemedText style={styles.loadingText}>
-              Loading services...
-            </ThemedText>
-          </View>
-        ) : null}
-
         {service === "airtime" || service === "data" ? (
           <View style={styles.segmentTabs}>
             <TouchableOpacity
@@ -909,10 +949,10 @@ export default function UtilitySelectScreen() {
               ]}
               onPress={() => onSwitchService("airtime")}
             >
-              <Ionicons
-                name="call-outline"
+              <Mobile
                 size={16}
                 color={service === "airtime" ? "#013D25" : "#7F7F86"}
+                variant="Outline"
               />
               <ThemedText
                 style={[
@@ -931,10 +971,10 @@ export default function UtilitySelectScreen() {
               ]}
               onPress={() => onSwitchService("data")}
             >
-              <Ionicons
-                name="wifi-outline"
+              <WifiSquare
                 size={16}
                 color={service === "data" ? "#013D25" : "#7F7F86"}
+                variant="Outline"
               />
               <ThemedText
                 style={[
@@ -956,7 +996,9 @@ export default function UtilitySelectScreen() {
             <View style={styles.networkGrid}>
               {orderedNetworks.map((item) => {
                 const selected = network === item.id;
-                const networkImageKey = getNetworkImageKey(item.id);
+                const networkImageKey = getNetworkImageKey(
+                  `${item.id} ${item.label} ${item.description || ""}`,
+                );
                 return (
                   <TouchableOpacity
                     key={item.id}
@@ -1010,7 +1052,7 @@ export default function UtilitySelectScreen() {
                   setPhoneError(undefined);
                 }}
               />
-              <Ionicons name="person-add-outline" size={18} color="#9B9BA2" />
+              <Add size={18} color="#9B9BA2" variant="Outline" />
             </View>
             {phoneError ? (
               <ThemedText style={styles.errorText}>{phoneError}</ThemedText>
@@ -1033,7 +1075,7 @@ export default function UtilitySelectScreen() {
                 Select Beneficiary
               </ThemedText>
               <View style={styles.searchRow}>
-                <Ionicons name="search-outline" size={16} color="#88888F" />
+                <SearchNormal1 size={16} color="#88888F" variant="Outline" />
                 <TextInput
                   style={styles.searchInput}
                   placeholder="Search by name or phone number"
@@ -1052,8 +1094,9 @@ export default function UtilitySelectScreen() {
                     setPhone(item.phone);
                     const matchedNetwork = networks.find(
                       (option) =>
-                        getNetworkImageKey(option.id) ===
-                        getNetworkImageKey(item.networkProvider || ""),
+                        getNetworkImageKey(
+                          `${option.id} ${option.label} ${option.description || ""}`,
+                        ) === getNetworkImageKey(item.networkProvider || ""),
                     );
                     if (matchedNetwork) {
                       setNetwork(matchedNetwork.id);
@@ -1146,7 +1189,7 @@ export default function UtilitySelectScreen() {
                     </ThemedText>
                   ) : null}
                 </View>
-                <Ionicons name="chevron-down" size={18} color="#6E6E75" />
+                <ArrowDown2 size={18} color="#6E6E75" />
               </TouchableOpacity>
             ) : (
               <ThemedText style={styles.emptyBeneficiaryText}>
@@ -1220,7 +1263,9 @@ export default function UtilitySelectScreen() {
             <ThemedText style={styles.sectionTitle}>Cable Provider</ThemedText>
             <View style={styles.cableGrid}>
               {cableProviders.map((item) => {
-                const imageKey = getCableImageKey(item.id || item.label);
+                const imageKey = getCableImageKey(
+                  `${item.id} ${item.label} ${item.description || ""}`,
+                );
                 const source = imageKey ? CABLE_IMAGES[imageKey] : undefined;
                 return (
                   <TouchableOpacity
@@ -1336,7 +1381,7 @@ export default function UtilitySelectScreen() {
                     </ThemedText>
                   ) : null}
                 </View>
-                <Ionicons name="chevron-down" size={18} color="#6E6E75" />
+                <ArrowDown2 size={18} color="#6E6E75" />
               </TouchableOpacity>
             ) : (
               <ThemedText style={styles.emptyBeneficiaryText}>
@@ -1370,7 +1415,7 @@ export default function UtilitySelectScreen() {
                     </ThemedText>
                   ) : null}
                 </View>
-                <Ionicons name="chevron-down" size={18} color="#6E6E75" />
+                <ArrowDown2 size={18} color="#6E6E75" />
               </TouchableOpacity>
             ) : (
               <ThemedText style={styles.emptyBeneficiaryText}>
@@ -1579,7 +1624,7 @@ export default function UtilitySelectScreen() {
                     </ThemedText>
                   ) : null}
                 </View>
-                <Ionicons name="chevron-down" size={18} color="#6E6E75" />
+                <ArrowDown2 size={18} color="#6E6E75" />
               </TouchableOpacity>
             ) : (
               <ThemedText style={styles.emptyBeneficiaryText}>
@@ -1616,6 +1661,8 @@ export default function UtilitySelectScreen() {
           loading={isSubmitting}
         />
       </View>
+      </React.Fragment>
+      ) : null}
 
       <TransactionPinValidator
         visible={showPinValidator}
@@ -1667,7 +1714,7 @@ export default function UtilitySelectScreen() {
                 Select Data Plan
               </ThemedText>
               <TouchableOpacity onPress={() => setShowDataPlanModal(false)}>
-                <Ionicons name="close" size={18} color="#6E6E75" />
+                <CloseCircle size={18} color="#6E6E75" variant="Outline" />
               </TouchableOpacity>
             </View>
 
@@ -1734,7 +1781,7 @@ export default function UtilitySelectScreen() {
               <TouchableOpacity
                 onPress={() => setShowElectricityProviderModal(false)}
               >
-                <Ionicons name="close" size={18} color="#6E6E75" />
+                <CloseCircle size={18} color="#6E6E75" variant="Outline" />
               </TouchableOpacity>
             </View>
 
@@ -1743,7 +1790,9 @@ export default function UtilitySelectScreen() {
               showsVerticalScrollIndicator={false}
             >
               {electricityProviders.map((item) => {
-                const imageKey = getElectricityImageKey(item.label || item.id);
+                const imageKey = getElectricityImageKey(
+                  `${item.id} ${item.label} ${item.description || ""}`,
+                );
                 const logo = imageKey
                   ? ELECTRICITY_IMAGES[imageKey]
                   : undefined;
@@ -1810,7 +1859,7 @@ export default function UtilitySelectScreen() {
               <TouchableOpacity
                 onPress={() => setShowTransportPlanModal(false)}
               >
-                <Ionicons name="close" size={18} color="#6E6E75" />
+                <CloseCircle size={18} color="#6E6E75" variant="Outline" />
               </TouchableOpacity>
             </View>
 
@@ -1878,7 +1927,7 @@ export default function UtilitySelectScreen() {
                 Select Subscription Plan
               </ThemedText>
               <TouchableOpacity onPress={() => setShowCablePlanModal(false)}>
-                <Ionicons name="close" size={18} color="#6E6E75" />
+                <CloseCircle size={18} color="#6E6E75" variant="Outline" />
               </TouchableOpacity>
             </View>
 
@@ -1953,14 +2002,14 @@ const styles = StyleSheet.create({
     paddingBottom: 26,
     gap: 10,
   },
-  loadingRow: {
-    flexDirection: "row",
+  fullPageLoader: {
+    flex: 1,
     alignItems: "center",
-    gap: 8,
-    marginBottom: 4,
+    justifyContent: "center",
+    gap: 14,
   },
   loadingText: {
-    fontSize: 11,
+    fontSize: 14,
     color: "#6F6F74",
   },
   heading: {
