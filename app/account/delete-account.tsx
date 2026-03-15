@@ -79,7 +79,7 @@ export default function DeleteAccountScreen() {
         {stage === 1 && (
           <>
             <ThemedText type='defaultSemiBold'>Why are you leaving?</ThemedText>
-            <ThemedText style={[styles.subText, { color: "#85808A" }]}>
+            <ThemedText style={[styles.subText, { color: C.muted }]}>
               Please select a reason for deleting your account.
             </ThemedText>
 
@@ -93,8 +93,8 @@ export default function DeleteAccountScreen() {
                     style={[
                       styles.reasonRow,
                       {
-                        borderColor: isSelected ? "#013D25" : C.border,
-                        backgroundColor: isSelected ? "#D2F1E4" : C.background,
+                        borderColor: isSelected ? C.primary : C.border,
+                        backgroundColor: isSelected ? C.primary + "20" : C.background,
                       },
                     ]}
                     onPress={() => setSelectedReason(reason)}
@@ -102,10 +102,10 @@ export default function DeleteAccountScreen() {
                     <View
                       style={{
                         ...styles.radio,
-                        borderColor: isSelected ? "#013D25" : "#85808A",
+                        borderColor: isSelected ? C.primary : C.muted,
                       }}
                     >
-                      {isSelected && <View style={styles.radioInner} />}
+                      {isSelected && <View style={[styles.radioInner, { backgroundColor: C.primary }]} />}
                     </View>
                     <ThemedText style={styles.reasonText}>{reason}</ThemedText>
                   </TouchableOpacity>
@@ -126,7 +126,7 @@ export default function DeleteAccountScreen() {
         {stage === 2 && (
           <>
             <ThemedText type='defaultSemiBold'>Confirm deletion</ThemedText>
-            <ThemedText style={[styles.subText, { color: "#85808A" }]}>
+            <ThemedText style={[styles.subText, { color: C.muted }]}>
               Enter the OTP sent to your email to confirm deletion.
             </ThemedText>
 
@@ -192,7 +192,6 @@ const styles = StyleSheet.create({
     width: 10,
     height: 10,
     borderRadius: 5,
-    backgroundColor: "#013D25",
   },
   reasonText: {
     fontSize: 14,
